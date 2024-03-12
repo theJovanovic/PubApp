@@ -1,0 +1,13 @@
+﻿using Server.Models;
+using AutoMapper;
+
+namespace Server;
+
+public class AutoMapperProfile : Profile
+{
+    public AutoMapperProfile()
+    {
+        CreateMap<Table, TableDTO>().ReverseMap();
+        CreateMap<Guest, GuestDTO>().ReverseMap();
+    }
+}
