@@ -1,4 +1,5 @@
-# Pub-TIKS
+# PubApp
+An application for TIKS project.
 
 Run server:
 - dotnet run
