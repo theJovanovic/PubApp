@@ -69,8 +69,8 @@ namespace Server.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<decimal>("Price")
-                        .HasColumnType("decimal(18,2)");
+                    b.Property<int>("Price")
+                        .HasColumnType("int");
 
                     b.HasKey("MenuItemID");
 
@@ -85,7 +85,7 @@ namespace Server.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("OrderID"));
 
-                    b.Property<int?>("GuestID")
+                    b.Property<int>("GuestID")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("OrderTime")
@@ -95,17 +95,12 @@ namespace Server.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("TableID")
-                        .HasColumnType("int");
-
-                    b.Property<int>("WaiterID")
+                    b.Property<int?>("WaiterID")
                         .HasColumnType("int");
 
                     b.HasKey("OrderID");
 
                     b.HasIndex("GuestID");
-
-                    b.HasIndex("TableID");
 
                     b.HasIndex("WaiterID");
 
@@ -186,25 +181,17 @@ namespace Server.Migrations
 
             modelBuilder.Entity("Server.Models.Order", b =>
                 {
-                    b.HasOne("Server.Models.Guest", null)
+                    b.HasOne("Server.Models.Guest", "Guest")
                         .WithMany("Orders")
-                        .HasForeignKey("GuestID");
-
-                    b.HasOne("Server.Models.Table", "Table")
-                        .WithMany()
-                        .HasForeignKey("TableID")
+                        .HasForeignKey("GuestID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Server.Models.Waiter", "Waiter")
+                    b.HasOne("Server.Models.Waiter", null)
                         .WithMany("Orders")
-                        .HasForeignKey("WaiterID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("WaiterID");
 
-                    b.Navigation("Table");
-
-                    b.Navigation("Waiter");
+                    b.Navigation("Guest");
                 });
 
             modelBuilder.Entity("Server.Models.OrderDetail", b =>

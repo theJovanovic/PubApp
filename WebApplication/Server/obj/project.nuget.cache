@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "9v9pHpv3MEUTeDY/otP+1VCn4XkRg+j9Wntpp4RCe1gS3BU8VVKKKEMCeDFj1ptyDxLBQ4WJqCbUdOpcIF5HRQ==",
+  "dgSpecHash": "QZwieCQklhF+4c9HFxgYOU0WORqW17gjOzpulTdKZ1Hvai/Ag1QcD5TmyEnza5b1YzxloqRQv021smzLDNeoHA==",
   "success": true,
-  "projectFilePath": "C:\\Users\\LENOVO\\Desktop\\Pub-TIKS\\WebApplication\\Server\\Server.csproj",
+  "projectFilePath": "C:\\Users\\LENOVO\\Desktop\\PubApp\\WebApplication\\Server\\Server.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\LENOVO\\.nuget\\packages\\automapper\\13.0.1\\automapper.13.0.1.nupkg.sha512",
     "C:\\Users\\LENOVO\\.nuget\\packages\\azure.core\\1.35.0\\azure.core.1.35.0.nupkg.sha512",
