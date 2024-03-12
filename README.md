@@ -9,4 +9,4 @@ Run client:
 - https://localhost:3000
 
 Database:
-- Connection string: "PubDB": "Server=(localdb)\\PubDatabase;Database=Pub"
+- Connection string: **"PubDB": "Server=(localdb)\\PubDatabase;Database=Pub"**
