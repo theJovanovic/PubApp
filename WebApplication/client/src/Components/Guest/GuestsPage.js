@@ -60,6 +60,7 @@ const GuestsPage = () => {
             >
             Delete
             </a>
+            <Link to={`/order/add/${guest.guestID}`}>Make order</Link>
           </li>
         ))}
       </ol>

@@ -10,6 +10,9 @@ import TableAddPage from './Components/Table/TableAddPage';
 import GuestAddPage from './Components/Guest/GuestAddPage';
 import GuestEditPage from './Components/Guest/GuestEditPage';
 import GuestInfoPage from './Components/Guest/GuestInfoPage';
+import OrderAddPage from './Components/Order/OrderAddPage';
+import MenuPage from './Components/Menu/MenuPage';
+import MenuItemAddPage from './Components/Menu/MenuItemAddPage';
 
 function App() {
   return (
@@ -25,6 +28,9 @@ function App() {
         <Route path="/guests/add" element={<GuestAddPage />} />
         <Route path="/guests/edit/:id" element={<GuestEditPage />} />
         <Route path="/guests/info/:id" element={<GuestInfoPage />} />
+        <Route path="/order/add/:id" element={<OrderAddPage />} />
+        <Route path="/menu" element={<MenuPage />} />
+        <Route path="/menu/add" element={<MenuItemAddPage />} />
       </Routes>
     </BrowserRouter>
   );

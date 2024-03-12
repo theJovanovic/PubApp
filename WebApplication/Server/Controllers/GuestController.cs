@@ -20,7 +20,7 @@ public class GuestController : ControllerBase
         _mapper = mapper;
     }
 
-    // GET: api/Guests
+    // GET: api/Guest
     [HttpGet]
     public async Task<ActionResult> GetGuests()
     {
@@ -39,7 +39,7 @@ public class GuestController : ControllerBase
         return Ok(guests);
     }
 
-    // GET: api/Guests/5
+    // GET: api/Guest/5
     [HttpGet("{id}")]
     public async Task<ActionResult> GetGuest(int id)
     {
@@ -54,7 +54,7 @@ public class GuestController : ControllerBase
                 HasDiscount = g.HasDiscount,
                 TableNumber = g.Table.Number
             })
-            .FirstAsync();
+            .FirstOrDefaultAsync();
 
         if (guest == null)
         {
@@ -64,7 +64,7 @@ public class GuestController : ControllerBase
         return Ok(guest);
     }
 
-    // GET: api/Guests/info/5
+    // GET: api/Guest/info/5
     [HttpGet("info/{id}")]
     public async Task<ActionResult> GetGuestInfo(int id)
     {
@@ -133,12 +133,12 @@ public class GuestController : ControllerBase
                 HasDiscount = g.HasDiscount,
                 TableNumber = g.Table.Number
             })
-            .FirstAsync();
+            .FirstOrDefaultAsync();
 
         return CreatedAtAction(nameof(GetGuest), new { id = result.GuestID }, result);
     }
 
-    // PUT: api/Guests/5
+    // PUT: api/Guest/5
     [HttpPut("{id}")]
     public async Task<IActionResult> PutGuest(int id, GuestDTO guestDTO)
     {
@@ -178,7 +178,7 @@ public class GuestController : ControllerBase
         return NoContent();
     }
 
-    // DELETE: api/Guests/5
+    // DELETE: api/Guest/5
     [HttpDelete("{id}")]
     public async Task<IActionResult> DeleteGuest(int id)
     {

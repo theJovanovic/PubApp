@@ -12,7 +12,9 @@ const NavigationHeader = () => {
           <li>
             <Link to="/guests">Guests</Link>
           </li>
-          {/* Add more navigation links here as needed */}
+          <li>
+            <Link to="/menu">Menu</Link>
+          </li>
         </ul>
       </nav>
     </header>

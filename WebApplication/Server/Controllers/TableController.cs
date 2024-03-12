@@ -36,8 +36,8 @@ public class TableController : ControllerBase
     {
         var table = await _context.Tables
             .Where(table => table.TableID == id)
-            .Select(t => _mapper.Map<TableDTO>(t))
-            .FirstAsync();
+            .Select(t => _mapper.Map<TableDTO>(t    ))
+            .FirstOrDefaultAsync();
 
         if (table == null)
         {
@@ -95,7 +95,7 @@ public class TableController : ControllerBase
         var result = await _context.Tables
             .Where(t => t.TableID == table.TableID)
             .Select(t => _mapper.Map<TableDTO>(t))
-            .FirstAsync();
+            .FirstOrDefaultAsync();
 
         return CreatedAtAction(nameof(GetTable), new { id = result.TableID }, result);
     }

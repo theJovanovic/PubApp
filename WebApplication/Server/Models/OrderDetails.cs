@@ -8,9 +8,9 @@ public class OrderDetail
 {
     [Key]
     public int OrderDetailID { get; set; }
+    public int Quantity { get; set; } // Added to track quantity of each item
     public int OrderID { get; set; }
     public int MenuItemID { get; set; }
-    public int Quantity { get; set; } // Added to track quantity of each item
 
     // Navigation properties
     [ForeignKey("OrderID")]

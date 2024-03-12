@@ -10,10 +10,17 @@ public class MenuItem
     [Key]
     public int MenuItemID { get; set; }
     public string Name { get; set; }
-    public decimal Price { get; set; }
+    public int Price { get; set; }
     public string Category { get; set; } // Consider using an enum for predefined categories
 
     // Collection of OrderDetail to represent Many-to-Many relationship with Order
-    [JsonIgnore]
     public List<OrderDetail> OrderDetails { get; set; }
+}
+
+public class MenuItemDTO
+{
+    public int MenuItemID { get; set; }
+    public string Name { get; set; }
+    public int Price { get; set; }
+    public string Category { get; set; }
 }

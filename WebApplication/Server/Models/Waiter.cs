@@ -12,6 +12,5 @@ public class Waiter
     public string Name { get; set; }
 
     // Navigation property for Orders
-    [JsonIgnore]
     public List<Order> Orders { get; set; }
 }

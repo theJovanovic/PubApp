@@ -9,5 +9,7 @@ public class AutoMapperProfile : Profile
     {
         CreateMap<Table, TableDTO>().ReverseMap();
         CreateMap<Guest, GuestDTO>().ReverseMap();
+        CreateMap<Order, OrderDTO>().ReverseMap();
+        CreateMap<MenuItem, MenuItemDTO>().ReverseMap();
     }
 }
