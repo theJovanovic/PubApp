@@ -24,11 +24,43 @@ public class OrderController : ControllerBase
     [HttpGet]
     public async Task<ActionResult> GetOrders()
     {
-        var guests = await _context.Orders
+        var orders = await _context.Orders
             .Select(o => _mapper.Map<OrderDTO>(o))
             .ToListAsync();
 
-        return Ok(guests);
+        return Ok(orders);
+    }
+
+    // GET: api/Order/overview
+    [HttpGet("overview")]
+    public async Task<ActionResult> GetOrdersOverview()
+    {
+        var random = new Random();
+        var ordersToUpdate = _context.Orders.Where(o => o.Status != "Delivered").ToList();
+
+        foreach (var order in ordersToUpdate)
+        {
+            // 15% chance
+            if (random.Next(100) < 15)
+            {
+                order.Status = ChangeOrderStatus(order.Status);
+            }
+        }
+
+        await _context.SaveChangesAsync();
+
+        var orders = await _context.Orders
+            .Select(o => new
+            {
+                Name = o.MenuItem.Name,
+                OrderTime = o.OrderTime,
+                Status = o.Status,
+                Quantity = o.Quantity,
+                TableNumber = o.Guest.Table.TableID
+            })
+            .ToListAsync();
+
+        return Ok(orders);
     }
 
     // GET: api/Order/5
@@ -50,25 +82,56 @@ public class OrderController : ControllerBase
 
     // POST: api/Order
     [HttpPost]
-    public async Task<ActionResult> PostOrder(OrderDTO orderDTO)
+    public async Task<ActionResult> PostOrder(OrderCreateDTO orderDTO)
     {
         if (!ModelState.IsValid)
         {
             return BadRequest(ModelState);
         }
 
+        var order = new Order
+        {
+            GuestID = orderDTO.GuestID,
+            Quantity = orderDTO.Quantity,
+            MenuItemID = orderDTO.MenuItemID,
+        };
 
-        var order = _mapper.Map<Order>(orderDTO);
-        
         await _context.Orders.AddAsync(order);
         await _context.SaveChangesAsync();
 
-        var result = await _context.Orders
-            .Where(o => o.OrderID == order.OrderID)
-            .Select(g => _mapper.Map<OrderDTO>(order))
-            .FirstOrDefaultAsync();
-
-        return CreatedAtAction(nameof(GetOrder), new { id = result.OrderID }, result);
+        return NoContent();
     }
 
+    // DELETE: api/Order/5
+    [HttpDelete("{id}")]
+    public async Task<IActionResult> DeleteOrder(int id)
+    {
+        var order = await _context.Orders.FindAsync(id);
+        if (order == null)
+        {
+            return NotFound();
+        }
+
+        _context.Orders.Remove(order);
+        await _context.SaveChangesAsync();
+
+        return NoContent();
+    }
+
+    private string ChangeOrderStatus(string status)
+    {
+        string newStatus = status;
+        switch (status)
+        {
+            case "Pending":
+                newStatus = "Preparing";
+                break;
+            case "Preparing":
+                newStatus = "Completed";
+                break;
+            default:
+                break;
+        }
+        return newStatus;
+    }
 }

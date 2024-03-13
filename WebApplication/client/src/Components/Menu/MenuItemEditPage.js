@@ -1,14 +1,33 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
 
-const MenuItemAddPage = () => {
+const MenuItemEditPage = () => {
   const navigate = useNavigate();
-  const [menuItem, setMenuItem] = useState({
-    name: '',
-    price: '',
-    category: '',
-    hasAllergens: false,
-  });
+  const { id } = useParams();
+  const [menuItem, setMenuItem] = useState({});
+
+  useEffect(() => {
+    const fetchMenuItem = async () => {
+      const endpoint = `https://localhost:7146/api/MenuItem/${id}`;
+      try {
+        const response = await fetch(endpoint, {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json"
+          }
+        });
+        if (!response.ok) {
+          throw new Error('Error fetching menu item');
+        }
+        const data = await response.json();
+        setMenuItem(data);
+      } catch (error) {
+        console.error('Failed to fetch menu item:', error);
+      }
+    };
+
+    fetchMenuItem();
+  }, []);
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -17,33 +36,36 @@ const MenuItemAddPage = () => {
       [name]: type === 'checkbox' ? checked : value,
     }));
   };
-  
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     console.log('Submitting menuItem:', menuItem);
     try {
-      const endpoint = 'https://localhost:7146/api/MenuItem';
+      const endpoint = `https://localhost:7146/api/MenuItem/${id}`;
       const response = await fetch(endpoint, {
-        method: 'POST',
+        method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify(menuItem),
       });
       if (!response.ok) {
-        throw new Error('Error adding menu item');
+        if (response.status === 404) {
+          alert("Error: Table doesn't exist")
+        }
+        throw new Error('Error editing menu item');
       }
       navigate('/menu');
     } catch (error) {
-      console.error('Failed to add menu item:', error);
+      console.error('Failed to edit item:', error);
     }
   };
 
   return (
     <div>
-      <h1>Add Item Page</h1>
+      <h1>Edit Item Page</h1>
       <form onSubmit={handleSubmit}>
-        <label>
+      <label>
           Name:
           <input
             type="text"
@@ -85,10 +107,10 @@ const MenuItemAddPage = () => {
           />
         </label>
         <br />
-        <button type="submit">Add menu item</button>
+        <button type="submit">Edit item</button>
       </form>
     </div>
   );
 };
 
-export default MenuItemAddPage;
+export default MenuItemEditPage;

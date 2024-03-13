@@ -18,6 +18,11 @@ public class Table
     public string Status { get; set; }
 
     public List<Guest> Guests { get; set; } = new List<Guest>();
+
+    public int? WaiterID {  get; set; }
+
+    [ForeignKey("WaiterID")]
+    public Waiter Waiter { get; set; }
 }
 
 public class TableDTO

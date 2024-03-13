@@ -48,6 +48,7 @@ const GuestsPage = () => {
       <Link to="/guests/add">Add Guest</Link>
       <ol>
         {guests.map((guest) => (
+          <>
           <li>
             <h2>Name: {guest.name}</h2>
             <h3>Allergies: {guest.hasAllergies && "Yes" || "No"}</h3>
@@ -62,6 +63,8 @@ const GuestsPage = () => {
             </a>
             <Link to={`/order/add/${guest.guestID}`}>Make order</Link>
           </li>
+          <br />
+          </>
         ))}
       </ol>
     </div>

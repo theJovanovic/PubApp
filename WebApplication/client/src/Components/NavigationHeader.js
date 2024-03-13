@@ -15,6 +15,9 @@ const NavigationHeader = () => {
           <li>
             <Link to="/menu">Menu</Link>
           </li>
+          <li>
+            <Link to="/waiters">Waiters</Link>
+          </li>
         </ul>
       </nav>
     </header>

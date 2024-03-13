@@ -95,6 +95,85 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "Server.Controllers.MenuItemController",
+    "Method": "GetMenuItems",
+    "RelativePath": "api/MenuItem",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Server.Controllers.MenuItemController",
+    "Method": "PostMenuItem",
+    "RelativePath": "api/MenuItem",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "menuItemDTO",
+        "Type": "Server.Models.MenuItemDTO",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Server.Controllers.MenuItemController",
+    "Method": "GetMenuItem",
+    "RelativePath": "api/MenuItem/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Server.Controllers.MenuItemController",
+    "Method": "PutTable",
+    "RelativePath": "api/MenuItem/{id}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "menuItemDTO",
+        "Type": "Server.Models.MenuItemDTO",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Server.Controllers.MenuItemController",
+    "Method": "DeleteMenuItem",
+    "RelativePath": "api/MenuItem/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "Server.Controllers.OrderController",
     "Method": "GetOrders",
     "RelativePath": "api/Order",
@@ -114,7 +193,7 @@
     "Parameters": [
       {
         "Name": "orderDTO",
-        "Type": "Server.Models.OrderDTO",
+        "Type": "Server.Models.OrderCreateDTO",
         "IsRequired": true
       }
     ],

@@ -11,5 +11,6 @@ public class AutoMapperProfile : Profile
         CreateMap<Guest, GuestDTO>().ReverseMap();
         CreateMap<Order, OrderDTO>().ReverseMap();
         CreateMap<MenuItem, MenuItemDTO>().ReverseMap();
+        CreateMap<Waiter, WaiterDTO>().ReverseMap();
     }
 }

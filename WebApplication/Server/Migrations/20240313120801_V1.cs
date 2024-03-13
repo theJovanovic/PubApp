@@ -19,26 +19,12 @@ namespace Server.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Price = table.Column<int>(type: "int", nullable: false),
-                    Category = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    Category = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    HasAllergens = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_MENU_ITEM", x => x.MenuItemID);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "TABLE",
-                columns: table => new
-                {
-                    TableID = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Number = table.Column<int>(type: "int", nullable: false),
-                    Seats = table.Column<int>(type: "int", nullable: false),
-                    Status = table.Column<string>(type: "nvarchar(max)", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_TABLE", x => x.TableID);
                 });
 
             migrationBuilder.CreateTable(
@@ -52,6 +38,27 @@ namespace Server.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_WAITER", x => x.WaiterID);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "TABLE",
+                columns: table => new
+                {
+                    TableID = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Number = table.Column<int>(type: "int", nullable: false),
+                    Seats = table.Column<int>(type: "int", nullable: false),
+                    Status = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    WaiterID = table.Column<int>(type: "int", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_TABLE", x => x.TableID);
+                    table.ForeignKey(
+                        name: "FK_TABLE_WAITER_WaiterID",
+                        column: x => x.WaiterID,
+                        principalTable: "WAITER",
+                        principalColumn: "WaiterID");
                 });
 
             migrationBuilder.CreateTable(
@@ -85,8 +92,9 @@ namespace Server.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     OrderTime = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Status = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Quantity = table.Column<int>(type: "int", nullable: false),
                     GuestID = table.Column<int>(type: "int", nullable: false),
-                    WaiterID = table.Column<int>(type: "int", nullable: true)
+                    MenuItemID = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -98,35 +106,10 @@ namespace Server.Migrations
                         principalColumn: "GuestID",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_ORDER_WAITER_WaiterID",
-                        column: x => x.WaiterID,
-                        principalTable: "WAITER",
-                        principalColumn: "WaiterID");
-                });
-
-            migrationBuilder.CreateTable(
-                name: "ORDER_DETAILS",
-                columns: table => new
-                {
-                    OrderID = table.Column<int>(type: "int", nullable: false),
-                    MenuItemID = table.Column<int>(type: "int", nullable: false),
-                    OrderDetailID = table.Column<int>(type: "int", nullable: false),
-                    Quantity = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_ORDER_DETAILS", x => new { x.OrderID, x.MenuItemID });
-                    table.ForeignKey(
-                        name: "FK_ORDER_DETAILS_MENU_ITEM_MenuItemID",
+                        name: "FK_ORDER_MENU_ITEM_MenuItemID",
                         column: x => x.MenuItemID,
                         principalTable: "MENU_ITEM",
                         principalColumn: "MenuItemID",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_ORDER_DETAILS_ORDER_OrderID",
-                        column: x => x.OrderID,
-                        principalTable: "ORDER",
-                        principalColumn: "OrderID",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -141,25 +124,19 @@ namespace Server.Migrations
                 column: "GuestID");
 
             migrationBuilder.CreateIndex(
-                name: "IX_ORDER_WaiterID",
+                name: "IX_ORDER_MenuItemID",
                 table: "ORDER",
-                column: "WaiterID");
+                column: "MenuItemID");
 
             migrationBuilder.CreateIndex(
-                name: "IX_ORDER_DETAILS_MenuItemID",
-                table: "ORDER_DETAILS",
-                column: "MenuItemID");
+                name: "IX_TABLE_WaiterID",
+                table: "TABLE",
+                column: "WaiterID");
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropTable(
-                name: "ORDER_DETAILS");
-
-            migrationBuilder.DropTable(
-                name: "MENU_ITEM");
-
             migrationBuilder.DropTable(
                 name: "ORDER");
 
@@ -167,10 +144,13 @@ namespace Server.Migrations
                 name: "GUEST");
 
             migrationBuilder.DropTable(
-                name: "WAITER");
+                name: "MENU_ITEM");
 
             migrationBuilder.DropTable(
                 name: "TABLE");
+
+            migrationBuilder.DropTable(
+                name: "WAITER");
         }
     }
 }

@@ -65,6 +65,9 @@ namespace Server.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<bool>("HasAllergens")
+                        .HasColumnType("bit");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -88,44 +91,26 @@ namespace Server.Migrations
                     b.Property<int>("GuestID")
                         .HasColumnType("int");
 
+                    b.Property<int>("MenuItemID")
+                        .HasColumnType("int");
+
                     b.Property<DateTime>("OrderTime")
                         .HasColumnType("datetime2");
+
+                    b.Property<int>("Quantity")
+                        .HasColumnType("int");
 
                     b.Property<string>("Status")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("WaiterID")
-                        .HasColumnType("int");
-
                     b.HasKey("OrderID");
 
                     b.HasIndex("GuestID");
 
-                    b.HasIndex("WaiterID");
-
-                    b.ToTable("ORDER");
-                });
-
-            modelBuilder.Entity("Server.Models.OrderDetail", b =>
-                {
-                    b.Property<int>("OrderID")
-                        .HasColumnType("int");
-
-                    b.Property<int>("MenuItemID")
-                        .HasColumnType("int");
-
-                    b.Property<int>("OrderDetailID")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Quantity")
-                        .HasColumnType("int");
-
-                    b.HasKey("OrderID", "MenuItemID");
-
                     b.HasIndex("MenuItemID");
 
-                    b.ToTable("ORDER_DETAILS");
+                    b.ToTable("ORDER");
                 });
 
             modelBuilder.Entity("Server.Models.Table", b =>
@@ -146,7 +131,12 @@ namespace Server.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int?>("WaiterID")
+                        .HasColumnType("int");
+
                     b.HasKey("TableID");
+
+                    b.HasIndex("WaiterID");
 
                     b.ToTable("TABLE");
                 });
@@ -187,30 +177,24 @@ namespace Server.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Server.Models.Waiter", null)
-                        .WithMany("Orders")
-                        .HasForeignKey("WaiterID");
-
-                    b.Navigation("Guest");
-                });
-
-            modelBuilder.Entity("Server.Models.OrderDetail", b =>
-                {
                     b.HasOne("Server.Models.MenuItem", "MenuItem")
-                        .WithMany("OrderDetails")
+                        .WithMany("Orders")
                         .HasForeignKey("MenuItemID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Server.Models.Order", "Order")
-                        .WithMany("OrderDetails")
-                        .HasForeignKey("OrderID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    b.Navigation("Guest");
 
                     b.Navigation("MenuItem");
+                });
 
-                    b.Navigation("Order");
+            modelBuilder.Entity("Server.Models.Table", b =>
+                {
+                    b.HasOne("Server.Models.Waiter", "Waiter")
+                        .WithMany("Tables")
+                        .HasForeignKey("WaiterID");
+
+                    b.Navigation("Waiter");
                 });
 
             modelBuilder.Entity("Server.Models.Guest", b =>
@@ -220,12 +204,7 @@ namespace Server.Migrations
 
             modelBuilder.Entity("Server.Models.MenuItem", b =>
                 {
-                    b.Navigation("OrderDetails");
-                });
-
-            modelBuilder.Entity("Server.Models.Order", b =>
-                {
-                    b.Navigation("OrderDetails");
+                    b.Navigation("Orders");
                 });
 
             modelBuilder.Entity("Server.Models.Table", b =>
@@ -235,7 +214,7 @@ namespace Server.Migrations
 
             modelBuilder.Entity("Server.Models.Waiter", b =>
                 {
-                    b.Navigation("Orders");
+                    b.Navigation("Tables");
                 });
 #pragma warning restore 612, 618
         }

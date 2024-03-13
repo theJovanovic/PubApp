@@ -9,18 +9,22 @@ public class Order
 {
     [Key]
     public int OrderID { get; set; }
-    public DateTime OrderTime { get; set; } = DateTime.Now;
-    public string Status { get; set; } // Consider using an enum for predefined statuses
 
-    // Foreign Keys
+    public DateTime OrderTime { get; set; } = DateTime.Now;
+
+    public string Status { get; set; } = "Pending"; // Pending, Preparing, Completed, Delivered
+
+    public int Quantity { get; set; }
+
     public int GuestID { get; set; }
 
-    // Navigation properties
     [ForeignKey("GuestID")]
     public Guest Guest { get; set; }
 
-    // Collection of MenuItem through a junction table (OrderDetail)
-    public List<OrderDetail> OrderDetails { get; set; }
+    public int MenuItemID { get; set; }
+
+    [ForeignKey("MenuItemID")]
+    public MenuItem MenuItem { get; set; }
 }
 
 public class OrderDTO
@@ -29,4 +33,11 @@ public class OrderDTO
     public DateTime OrderTime { get; set; }
     public string Status { get; set; }
     public int GuestID { get; set; }
+}
+
+public class OrderCreateDTO
+{
+    public int GuestID { get; set; }
+    public int MenuItemID { get; set; }
+    public int Quantity {  get; set; }
 }

@@ -48,6 +48,7 @@ const TablesPage = () => {
       <Link to="/tables/add">Add Table</Link>
       <ol>
         {tables.map((table) => (
+          <>
           <li>
             <h2>Table {table.number}</h2>
             <h3>Seats: {table.seats}</h3>
@@ -61,6 +62,8 @@ const TablesPage = () => {
             Delete
             </a>
           </li>
+          <br />
+          </>
         ))}
       </ol>
     </div>

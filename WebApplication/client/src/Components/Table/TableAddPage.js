@@ -68,7 +68,7 @@ const TableAddPage = () => {
         <label>
           Status:
           <select name="status" value={table.status} onChange={handleChange} required>
-            <option value="">Select a status</option>
+            <option value="">Select status</option>
             <option value="Available">Available</option>
             <option value="Occupied">Occupied</option>
             <option value="Reserved">Reserved</option>

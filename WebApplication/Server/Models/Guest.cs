@@ -18,10 +18,8 @@ public class Guest
 
     public bool HasDiscount { get; set; }
 
-    // Foreign Key
     public int TableID { get; set; }
 
-    // Navigation property for Table
     [ForeignKey("TableID")]
     public Table Table { get; set; }
 

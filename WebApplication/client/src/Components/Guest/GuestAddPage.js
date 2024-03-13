@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 const GuestAddPage = () => {
   const navigate = useNavigate();
+  const [tables, setTables] = useState([])
   const [guest, setGuest] = useState({
     name: '',
     money: '',
@@ -10,6 +11,29 @@ const GuestAddPage = () => {
     hasDiscount: false,
     tableNumber: '',
   });
+
+  useEffect(() => {
+    const fetchTables = async () => {
+      const endpoint = 'https://localhost:7146/api/Table';
+      try {
+        const response = await fetch(endpoint, {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json"
+          }
+        });
+        if (!response.ok) {
+          throw new Error('Error fetching tables');
+        }
+        const data = await response.json();
+        setTables(data);
+      } catch (error) {
+        console.error('Failed to fetch tables:', error);
+      }
+    };
+
+    fetchTables();
+  }, []);
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -90,14 +114,13 @@ const GuestAddPage = () => {
         </label>
         <br />
         <label>
-          Table number:
-          <input
-            type="number"
-            name="tableNumber"
-            value={guest.tableNumber}
-            onChange={handleChange}
-            required
-          />
+          Select table:
+          <select name="tableNumber" value={guest.tableNumber} onChange={handleChange} required>
+            <option value="">Select table</option>
+            {tables.map((table) => (
+              <option value={table.number}>Table {table.number}</option>
+            ))}
+          </select>
         </label>
         <br />
         <button type="submit">Add Guest</button>

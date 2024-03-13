@@ -31,6 +31,31 @@ public class MenuItemController : ControllerBase
         return Ok(menuItems);
     }
 
+    // GET: api/MenuItem/order/5
+    [HttpGet("order/{guestID}")]
+    public async Task<ActionResult> GetMenuItemsForOrder(int guestID)
+    {
+        var guest = await _context.Guests.FindAsync(guestID);
+
+        if (guest == null)
+        {
+            return NotFound();
+        }
+
+        var menuItemsQuery = _context.MenuItems.AsQueryable();
+
+        if (guest.HasAllergies)
+        {
+            menuItemsQuery = menuItemsQuery.Where(mi => !mi.HasAllergens);
+        }
+
+        var menuItems = await menuItemsQuery
+            .Select(mi => _mapper.Map<MenuItemDTO>(mi))
+            .ToListAsync();
+
+        return Ok(menuItems);
+    }
+
     // GET: api/MenuItem/5
     [HttpGet("{id}")]
     public async Task<ActionResult> GetMenuItem(int id)
@@ -68,6 +93,32 @@ public class MenuItemController : ControllerBase
             .FirstOrDefaultAsync();
 
         return CreatedAtAction(nameof(GetMenuItem), new { id = result.MenuItemID }, result);
+    }
+
+    // PUT: api/MenuItem/5
+    [HttpPut("{id}")]
+    public async Task<IActionResult> PutTable(int id, MenuItemDTO menuItemDTO)
+    {
+        if (id != menuItemDTO.MenuItemID)
+        {
+            return BadRequest();
+        }
+
+        var menuItem = await _context.MenuItems.FindAsync(menuItemDTO.MenuItemID);
+
+        if (menuItem == null)
+        {
+            return NotFound();
+        }
+
+        menuItem.Name = menuItemDTO.Name;
+        menuItem.Price = menuItemDTO.Price;
+        menuItem.Category = menuItemDTO.Category;
+        menuItem.HasAllergens = menuItemDTO.HasAllergens;
+
+        await _context.SaveChangesAsync();
+
+        return NoContent();
     }
 
     // DELETE: api/MenuItem/5

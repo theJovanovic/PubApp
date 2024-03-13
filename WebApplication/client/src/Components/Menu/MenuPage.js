@@ -49,17 +49,21 @@ const MenuPage = () => {
         <Link to="/menu/add">Add menu item</Link>
         <ol>
             {menuItems.map((item) => (
-                <li>
-                    <h2>{item.name}</h2>
-                    <h3>{item.price}din</h3>
-                    <h3>Category: {item.category}</h3>
-                    <a
-                      style={{ color: 'blue', textDecoration: 'underline', cursor: 'pointer' }}
-                      onClick={() => {deleteMenuItem(item.menuItemID)}}
-                    >
-                    Delete
-                    </a>
-                </li>
+              <>
+              <li>
+                <h2>{item.name} {item.hasAllergens && "(A)"}</h2>
+                <h3>{item.price}din</h3>
+                <h3>Category: {item.category}</h3>
+                <Link to={`/menu/edit/${item.menuItemID}`}>Edit</Link>
+                <a
+                  style={{ color: 'blue', textDecoration: 'underline', cursor: 'pointer' }}
+                  onClick={() => {deleteMenuItem(item.menuItemID)}}
+                >
+                Delete
+                </a>
+              </li>
+              <br />
+              </>
             ))}
         </ol>
     </div>

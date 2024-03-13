@@ -88,7 +88,18 @@ public class GuestController : ControllerBase
             TableNumber = await _context.Tables
             .Where(t => t.TableID == guest.TableID)
             .Select(t => t.Number)
-            .FirstOrDefaultAsync()
+            .FirstOrDefaultAsync(),
+            Orders = await _context.Orders
+            .Where(o => o.GuestID == guest.GuestID)
+            .Where(o => o.Status != "Delivered")
+            .Select(o => new
+            {
+                OrderID = o.OrderID,
+                Name = o.MenuItem.Name,
+                Price = o.MenuItem.Price,
+                Status = o.Status
+            })
+            .ToListAsync()
         };
 
         return Ok(guestInfo);

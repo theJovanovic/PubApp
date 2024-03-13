@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Reflection.Metadata.Ecma335;
 using System.Text.Json.Serialization;
 
 namespace Server.Models;
@@ -9,12 +10,16 @@ public class MenuItem
 {
     [Key]
     public int MenuItemID { get; set; }
-    public string Name { get; set; }
-    public int Price { get; set; }
-    public string Category { get; set; } // Consider using an enum for predefined categories
 
-    // Collection of OrderDetail to represent Many-to-Many relationship with Order
-    public List<OrderDetail> OrderDetails { get; set; }
+    public string Name { get; set; }
+
+    public int Price { get; set; }
+
+    public string Category { get; set; }
+
+    public bool HasAllergens { get; set; }
+
+    public List<Order> Orders { get; set; }
 }
 
 public class MenuItemDTO
@@ -23,4 +28,5 @@ public class MenuItemDTO
     public string Name { get; set; }
     public int Price { get; set; }
     public string Category { get; set; }
+    public bool HasAllergens { get; set; }
 }
