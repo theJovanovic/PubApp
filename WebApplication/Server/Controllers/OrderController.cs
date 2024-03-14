@@ -36,7 +36,10 @@ public class OrderController : ControllerBase
     public async Task<ActionResult> GetOrdersOverview()
     {
         var random = new Random();
-        var ordersToUpdate = _context.Orders.Where(o => o.Status != "Delivered").ToList();
+        var ordersToUpdate = _context.Orders
+            .Where(o => o.Status != "Completed")
+            .Where(o => o.Status != "Delivered")
+            .ToList();
 
         foreach (var order in ordersToUpdate)
         {
@@ -50,8 +53,10 @@ public class OrderController : ControllerBase
         await _context.SaveChangesAsync();
 
         var orders = await _context.Orders
+            .Where(o => o.Status != "Delivered")
             .Select(o => new
             {
+                OrderID = o.OrderID,
                 Name = o.MenuItem.Name,
                 OrderTime = o.OrderTime,
                 Status = o.Status,
@@ -102,11 +107,38 @@ public class OrderController : ControllerBase
         return NoContent();
     }
 
+    // PUT: api/Order/5/Waiter/1
+    [HttpPut("{orderID}/Waiter/{waiterID}")]
+    public async Task<ActionResult> DeliverOrder(int orderID, int waiterID)
+    {
+        var order = await _context.Orders.FindAsync(orderID);
+        var waiter = await _context.Waiters.FindAsync(waiterID);
+
+        if (order == null || waiter == null)
+        {
+            return NotFound();
+        }
+
+        if (order.Status != "Completed")
+        {
+            return BadRequest();
+        }
+
+        order.Status = "Delivered";
+        order.WaiterID = waiterID;
+    
+        await _context.SaveChangesAsync();
+        
+        return NoContent();
+    }
+
+
     // DELETE: api/Order/5
     [HttpDelete("{id}")]
     public async Task<IActionResult> DeleteOrder(int id)
     {
         var order = await _context.Orders.FindAsync(id);
+
         if (order == null)
         {
             return NotFound();
@@ -116,6 +148,69 @@ public class OrderController : ControllerBase
         await _context.SaveChangesAsync();
 
         return NoContent();
+    }
+
+    // DELETE: api/Order/pay/5
+    [HttpDelete("pay/{id}")]
+    public async Task<IActionResult> PayOrder(int id, int tip)
+    {
+        var order = await _context.Orders.FindAsync(id);
+
+        if (order == null)
+        {
+            return NotFound();
+        }
+
+        // remove money from guest
+        var guest = await _context.Guests.FindAsync(order.GuestID);
+        var menuItem = await _context.MenuItems.FindAsync(order.MenuItemID);
+        if (menuItem == null)
+        {
+            return NotFound();
+        }
+
+        int discountedPrice = guest.HasDiscount ? (int)(menuItem.Price * 0.85) : menuItem.Price; // 15% discount
+        int totalOrderCost = discountedPrice * order.Quantity + tip;
+        guest.Money -= totalOrderCost;
+        
+        // add tip to waiter
+        var waiter = await _context.Waiters.FindAsync(order.WaiterID);
+        if (waiter == null)
+        {
+            return NotFound();
+        }
+        waiter.Tips += tip;
+
+        // delete order
+        _context.Orders.Remove(order);
+        await _context.SaveChangesAsync();
+
+        var guestInfo = new
+        {
+            GuestID = guest.GuestID,
+            Name = guest.Name,
+            Money = guest.Money,
+            HasAllergies = guest.HasAllergies,
+            HasDiscount = guest.HasDiscount,
+            TableID = guest.TableID,
+            TableNumber = await _context.Tables
+            .Where(t => t.TableID == guest.TableID)
+            .Select(t => t.Number)
+            .FirstOrDefaultAsync(),
+            Orders = await _context.Orders
+            .Where(o => o.GuestID == guest.GuestID)
+            .Select(o => new
+            {
+                OrderID = o.OrderID,
+                Name = o.MenuItem.Name,
+                Price = guest.HasDiscount ? (int)(o.MenuItem.Price * 0.85) : o.MenuItem.Price,
+                Status = o.Status,
+                Quantity = o.Quantity,
+            })
+            .ToListAsync()
+        };
+
+        return Ok(guestInfo);
     }
 
     private string ChangeOrderStatus(string status)

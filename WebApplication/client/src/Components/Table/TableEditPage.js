@@ -53,7 +53,7 @@ const TableEditPage = () => {
         alert("Error editing table")
         throw new Error('Error editing table');
       }
-      navigate('/tables');
+      navigate(`/tables/info/${id}`);
     } catch (error) {
       console.error('Failed to edit table:', error);
     }
@@ -91,7 +91,7 @@ const TableEditPage = () => {
             <option value="">Select a status</option>
             <option value="Available">Available</option>
             <option value="Occupied">Occupied</option>
-            <option value="Reserved">Reserved</option>
+            <option value="Full">Full</option>
           </select>
         </label>
         <br />

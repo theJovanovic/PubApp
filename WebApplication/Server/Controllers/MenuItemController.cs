@@ -42,6 +42,8 @@ public class MenuItemController : ControllerBase
             return NotFound();
         }
 
+        var discountFactor = guest.HasDiscount ? 0.85 : 1.0;
+
         var menuItemsQuery = _context.MenuItems.AsQueryable();
 
         if (guest.HasAllergies)
@@ -50,7 +52,14 @@ public class MenuItemController : ControllerBase
         }
 
         var menuItems = await menuItemsQuery
-            .Select(mi => _mapper.Map<MenuItemDTO>(mi))
+            .Select(mi => new MenuItemDTO
+            {
+                MenuItemID = mi.MenuItemID,
+                Name = mi.Name,
+                Price = (int)(mi.Price * discountFactor),
+                Category = mi.Category,
+                HasAllergens = mi.HasAllergens
+            })
             .ToListAsync();
 
         return Ok(menuItems);

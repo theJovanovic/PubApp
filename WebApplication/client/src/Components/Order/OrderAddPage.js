@@ -13,7 +13,6 @@ const OrderAddPage = () => {
   });
   const [hasAllergens, setHasAllergens] = useState(false)
 
-  // Fetch guest - mozda ne treba?
   useEffect(() => {
     const fetchGuest = async () => {
       const endpoint = `https://localhost:7146/api/Guest/${id}`;
@@ -107,6 +106,9 @@ const OrderAddPage = () => {
   return (
     <div>
       <h1>Add Order Page</h1>
+      <h3>Available: {guest.money}din
+      {guest.hasDiscount && " (15% discount applied)"}
+      </h3>
       <form onSubmit={handleSubmit}>
         <label>
           Select dish:
@@ -121,7 +123,7 @@ const OrderAddPage = () => {
           <>
           <br />
           <label>
-            Has allergens
+            *Has allergens
           </label>
           </>
         )}

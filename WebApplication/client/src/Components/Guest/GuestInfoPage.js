@@ -4,6 +4,7 @@ import { Link, useParams } from 'react-router-dom';
 const GuestInfoPage = () => {
     const { id } = useParams();
     const [guest, setGuest] = useState({});
+    const [tip, setTip] = useState(0)
 
     // Fetch guest
     useEffect(() => {
@@ -47,6 +48,33 @@ const GuestInfoPage = () => {
       }
     };
 
+    const payOrder = async (orderID) => {
+      try {
+        const endpoint = `https://localhost:7146/api/Order/pay/${orderID}`;
+        const response = await fetch(endpoint, {
+          method: 'DELETE',
+          body: JSON.stringify(tip),
+        });
+        if (!response.ok) {
+          throw new Error('Error paying order');
+        }
+        const order = guest.orders.find(order => order.orderID === orderID)
+        const totalPrice = order.price * order.quantity
+        setGuest(prevGuest => ({
+          ...prevGuest,
+          money: prevGuest.money - totalPrice,
+          orders: prevGuest.orders.filter(order => order.orderID !== orderID)
+        }));
+      } catch (error) {
+        console.error('Failed to pay order:', error);
+      }
+    }
+
+    const handleChange = (e) => {
+      const { _, value } = e.target;
+      setTip(value);
+    };
+
     return (
     <div>
         <h1>Info Guest Page</h1>
@@ -55,21 +83,47 @@ const GuestInfoPage = () => {
         <h2>Discount: {guest.hasDiscount && "Yes" || "No"}</h2>
         <h2>Money: {guest.money}</h2>
         <h2>Table number: <Link to={`/tables/info/${guest.tableID}`}>{guest.tableNumber}</Link></h2>
+        <Link to={`/guests/edit/${guest.guestID}`}>Edit</Link>
         <Link to={`/order/add/${guest.guestID}`}>Make order</Link>
         <h2>Orders:</h2>
         <ol>
           {guest.orders?.map((order) => (
+            <>
             <li>
-              <h3>{order.name}</h3>
-              <h3>{order.price}</h3>
+              <h3>{order.name} {order.quantity > 1 && `x${order.quantity}`}</h3>
+              <h3>{order.price * order.quantity}</h3>
               <h3>{order.status}</h3>
-              <a
-                style={{ color: 'blue', textDecoration: 'underline', cursor: 'pointer' }}
-                onClick={() => {cancelOrder(order.orderID)}}
-              >
-              Cancel
-              </a>
+              {order.status === "Delivered" && (
+                <>
+                <label>
+                  Tip (optional):
+                  <input
+                    type="number"
+                    name="tip"
+                    value={tip}
+                    onChange={handleChange}
+                    required
+                  />
+                </label>
+                <br />
+                <a
+                  style={{ color: 'blue', textDecoration: 'underline', cursor: 'pointer' }}
+                  onClick={() => {payOrder(order.orderID)}}
+                >
+                Pay
+                </a>
+                </>
+              ) || (
+                <a
+                  style={{ color: 'blue', textDecoration: 'underline', cursor: 'pointer' }}
+                  onClick={() => {cancelOrder(order.orderID)}}
+                >
+                Cancel
+                </a>
+              )}
             </li>
+            <br />
+            </>
           ))}
         </ol>
     </div>

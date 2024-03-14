@@ -91,13 +91,13 @@ public class GuestController : ControllerBase
             .FirstOrDefaultAsync(),
             Orders = await _context.Orders
             .Where(o => o.GuestID == guest.GuestID)
-            .Where(o => o.Status != "Delivered")
             .Select(o => new
             {
                 OrderID = o.OrderID,
                 Name = o.MenuItem.Name,
-                Price = o.MenuItem.Price,
-                Status = o.Status
+                Price = guest.HasDiscount ? (int)(o.MenuItem.Price * 0.85) : o.MenuItem.Price,
+                Status = o.Status,
+                Quantity = o.Quantity,
             })
             .ToListAsync()
         };
@@ -115,9 +115,27 @@ public class GuestController : ControllerBase
         }
 
         var existingTable = await _context.Tables.FirstOrDefaultAsync(t => t.Number == guestDTO.TableNumber);
+
         if (existingTable == null)
         {
             return NotFound();
+        }
+
+        var numOfPeopleAtTable = _context.Guests
+            .Where(g => g.TableID == existingTable.TableID)
+            .Count();
+
+        if (numOfPeopleAtTable < existingTable.Seats - 1)
+        {
+            existingTable.Status = "Occupied";
+        }
+        else if (numOfPeopleAtTable == existingTable.Seats - 1)
+        {
+            existingTable.Status = "Full";
+        }
+        else if (numOfPeopleAtTable == existingTable.Seats)
+        {
+            return Conflict();
         }
 
         var guest = new Guest

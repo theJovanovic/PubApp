@@ -25,6 +25,11 @@ public class Order
 
     [ForeignKey("MenuItemID")]
     public MenuItem MenuItem { get; set; }
+
+    public int? WaiterID { get; set; }
+
+    [ForeignKey("WaiterID")]
+    public Waiter? Waiter { get; set; }
 }
 
 public class OrderDTO

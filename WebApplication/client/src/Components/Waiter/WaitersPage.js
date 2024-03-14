@@ -51,6 +51,7 @@ const WaitersPage = () => {
           <>
           <li>
             <h2>{waiter.name}</h2>
+            <h3>Tips: {waiter.tips}din</h3>
             <Link to={`/waiters/orders/${waiter.waiterID}`}>View orders</Link>
             <a
               style={{ color: 'blue', textDecoration: 'underline', cursor: 'pointer' }}

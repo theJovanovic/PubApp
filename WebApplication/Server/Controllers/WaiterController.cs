@@ -58,7 +58,8 @@ public class WaiterController : ControllerBase
 
         var waiter = new Waiter
         {
-            Name = waiterDTO.Name
+            Name = waiterDTO.Name,
+            Tips = waiterDTO.Tips
         };
 
         await _context.Waiters.AddAsync(waiter);

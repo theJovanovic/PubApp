@@ -71,8 +71,7 @@ const TableAddPage = () => {
             <option value="">Select status</option>
             <option value="Available">Available</option>
             <option value="Occupied">Occupied</option>
-            <option value="Reserved">Reserved</option>
-            // Add other statuses as needed
+            <option value="Full">Full</option>
           </select>
         </label>
         <br />

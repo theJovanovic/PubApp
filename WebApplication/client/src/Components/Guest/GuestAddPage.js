@@ -59,6 +59,9 @@ const GuestAddPage = () => {
         if (response.status === 404) {
           alert("Error: Table doesn't exist")
         }
+        else if (response.status == 409) {
+          alert("Error: Table is full")
+        }
         throw new Error('Error adding guest');
       }
       navigate('/guests');

@@ -55,7 +55,8 @@ const GuestEditPage = () => {
         }
         throw new Error('Error editing guest');
       }
-      navigate('/guests');
+      navigate(`/guests/info/${id}`);
+      // navigate(`/guests`);
     } catch (error) {
       console.error('Failed to edit guest:', error);
     }

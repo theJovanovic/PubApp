@@ -51,7 +51,7 @@ const GuestsPage = () => {
           <>
           <li>
             <h2>Name: {guest.name}</h2>
-            <h3>Allergies: {guest.hasAllergies && "Yes" || "No"}</h3>
+            {/* <h3>Allergies: {guest.hasAllergies && "Yes" || "No"}</h3> */}
             <h3>Table: {guest.tableNumber}</h3>
             <Link to={`/guests/edit/${guest.guestID}`}>Edit</Link>
             <Link to={`/guests/info/${guest.guestID}`}>Info</Link>
