@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
+import alertError from '../../alertError';
 
 const MenuItemEditPage = () => {
   const navigate = useNavigate();
   const { id } = useParams();
   const [menuItem, setMenuItem] = useState({});
+  const [categories, setCategories] = useState([]);
 
   useEffect(() => {
     const fetchMenuItem = async () => {
@@ -17,7 +19,8 @@ const MenuItemEditPage = () => {
           }
         });
         if (!response.ok) {
-          throw new Error('Error fetching menu item');
+          const message = await alertError(response);
+          throw new Error(message);
         }
         const data = await response.json();
         setMenuItem(data);
@@ -27,6 +30,30 @@ const MenuItemEditPage = () => {
     };
 
     fetchMenuItem();
+  }, []);
+
+  useEffect(() => {
+    const fetchMenuCategories = async () => {
+      const endpoint = `https://localhost:7146/api/MenuItem/categories`;
+      try {
+        const response = await fetch(endpoint, {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json"
+          }
+        });
+        if (!response.ok) {
+          const message = await alertError(response);
+          throw new Error(message);
+        }
+        const data = await response.json();
+        setCategories(data);
+      } catch (error) {
+        console.error('Failed to fetch menu categories:', error);
+      }
+    };
+
+    fetchMenuCategories();
   }, []);
 
   const handleChange = (e) => {
@@ -50,10 +77,8 @@ const MenuItemEditPage = () => {
         body: JSON.stringify(menuItem),
       });
       if (!response.ok) {
-        if (response.status === 404) {
-          alert("Error: Table doesn't exist")
-        }
-        throw new Error('Error editing menu item');
+        const message = await alertError(response);
+        throw new Error(message);
       }
       navigate('/menu');
     } catch (error) {
@@ -83,6 +108,7 @@ const MenuItemEditPage = () => {
             name="price"
             value={menuItem.price}
             onChange={handleChange}
+            min={0}
             required
           />
         </label>
@@ -91,9 +117,9 @@ const MenuItemEditPage = () => {
           Category:
           <select name="category" value={menuItem.category} onChange={handleChange} required>
             <option value="">Select a category</option>
-            <option value="Italian">Italian</option>
-            <option value="Mexican">Mexican</option>
-            <option value="Asian">Asian</option>
+            {categories.map((category) => (
+              <option value={category}>{category}</option>
+            ))}
           </select>
         </label>
         <br />

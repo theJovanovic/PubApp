@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import alertError from '../../alertError';
 
 const TablesPage = () => {
   const [tables, setTables] = useState([])
@@ -15,7 +16,8 @@ const TablesPage = () => {
           }
         });
         if (!response.ok) {
-          throw new Error('Error fetching tables');
+          const message = await alertError(response);
+          throw new Error(message);
         }
         const data = await response.json();
         setTables(data);
@@ -34,7 +36,8 @@ const TablesPage = () => {
         method: 'DELETE',
       });
       if (!response.ok) {
-        throw new Error('Error deleting table');
+        const message = await alertError(response);
+        throw new Error(message);
       }
       setTables(tables.filter(table => table.tableID !== tableID));
     } catch (error) {

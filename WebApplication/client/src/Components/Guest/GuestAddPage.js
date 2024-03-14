@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import alertError from '../../alertError';
 
 const GuestAddPage = () => {
   const navigate = useNavigate();
@@ -23,7 +24,8 @@ const GuestAddPage = () => {
           }
         });
         if (!response.ok) {
-          throw new Error('Error fetching tables');
+          const message = await alertError(response);
+          throw new Error(message);
         }
         const data = await response.json();
         setTables(data);
@@ -56,13 +58,8 @@ const GuestAddPage = () => {
         body: JSON.stringify(guest),
       });
       if (!response.ok) {
-        if (response.status === 404) {
-          alert("Error: Table doesn't exist")
-        }
-        else if (response.status == 409) {
-          alert("Error: Table is full")
-        }
-        throw new Error('Error adding guest');
+        const message = await alertError(response);
+        throw new Error(message);
       }
       navigate('/guests');
     } catch (error) {
@@ -92,6 +89,7 @@ const GuestAddPage = () => {
             name="money"
             value={guest.money}
             onChange={handleChange}
+            min={0}
             required
           />
         </label>

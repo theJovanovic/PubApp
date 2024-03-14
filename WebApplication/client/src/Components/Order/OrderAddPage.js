@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
+import alertError from '../../alertError';
 
 const OrderAddPage = () => {
   const navigate = useNavigate();
@@ -24,7 +25,8 @@ const OrderAddPage = () => {
           }
         });
         if (!response.ok) {
-          throw new Error('Error fetching guest');
+          const message = await alertError(response);
+          throw new Error(message);
         }
         const data = await response.json();
         setGuest(data);
@@ -48,7 +50,8 @@ const OrderAddPage = () => {
           }
         });
         if (!response.ok) {
-          throw new Error('Error fetching menu items');
+          const message = await alertError(response);
+          throw new Error(message);
         }
         const data = await response.json();
         setMenuItems(data);
@@ -92,10 +95,8 @@ const OrderAddPage = () => {
         body: JSON.stringify(order),
       });
       if (!response.ok) {
-        if (response.status === 404) {
-          alert("Error: Table doesn't exist")
-        }
-        throw new Error('Error adding order');
+        const message = await alertError(response);
+        throw new Error(message);
       }
       navigate(`/guests/info/${id}`);
     } catch (error) {
@@ -135,6 +136,7 @@ const OrderAddPage = () => {
             name="quantity"
             value={order.quantity}
             onChange={handleChange}
+            min={1}
             required
           />
         </label>

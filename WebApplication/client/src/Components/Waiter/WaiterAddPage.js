@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import alertError from '../../alertError';
 
 const WaiterAddPage = () => {
   const navigate = useNavigate();
@@ -28,10 +29,8 @@ const WaiterAddPage = () => {
         body: JSON.stringify(waiter),
       });
       if (!response.ok) {
-        if (response.status === 404) {
-          alert("Error: Table doesn't exist")
-        }
-        throw new Error('Error adding waiter');
+        const message = await alertError(response);
+        throw new Error(message);
       }
       navigate('/waiters');
     } catch (error) {

@@ -79,7 +79,7 @@ public class OrderController : ControllerBase
 
         if (order == null)
         {
-            return NotFound();
+            return NotFound("Order with given ID doesn't exist");
         }
 
         return Ok(order);
@@ -92,6 +92,12 @@ public class OrderController : ControllerBase
         if (!ModelState.IsValid)
         {
             return BadRequest(ModelState);
+        }
+
+        //Asserts
+        if (orderDTO.Quantity < 1)
+        {
+            return BadRequest("Quantity must be a positive value");
         }
 
         var order = new Order
@@ -114,14 +120,19 @@ public class OrderController : ControllerBase
         var order = await _context.Orders.FindAsync(orderID);
         var waiter = await _context.Waiters.FindAsync(waiterID);
 
-        if (order == null || waiter == null)
+        if (order == null)
         {
-            return NotFound();
+            return NotFound("Order with given ID doesn't exist");
+        }
+
+        if (waiter == null)
+        {
+            return NotFound("Waiter with given ID doesn't exist");
         }
 
         if (order.Status != "Completed")
         {
-            return BadRequest();
+            return BadRequest("Order is not completed");
         }
 
         order.Status = "Delivered";
@@ -141,7 +152,7 @@ public class OrderController : ControllerBase
 
         if (order == null)
         {
-            return NotFound();
+            return NotFound("Order with given ID doesn't exist");
         }
 
         _context.Orders.Remove(order);
@@ -154,19 +165,30 @@ public class OrderController : ControllerBase
     [HttpDelete("pay/{id}")]
     public async Task<IActionResult> PayOrder(int id, int tip)
     {
+        //Asserts
+        if (tip < 0)
+        {
+            return BadRequest("Tip can't be a negative value");
+        }
+
         var order = await _context.Orders.FindAsync(id);
 
         if (order == null)
         {
-            return NotFound();
+            return NotFound("Order with given ID doesn't exist");
         }
 
         // remove money from guest
         var guest = await _context.Guests.FindAsync(order.GuestID);
+        if (guest == null)
+        {
+            return NotFound("Guest with given ID doesn't exist");
+        }
+
         var menuItem = await _context.MenuItems.FindAsync(order.MenuItemID);
         if (menuItem == null)
         {
-            return NotFound();
+            return NotFound("Item with given ID doesn't exist");
         }
 
         int discountedPrice = guest.HasDiscount ? (int)(menuItem.Price * 0.85) : menuItem.Price; // 15% discount
@@ -177,7 +199,7 @@ public class OrderController : ControllerBase
         var waiter = await _context.Waiters.FindAsync(order.WaiterID);
         if (waiter == null)
         {
-            return NotFound();
+            return NotFound("Waiter with given ID doesn't exist");
         }
         waiter.Tips += tip;
 
@@ -185,32 +207,7 @@ public class OrderController : ControllerBase
         _context.Orders.Remove(order);
         await _context.SaveChangesAsync();
 
-        var guestInfo = new
-        {
-            GuestID = guest.GuestID,
-            Name = guest.Name,
-            Money = guest.Money,
-            HasAllergies = guest.HasAllergies,
-            HasDiscount = guest.HasDiscount,
-            TableID = guest.TableID,
-            TableNumber = await _context.Tables
-            .Where(t => t.TableID == guest.TableID)
-            .Select(t => t.Number)
-            .FirstOrDefaultAsync(),
-            Orders = await _context.Orders
-            .Where(o => o.GuestID == guest.GuestID)
-            .Select(o => new
-            {
-                OrderID = o.OrderID,
-                Name = o.MenuItem.Name,
-                Price = guest.HasDiscount ? (int)(o.MenuItem.Price * 0.85) : o.MenuItem.Price,
-                Status = o.Status,
-                Quantity = o.Quantity,
-            })
-            .ToListAsync()
-        };
-
-        return Ok(guestInfo);
+        return NoContent();
     }
 
     private string ChangeOrderStatus(string status)

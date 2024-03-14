@@ -1,10 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
+import alertError from '../../alertError';
 
 const GuestEditPage = () => {
   const navigate = useNavigate();
   const { id } = useParams();
+  const [tables, setTables] = useState([])
   const [guest, setGuest] = useState({});
+  const [guestCurrentTableNumber, setGuestCurrentTableNumber] = useState();
 
   useEffect(() => {
     const fetchGuest = async () => {
@@ -17,16 +20,42 @@ const GuestEditPage = () => {
           }
         });
         if (!response.ok) {
-          throw new Error('Error fetching guest');
+          const message = await alertError(response);
+          throw new Error(message);
         }
         const data = await response.json();
         setGuest(data);
+        setGuestCurrentTableNumber(data.tableNumber)
       } catch (error) {
         console.error('Failed to fetch guest:', error);
       }
     };
 
     fetchGuest();
+  }, []);
+
+  useEffect(() => {
+    const fetchTables = async () => {
+      const endpoint = 'https://localhost:7146/api/Table';
+      try {
+        const response = await fetch(endpoint, {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json"
+          }
+        });
+        if (!response.ok) {
+          const message = await alertError(response);
+          throw new Error(message);
+        }
+        const data = await response.json();
+        setTables(data);
+      } catch (error) {
+        console.error('Failed to fetch tables:', error);
+      }
+    };
+
+    fetchTables();
   }, []);
 
   const handleChange = (e) => {
@@ -50,13 +79,10 @@ const GuestEditPage = () => {
         body: JSON.stringify(guest),
       });
       if (!response.ok) {
-        if (response.status === 404) {
-          alert("Error: Table doesn't exist")
-        }
-        throw new Error('Error editing guest');
+        const message = await alertError(response);
+        throw new Error(message);
       }
       navigate(`/guests/info/${id}`);
-      // navigate(`/guests`);
     } catch (error) {
       console.error('Failed to edit guest:', error);
     }
@@ -84,6 +110,7 @@ const GuestEditPage = () => {
             name="money"
             value={guest.money}
             onChange={handleChange}
+            min={0}
             required
           />
         </label>
@@ -109,14 +136,12 @@ const GuestEditPage = () => {
         </label>
         <br />
         <label>
-          Table number:
-          <input
-            type="number"
-            name="tableNumber"
-            value={guest.tableNumber}
-            onChange={handleChange}
-            required
-          />
+          Select table:
+          <select name="tableNumber" value={guest.tableNumber} onChange={handleChange} required>
+            {tables.map((table) => (
+              <option value={table.number}>Table {table.number} {table.number === guestCurrentTableNumber && " - Current"}</option>
+            ))}
+          </select>
         </label>
         <br />
         <button type="submit">Edit Guest</button>

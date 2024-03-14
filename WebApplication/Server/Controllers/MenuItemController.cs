@@ -39,7 +39,7 @@ public class MenuItemController : ControllerBase
 
         if (guest == null)
         {
-            return NotFound();
+            return NotFound("Guest with given ID doesn't exist");
         }
 
         var discountFactor = guest.HasDiscount ? 0.85 : 1.0;
@@ -76,10 +76,18 @@ public class MenuItemController : ControllerBase
 
         if (menuItem == null)
         {
-            return NotFound();
+            return NotFound("Item with given ID doesn't exist");
         }
 
         return Ok(menuItem);
+    }
+
+    // GET: api/MenuItem/categories
+    [HttpGet("categories")]
+    public async Task<ActionResult> GetMenuCategories()
+    {
+        List<string> categories = Enum.GetNames(typeof(Category)).ToList();
+        return Ok(categories);
     }
 
     // POST: api/MenuItem
@@ -89,6 +97,24 @@ public class MenuItemController : ControllerBase
         if (!ModelState.IsValid)
         {
             return BadRequest(ModelState);
+        }
+
+        // Asserts
+        if (menuItemDTO.Name.Length > 80)
+        {
+            return BadRequest("Name can't have more than 80 character");
+        }
+        if (menuItemDTO.Price < 0)
+        {
+            return BadRequest("Price can't be negative");
+        }
+
+        // check if menuItemDTO.Category belongs to Category enum defined in MenuItem.cs
+        bool categoryExists = Enum.IsDefined(typeof(Category), menuItemDTO.Category);
+
+        if (categoryExists == false)
+        {
+            return BadRequest("The given category doesn't exist");
         }
 
         var menuItem = _mapper.Map<MenuItem>(menuItemDTO);
@@ -108,16 +134,34 @@ public class MenuItemController : ControllerBase
     [HttpPut("{id}")]
     public async Task<IActionResult> PutTable(int id, MenuItemDTO menuItemDTO)
     {
+        // Asserts
+        if (menuItemDTO.Name.Length > 80)
+        {
+            return BadRequest("Name can't have more than 80 character");
+        }
+        if (menuItemDTO.Price < 0)
+        {
+            return BadRequest("Price can't be negative");
+        }
+
         if (id != menuItemDTO.MenuItemID)
         {
-            return BadRequest();
+            return BadRequest("Item IDs don't match");
+        }
+
+        // check if menuItemDTO.Category belongs to Category enum defined in MenuItem.cs
+        bool categoryExists = Enum.IsDefined(typeof(Category), menuItemDTO.Category);
+
+        if (categoryExists == false)
+        {
+            return BadRequest("The given category doesn't exist");
         }
 
         var menuItem = await _context.MenuItems.FindAsync(menuItemDTO.MenuItemID);
 
         if (menuItem == null)
         {
-            return NotFound();
+            return NotFound("Item with given ID doesn't exist");
         }
 
         menuItem.Name = menuItemDTO.Name;
@@ -137,7 +181,7 @@ public class MenuItemController : ControllerBase
         var menuItem = await _context.MenuItems.FindAsync(id);
         if (menuItem == null)
         {
-            return NotFound();
+            return NotFound("Item with given ID doesn't exist");
         }
 
         _context.MenuItems.Remove(menuItem);

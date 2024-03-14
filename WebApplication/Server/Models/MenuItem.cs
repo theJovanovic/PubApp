@@ -5,6 +5,17 @@ using System.Text.Json.Serialization;
 
 namespace Server.Models;
 
+public enum Category
+{
+    Chinese,
+    French,
+    Indian,
+    International,
+    Italian,
+    Japanese,
+    Mexican,
+}
+
 [Table("MENU_ITEM")]
 public class MenuItem
 {

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import alertError from '../../alertError';
 
 const TableAddPage = () => {
   const navigate = useNavigate();
@@ -30,8 +31,8 @@ const TableAddPage = () => {
         body: JSON.stringify(table),
       });
       if (!response.ok) {
-        alert("Error adding table")
-        throw new Error('Error adding table');
+        const message = await alertError(response);
+        throw new Error(message);
       }
       navigate('/tables');
     } catch (error) {
@@ -50,6 +51,7 @@ const TableAddPage = () => {
             name="number"
             value={table.number}
             onChange={handleChange}
+            min={1}
             required
           />
         </label>
@@ -61,6 +63,7 @@ const TableAddPage = () => {
             name="seats"
             value={table.seats}
             onChange={handleChange}
+            min={1}
             required
           />
         </label>

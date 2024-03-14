@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import alertError from '../../alertError';
 
 const WaiterOrderPage = () => {
   const { id } = useParams();
@@ -16,7 +17,8 @@ const WaiterOrderPage = () => {
           }
         });
         if (!response.ok) {
-          throw new Error('Error fetching orders');
+          const message = await alertError(response);
+          throw new Error(message);
         }
         const data = await response.json();
         setOrders(data);
@@ -45,7 +47,8 @@ const WaiterOrderPage = () => {
         method: 'PUT',
       });
       if (!response.ok) {
-        throw new Error('Error delivering order');
+        const message = await alertError(response);
+        throw new Error(message);
       }
       setOrders(orders.filter(order => order.orderID !== orderID));
     } catch (error) {

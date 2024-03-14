@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import alertError from '../../alertError';
 
 const WaitersPage = () => {
   const [waiters, setWaiters] = useState([])
@@ -15,7 +16,8 @@ const WaitersPage = () => {
           }
         });
         if (!response.ok) {
-          throw new Error('Error fetching waiters');
+          const message = await alertError(response);
+          throw new Error(message);
         }
         const data = await response.json();
         setWaiters(data);
@@ -34,7 +36,8 @@ const WaitersPage = () => {
         method: 'DELETE',
       });
       if (!response.ok) {
-        throw new Error('Error deleting waiter');
+        const message = await alertError(response);
+        throw new Error(message);
       }
       setWaiters(waiters.filter(waiter => waiter.waiterID !== waiterID));
     } catch (error) {

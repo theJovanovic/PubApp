@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
+import alertError from '../../alertError';
 
 const TableEditPage = () => {
   const navigate = useNavigate();
@@ -17,7 +18,8 @@ const TableEditPage = () => {
           }
         });
         if (!response.ok) {
-          throw new Error('Error fetching table');
+          const message = await alertError(response);
+          throw new Error(message);
         }
         const data = await response.json();
         setTable(data);
@@ -50,8 +52,8 @@ const TableEditPage = () => {
         body: JSON.stringify(table),
       });
       if (!response.ok) {
-        alert("Error editing table")
-        throw new Error('Error editing table');
+        const message = await alertError(response);
+        throw new Error(message);
       }
       navigate(`/tables/info/${id}`);
     } catch (error) {
@@ -70,6 +72,7 @@ const TableEditPage = () => {
             name="number"
             value={table.number}
             onChange={handleChange}
+            min={1}
             required
           />
         </label>
@@ -81,6 +84,7 @@ const TableEditPage = () => {
             name="seats"
             value={table.seats}
             onChange={handleChange}
+            min={1}
             required
           />
         </label>

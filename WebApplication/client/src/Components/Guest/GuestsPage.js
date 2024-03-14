@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import alertError from '../../alertError';
 
 const GuestsPage = () => {
   const [guests, setGuests] = useState([])
@@ -15,7 +16,8 @@ const GuestsPage = () => {
           }
         });
         if (!response.ok) {
-          throw new Error('Error fetching guests');
+          const message = await alertError(response);
+          throw new Error(message);
         }
         const data = await response.json();
         setGuests(data);
@@ -34,7 +36,8 @@ const GuestsPage = () => {
         method: 'DELETE',
       });
       if (!response.ok) {
-        throw new Error('Error deleting guest');
+        const message = await alertError(response);
+        throw new Error(message);
       }
       setGuests(guests.filter(guest => guest.guestID !== guestID));
     } catch (error) {

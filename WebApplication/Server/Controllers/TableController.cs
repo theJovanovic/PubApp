@@ -41,7 +41,7 @@ public class TableController : ControllerBase
 
         if (table == null)
         {
-            return NotFound();
+            return NotFound("Table with given ID doesn't exist");
         }
 
         return Ok(table);
@@ -57,7 +57,7 @@ public class TableController : ControllerBase
 
         if (table == null)
         {
-            return NotFound();
+            return NotFound("Table with given ID doesn't exist");
         }
 
         var tableInfo = new
@@ -87,6 +87,25 @@ public class TableController : ControllerBase
             return BadRequest(ModelState);
         }
 
+        //Asserts
+        if (tableDTO.Number < 1)
+        {
+            return BadRequest("Table number must be a positive value");
+        }
+        if (tableDTO.Seats < 1)
+        {
+            return BadRequest("Seats must be a positive value");
+        }
+
+        var existingTable = await _context.Tables
+            .Where(t => t.Number ==  tableDTO.Number)
+            .FirstOrDefaultAsync();
+
+        if (existingTable != null)
+        {
+            return Conflict("Table with the same number already exist");
+        }
+
         var table = _mapper.Map<Table>(tableDTO);
 
         await _context.Tables.AddAsync(table);
@@ -104,16 +123,37 @@ public class TableController : ControllerBase
     [HttpPut("{id}")]
     public async Task<IActionResult> PutTable(int id, TableDTO tableDTO)
     {
+        //Asserts
+        if (tableDTO.Number < 1)
+        {
+            return BadRequest("Table number must be a positive value");
+        }
+        if (tableDTO.Seats < 1)
+        {
+            return BadRequest("Seats must be a positive value");
+        }
+
         if (id != tableDTO.TableID)
         {
-            return BadRequest();
+            return BadRequest("Table IDs doesn't match");
         }
 
         var table = await _context.Tables.FindAsync(tableDTO.TableID);
 
+        // check if table we want to edit exists
         if (table == null)
         {
-            return NotFound();
+            return NotFound("Table with given ID doesn't exist");
+        }
+
+        var tableWithSameNumber = await _context.Tables
+            .Where(t => t.Number == tableDTO.Number)
+            .FirstOrDefaultAsync();
+
+        // check if table exists with the number we want to edit
+        if (tableWithSameNumber != table)
+        {
+            return Conflict("Table with the same number already exists");
         }
 
         table.Number = tableDTO.Number;
@@ -132,7 +172,7 @@ public class TableController : ControllerBase
         var table = await _context.Tables.FindAsync(id);
         if (table == null)
         {
-            return NotFound();
+            return NotFound("Table with given ID doesn't exist");
         }
 
         _context.Tables.Remove(table);
