@@ -58,7 +58,7 @@ public class GuestController : ControllerBase
 
         if (guest == null)
         {
-            return NotFound();
+            return NotFound("Guest with given ID doesn't exist");
         }
 
         return Ok(guest);
@@ -74,7 +74,7 @@ public class GuestController : ControllerBase
 
         if (guest == null)
         {
-            return NotFound();
+            return NotFound("Guest with given ID doesn't exist");
         }
 
         var guestInfo = new
@@ -91,13 +91,13 @@ public class GuestController : ControllerBase
             .FirstOrDefaultAsync(),
             Orders = await _context.Orders
             .Where(o => o.GuestID == guest.GuestID)
-            .Where(o => o.Status != "Delivered")
             .Select(o => new
             {
                 OrderID = o.OrderID,
                 Name = o.MenuItem.Name,
-                Price = o.MenuItem.Price,
-                Status = o.Status
+                Price = guest.HasDiscount ? (int)(o.MenuItem.Price * 0.85) : o.MenuItem.Price,
+                Status = o.Status,
+                Quantity = o.Quantity,
             })
             .ToListAsync()
         };
@@ -114,10 +114,42 @@ public class GuestController : ControllerBase
             return BadRequest(ModelState);
         }
 
+        // Asserts
+        if (guestDTO.Name.Length > 50)
+        {
+            return BadRequest("Name can't have more than 50 characters");
+        }
+        if (guestDTO.Money < 0)
+        {
+            return BadRequest("Money can't be negative");
+        }
+        if (guestDTO.TableNumber < 1)
+        {
+            return BadRequest("Table number must be positive value");
+        }
+
         var existingTable = await _context.Tables.FirstOrDefaultAsync(t => t.Number == guestDTO.TableNumber);
+
         if (existingTable == null)
         {
-            return NotFound();
+            return NotFound("Table with given number doesn't exist");
+        }
+
+        var numOfPeopleAtTable = _context.Guests
+            .Where(g => g.TableID == existingTable.TableID)
+            .Count();
+
+        if (numOfPeopleAtTable < existingTable.Seats - 1)
+        {
+            existingTable.Status = "Occupied";
+        }
+        else if (numOfPeopleAtTable == existingTable.Seats - 1)
+        {
+            existingTable.Status = "Full";
+        }
+        else if (numOfPeopleAtTable == existingTable.Seats)
+        {
+            return Conflict("Table is already full");
         }
 
         var guest = new Guest
@@ -153,19 +185,33 @@ public class GuestController : ControllerBase
     [HttpPut("{id}")]
     public async Task<IActionResult> PutGuest(int id, GuestDTO guestDTO)
     {
+        // Asserts
+        if (guestDTO.Name.Length > 50)
+        {
+            return BadRequest("Name can't have more than 50 characters");
+        }
+        if (guestDTO.Money < 0)
+        {
+            return BadRequest("Money can't be negative");
+        }
+        if (guestDTO.TableNumber < 1)
+        {
+            return BadRequest("Table number must be positive value");
+        }
+
         if (id != guestDTO.GuestID)
         {
-            return BadRequest();
+            return BadRequest("Guest IDs don't match");
         }
 
         var guest = await _context.Guests.FindAsync(guestDTO.GuestID);
 
         if (guest == null)
         {
-            return NotFound();
+            return NotFound("Guest with given ID doesn't exist");
         }
 
-        var guestsTable = await _context.Tables.FirstOrDefaultAsync(t => t.TableID == guest.TableID);
+        var oldTable = await _context.Tables.FirstOrDefaultAsync(t => t.TableID == guest.TableID);
 
         //change other properties
         guest.Name = guestDTO.Name;
@@ -174,14 +220,45 @@ public class GuestController : ControllerBase
         guest.HasDiscount = guestDTO.HasDiscount;
 
         // change table
-        if (guestDTO.TableNumber != guestsTable.Number)
+        if (guestDTO.TableNumber != oldTable.Number)
         {
-            var existingTable = await _context.Tables.FirstOrDefaultAsync(t => t.Number == guestDTO.TableNumber);
-            if (existingTable == null)
+            var newTable = await _context.Tables.FirstOrDefaultAsync(t => t.Number == guestDTO.TableNumber);
+            if (newTable == null)
             {
-                return NotFound();
+                return NotFound("Table with given table number doesn't exist");
             }
-            guest.TableID = existingTable.TableID;
+
+            //change new table status
+            var newTableGuestCount = _context.Guests
+                .Where(g => g.TableID == newTable.TableID)
+                .Count();
+            if (newTableGuestCount == newTable.Seats)
+            {
+                return BadRequest("Table is already full");
+            }
+            else if (newTableGuestCount == newTable.Seats - 1)
+            {
+                newTable.Status = "Full";
+            }
+            else if (newTableGuestCount == 0)
+            {
+                newTable.Status = "Occupied";
+            }
+
+            //change old table status
+            var oldTableGuestCount = _context.Guests
+                    .Where(g => g.TableID == oldTable.TableID)
+                    .Count();
+            if (oldTableGuestCount == oldTable.Seats)
+            {
+                oldTable.Status = "Occupied";
+            }
+            else if (oldTableGuestCount == 1)
+            {
+                oldTable.Status = "Available";
+            }
+
+            guest.TableID = newTable.TableID;
         }
 
         await _context.SaveChangesAsync();
@@ -196,7 +273,26 @@ public class GuestController : ControllerBase
         var guest = await _context.Guests.FindAsync(id);
         if (guest == null)
         {
-            return NotFound();
+            return NotFound("Guest with given ID doesn't exist");
+        }
+
+        //update table
+        var table = await _context.Tables.FindAsync(guest.TableID);
+        if (table == null)
+        {
+            return NotFound("Table with given ID doesn't exist");
+        }
+
+        var guestsAtTable = _context.Guests
+            .Where(g => g.TableID == table.TableID)
+            .Count();
+        if (guestsAtTable == table.Seats)
+        {
+            table.Status = "Occupied";
+        }
+        else if (guestsAtTable == 1)
+        {
+            table.Status = "Available";
         }
 
         _context.Guests.Remove(guest);

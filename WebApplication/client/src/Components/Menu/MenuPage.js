@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
+import alertError from '../../alertError';
 
 const MenuPage = () => {
     const { id } = useParams();
@@ -16,7 +17,8 @@ const MenuPage = () => {
               }
             });
             if (!response.ok) {
-              throw new Error('Error fetching menu items');
+              const message = await alertError(response);
+              throw new Error(message);
             }
             const data = await response.json();
             setMenuItems(data);
@@ -35,7 +37,8 @@ const MenuPage = () => {
           method: 'DELETE',
         });
         if (!response.ok) {
-          throw new Error('Error deleting item');
+          const message = await alertError(response);
+          throw new Error(message);
         }
         setMenuItems(menuItems.filter(item => item.menuItemID !== menuItemID));
       } catch (error) {

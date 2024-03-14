@@ -39,7 +39,7 @@ public class WaiterController : ControllerBase
 
         if (waiter == null)
         {
-            return NotFound();
+            return NotFound("Waiter with given ID doesn't exist");
         }
         
         var result = _mapper.Map<WaiterDTO>(waiter);
@@ -56,9 +56,20 @@ public class WaiterController : ControllerBase
             return BadRequest(ModelState);
         }
 
+        //Asserts
+        if (waiterDTO.Name.Length > 50)
+        {
+            return BadRequest("Name can't have more than 50 character");
+        }
+        if (waiterDTO.Tips != 0)
+        {
+            return BadRequest("Tips can't be set");
+        }
+
         var waiter = new Waiter
         {
-            Name = waiterDTO.Name
+            Name = waiterDTO.Name,
+            Tips = waiterDTO.Tips
         };
 
         await _context.Waiters.AddAsync(waiter);
@@ -73,16 +84,22 @@ public class WaiterController : ControllerBase
     [HttpPut("{id}")]
     public async Task<ActionResult> PutWaiter(int id, WaiterDTO waiterDTO)
     {
+        //Asserts
+        if (waiterDTO.Name.Length > 50)
+        {
+            return BadRequest("Name can't have more than 50 character");
+        }
+
         if (id != waiterDTO.WaiterID)
         {
-            return BadRequest();
+            return BadRequest("Waiter IDs don't match");
         }
 
         var waiter = await _context.Waiters.FindAsync(waiterDTO.WaiterID);
 
         if (waiter == null)
         {
-            return NotFound();
+            return NotFound("Waiter with given ID doesn't exist");
         }
 
         //change other properties
@@ -100,7 +117,7 @@ public class WaiterController : ControllerBase
         var waiter = await _context.Waiters.FindAsync(id);
         if (waiter == null)
         {
-            return NotFound();
+            return NotFound("Waiter with given ID doesn't exist");
         }
 
         _context.Waiters.Remove(waiter);

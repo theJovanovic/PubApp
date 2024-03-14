@@ -12,7 +12,7 @@ using Models;
 namespace Server.Migrations
 {
     [DbContext(typeof(PubContext))]
-    [Migration("20240313120801_V1")]
+    [Migration("20240313212447_V1")]
     partial class V1
     {
         /// <inheritdoc />
@@ -107,11 +107,16 @@ namespace Server.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int?>("WaiterID")
+                        .HasColumnType("int");
+
                     b.HasKey("OrderID");
 
                     b.HasIndex("GuestID");
 
                     b.HasIndex("MenuItemID");
+
+                    b.HasIndex("WaiterID");
 
                     b.ToTable("ORDER");
                 });
@@ -134,12 +139,7 @@ namespace Server.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("WaiterID")
-                        .HasColumnType("int");
-
                     b.HasKey("TableID");
-
-                    b.HasIndex("WaiterID");
 
                     b.ToTable("TABLE");
                 });
@@ -155,6 +155,9 @@ namespace Server.Migrations
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Tips")
+                        .HasColumnType("int");
 
                     b.HasKey("WaiterID");
 
@@ -186,16 +189,13 @@ namespace Server.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("Server.Models.Waiter", "Waiter")
+                        .WithMany()
+                        .HasForeignKey("WaiterID");
+
                     b.Navigation("Guest");
 
                     b.Navigation("MenuItem");
-                });
-
-            modelBuilder.Entity("Server.Models.Table", b =>
-                {
-                    b.HasOne("Server.Models.Waiter", "Waiter")
-                        .WithMany("Tables")
-                        .HasForeignKey("WaiterID");
 
                     b.Navigation("Waiter");
                 });
@@ -213,11 +213,6 @@ namespace Server.Migrations
             modelBuilder.Entity("Server.Models.Table", b =>
                 {
                     b.Navigation("Guests");
-                });
-
-            modelBuilder.Entity("Server.Models.Waiter", b =>
-                {
-                    b.Navigation("Tables");
                 });
 #pragma warning restore 612, 618
         }

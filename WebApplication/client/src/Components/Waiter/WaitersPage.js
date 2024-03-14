@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import alertError from '../../alertError';
 
 const WaitersPage = () => {
   const [waiters, setWaiters] = useState([])
@@ -15,7 +16,8 @@ const WaitersPage = () => {
           }
         });
         if (!response.ok) {
-          throw new Error('Error fetching waiters');
+          const message = await alertError(response);
+          throw new Error(message);
         }
         const data = await response.json();
         setWaiters(data);
@@ -34,7 +36,8 @@ const WaitersPage = () => {
         method: 'DELETE',
       });
       if (!response.ok) {
-        throw new Error('Error deleting waiter');
+        const message = await alertError(response);
+        throw new Error(message);
       }
       setWaiters(waiters.filter(waiter => waiter.waiterID !== waiterID));
     } catch (error) {
@@ -51,6 +54,7 @@ const WaitersPage = () => {
           <>
           <li>
             <h2>{waiter.name}</h2>
+            <h3>Tips: {waiter.tips}din</h3>
             <Link to={`/waiters/orders/${waiter.waiterID}`}>View orders</Link>
             <a
               style={{ color: 'blue', textDecoration: 'underline', cursor: 'pointer' }}

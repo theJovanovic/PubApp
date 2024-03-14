@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
+import alertError from '../../alertError';
 
 const OrderAddPage = () => {
   const navigate = useNavigate();
@@ -13,7 +14,6 @@ const OrderAddPage = () => {
   });
   const [hasAllergens, setHasAllergens] = useState(false)
 
-  // Fetch guest - mozda ne treba?
   useEffect(() => {
     const fetchGuest = async () => {
       const endpoint = `https://localhost:7146/api/Guest/${id}`;
@@ -25,7 +25,8 @@ const OrderAddPage = () => {
           }
         });
         if (!response.ok) {
-          throw new Error('Error fetching guest');
+          const message = await alertError(response);
+          throw new Error(message);
         }
         const data = await response.json();
         setGuest(data);
@@ -49,7 +50,8 @@ const OrderAddPage = () => {
           }
         });
         if (!response.ok) {
-          throw new Error('Error fetching menu items');
+          const message = await alertError(response);
+          throw new Error(message);
         }
         const data = await response.json();
         setMenuItems(data);
@@ -93,10 +95,8 @@ const OrderAddPage = () => {
         body: JSON.stringify(order),
       });
       if (!response.ok) {
-        if (response.status === 404) {
-          alert("Error: Table doesn't exist")
-        }
-        throw new Error('Error adding order');
+        const message = await alertError(response);
+        throw new Error(message);
       }
       navigate(`/guests/info/${id}`);
     } catch (error) {
@@ -107,6 +107,9 @@ const OrderAddPage = () => {
   return (
     <div>
       <h1>Add Order Page</h1>
+      <h3>Available: {guest.money}din
+      {guest.hasDiscount && " (15% discount applied)"}
+      </h3>
       <form onSubmit={handleSubmit}>
         <label>
           Select dish:
@@ -121,7 +124,7 @@ const OrderAddPage = () => {
           <>
           <br />
           <label>
-            Has allergens
+            *Has allergens
           </label>
           </>
         )}
@@ -133,6 +136,7 @@ const OrderAddPage = () => {
             name="quantity"
             value={order.quantity}
             onChange={handleChange}
+            min={1}
             required
           />
         </label>

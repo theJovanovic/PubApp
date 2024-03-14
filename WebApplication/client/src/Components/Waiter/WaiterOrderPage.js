@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
+import alertError from '../../alertError';
 
 const WaiterOrderPage = () => {
-  const navigate = useNavigate();
   const { id } = useParams();
   const [orders, setOrders] = useState([]);
 
@@ -17,7 +17,8 @@ const WaiterOrderPage = () => {
           }
         });
         if (!response.ok) {
-          throw new Error('Error fetching orders');
+          const message = await alertError(response);
+          throw new Error(message);
         }
         const data = await response.json();
         setOrders(data);
@@ -39,18 +40,45 @@ const WaiterOrderPage = () => {
     return formattedDate;
   }
 
+  const deliverOrder = async (orderID) => {
+    try {
+      const endpoint = `https://localhost:7146/api/Order/${orderID}/Waiter/${id}`;
+      const response = await fetch(endpoint, {
+        method: 'PUT',
+      });
+      if (!response.ok) {
+        const message = await alertError(response);
+        throw new Error(message);
+      }
+      setOrders(orders.filter(order => order.orderID !== orderID));
+    } catch (error) {
+      console.error('Failed to deliver order:', error);
+    }
+  }
+
   return (
     <div>
       <h1>Orders overview</h1>
       <ol>
         {orders.map((order) => (
+          <>
           <li>
             <h2>Name: {order.name}</h2>
             <h2>Order time: {formatDate(order.orderTime)}</h2>
             <h2>Status: {order.status}</h2>
             <h2>Quantity: {order.quantity}</h2>
             <h2>Table: {order.tableNumber}</h2>
+            {order.status === "Completed" && 
+              <a
+                style={{ color: 'blue', textDecoration: 'underline', cursor: 'pointer' }}
+                onClick={() => {deliverOrder(order.orderID)}}
+              >
+              Deliver
+              </a>
+            }
           </li>
+          <br />
+          </>
         ))}
       </ol>
     </div>

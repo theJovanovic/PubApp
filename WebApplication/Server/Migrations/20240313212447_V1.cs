@@ -28,19 +28,6 @@ namespace Server.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "WAITER",
-                columns: table => new
-                {
-                    WaiterID = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_WAITER", x => x.WaiterID);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "TABLE",
                 columns: table => new
                 {
@@ -48,17 +35,25 @@ namespace Server.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Number = table.Column<int>(type: "int", nullable: false),
                     Seats = table.Column<int>(type: "int", nullable: false),
-                    Status = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    WaiterID = table.Column<int>(type: "int", nullable: true)
+                    Status = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_TABLE", x => x.TableID);
-                    table.ForeignKey(
-                        name: "FK_TABLE_WAITER_WaiterID",
-                        column: x => x.WaiterID,
-                        principalTable: "WAITER",
-                        principalColumn: "WaiterID");
+                });
+
+            migrationBuilder.CreateTable(
+                name: "WAITER",
+                columns: table => new
+                {
+                    WaiterID = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Tips = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_WAITER", x => x.WaiterID);
                 });
 
             migrationBuilder.CreateTable(
@@ -94,7 +89,8 @@ namespace Server.Migrations
                     Status = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Quantity = table.Column<int>(type: "int", nullable: false),
                     GuestID = table.Column<int>(type: "int", nullable: false),
-                    MenuItemID = table.Column<int>(type: "int", nullable: false)
+                    MenuItemID = table.Column<int>(type: "int", nullable: false),
+                    WaiterID = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -111,6 +107,11 @@ namespace Server.Migrations
                         principalTable: "MENU_ITEM",
                         principalColumn: "MenuItemID",
                         onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_ORDER_WAITER_WaiterID",
+                        column: x => x.WaiterID,
+                        principalTable: "WAITER",
+                        principalColumn: "WaiterID");
                 });
 
             migrationBuilder.CreateIndex(
@@ -129,8 +130,8 @@ namespace Server.Migrations
                 column: "MenuItemID");
 
             migrationBuilder.CreateIndex(
-                name: "IX_TABLE_WaiterID",
-                table: "TABLE",
+                name: "IX_ORDER_WaiterID",
+                table: "ORDER",
                 column: "WaiterID");
         }
 
@@ -147,10 +148,10 @@ namespace Server.Migrations
                 name: "MENU_ITEM");
 
             migrationBuilder.DropTable(
-                name: "TABLE");
+                name: "WAITER");
 
             migrationBuilder.DropTable(
-                name: "WAITER");
+                name: "TABLE");
         }
     }
 }
