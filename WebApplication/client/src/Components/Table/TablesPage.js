@@ -1,9 +1,37 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import alertError from '../../alertError';
+import './Table.css';
+
+const mockTables = [
+  {
+    tableID: "1",
+    number: 1,
+    seats: 4,
+    status: "Available",
+  },
+  {
+    tableID: "2",
+    number: 2,
+    seats: 2,
+    status: "Occupied",
+  },
+  {
+    tableID: "3",
+    number: 3,
+    seats: 6,
+    status: "Reserved",
+  },
+  {
+    tableID: "4",
+    number: 4,
+    seats: 4,
+    status: "Available",
+  }
+];
 
 const TablesPage = () => {
-  const [tables, setTables] = useState([])
+  const [tables, setTables] = useState(mockTables)
 
   useEffect(() => {
     const fetchTables = async () => {
@@ -46,29 +74,32 @@ const TablesPage = () => {
   };
 
   return (
-    <div>
-      <h1>Tables Page</h1>
-      <Link to="/tables/add">Add Table</Link>
-      <ol>
+    <div className="tables-page-container">
+      {/* <h1>Tables Page</h1> */}
+      <Link to="/tables/add" className="button-add">Add Table</Link>
+
+      <div className="tables-container">
         {tables.map((table) => (
-          <>
-          <li>
-            <h2>Table {table.number}</h2>
-            <h3>Seats: {table.seats}</h3>
-            <h3>Status: {table.status}</h3>
-            <Link to={`/tables/edit/${table.tableID}`}>Edit</Link>
-            <Link to={`/tables/info/${table.tableID}`}>Info</Link>
-            <a
-              style={{ color: 'blue', textDecoration: 'underline', cursor: 'pointer' }}
-              onClick={() => {deleteTable(table.tableID)}}
-            >
-            Delete
-            </a>
-          </li>
-          <br />
-          </>
+          <div key={table.tableID} className="table-wrapper">
+            <div className="table-circle">
+              <p>Table {table.number}</p>
+              <p>Seats: {table.seats}</p>
+              <p>Status: {table.status}</p>
+            </div>
+            <div className="table-actions">
+              <Link to={`/tables/edit/${table.tableID}`} className="button-edit">Edit</Link>
+              <Link to={`/tables/info/${table.tableID}`} className="button-info">Info</Link>
+              <button
+                className="button-delete"
+                onClick={() => deleteTable(table.tableID)}
+              >
+                Delete
+              </button>
+            </div>
+          </div>
         ))}
-      </ol>
+      </div>
+
     </div>
   );
 };

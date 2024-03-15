@@ -175,6 +175,16 @@
   },
   {
     "ContainingType": "Server.Controllers.MenuItemController",
+    "Method": "GetMenuCategories",
+    "RelativePath": "api/MenuItem/categories",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Server.Controllers.MenuItemController",
     "Method": "GetMenuItemsForOrder",
     "RelativePath": "api/MenuItem/order/{guestID}",
     "HttpMethod": "GET",

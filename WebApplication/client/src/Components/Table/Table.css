@@ -1,0 +1,129 @@
+.tables-page-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.tables-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+    padding: 20px;
+  }
+  
+  .table-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .table-circle {
+    background-color: #3c2f2f;
+    border-radius: 50%;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 200px;
+    height: 200px;
+    text-align: center;
+  }
+  
+  .table-circle p {
+    margin: 5px 0;
+  }
+  
+  .table-actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+  }
+  
+  .btn {
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    text-decoration: none;
+    text-align: center;
+    display: inline-block;
+  }
+  
+  .btn-edit {
+    background-color: blue;
+  }
+  
+  .btn-info {
+    background-color: green;
+  }
+  
+  .btn-delete {
+    background-color: red;
+  }
+
+/* Imported button */
+.button-add, .button-edit, .button-info, .button-delete {
+    align-items: center;
+    appearance: none;
+    background-color: #D2B48C;
+    font-size: 18px;
+    margin: 10px;
+    height: 48px;
+    padding-left: 16px;
+    padding-right: 16px;
+    border-radius: 4px;
+    border-width: 0;
+    /* box-shadow: rgba(45, 35, 66, 0.4) 0 2px 4px,rgba(45, 35, 66, 0.3) 0 7px 13px -3px,#D6D6E7 0 -3px 0 inset; */
+    box-sizing: border-box;
+    cursor: pointer;
+    display: inline-flex;
+    font-family: "JetBrains Mono",monospace;
+    justify-content: center;
+    line-height: 1;
+    list-style: none;
+    overflow: hidden;
+    position: relative;
+    text-align: left;
+    text-decoration: none;
+    transition: box-shadow .15s,transform .15s;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    white-space: nowrap;
+    will-change: box-shadow,transform;
+    align-self: center;
+}
+
+.button-add:focus, .button-edit:focus, .button-info:focus, .button-delete:focus {
+    box-shadow: #D6D6E7 0 0 0 1.5px inset, rgba(45, 35, 66, 0.4) 0 2px 4px, rgba(45, 35, 66, 0.3) 0 7px 13px -3px, #D6D6E7 0 -3px 0 inset;
+}
+
+.button-add:hover, .button-edit:hover, .button-info:hover, .button-delete:hover{
+    box-shadow: rgba(45, 35, 66, 0.4) 0 4px 8px, rgba(45, 35, 66, 0.3) 0 7px 13px -3px, #D6D6E7 0 -3px 0 inset;
+    transform: translateY(-2px);
+}
+
+.button-add:active, .button-edit:active, .button-info:active, .button-delete:active {
+    box-shadow: #D6D6E7 0 3px 7px inset;
+    transform: translateY(2px);
+}
+
+.button-edit, .button-info, .button-delete {
+    font-size: 18px;
+    margin: 5px;
+    height: 40px;
+    padding-left: 7px;
+    padding-right: 7px;
+}
+
+.button-edit {
+    background-color: #4C969C;
+}
+
+.button-info {
+    background-color: #6C8E5E;
+}
+
+.button-delete {
+    background-color: #800000;
+}

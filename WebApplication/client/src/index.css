@@ -1,4 +1,17 @@
 * {
     margin: 0;
     padding: 0;
+    color: #fff4e6 !important;
+}
+
+.navbar-bg-custom-color {
+    background-color: #4b3832;
+}
+
+.nav-link-custom-color:hover {
+    color: #be9b7b !important;
+}
+
+body {
+    background-color:#854442 !important;
 }
