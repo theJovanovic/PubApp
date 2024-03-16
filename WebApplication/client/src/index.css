@@ -1,12 +1,18 @@
 * {
-    margin: 0;
-    padding: 0;
     color: #fff4e6 !important;
+    font-family: "JetBrains Mono",monospace;
 }
 
 body {
     background-color:#854442 !important;
 }
+
+input[type="checkbox"] {
+    width: 25px;  /* or any size */
+    height: 25px; /* or any size */
+    cursor: pointer; /* Optional: to indicate that it's clickable */
+    /* Additional styling to ensure cross-browser compatibility may be necessary */
+  }
 
 /* Imported button */
 .button-add, .button-edit, .button-info, .button-delete {
@@ -24,7 +30,6 @@ body {
     box-sizing: border-box;
     cursor: pointer;
     display: inline-flex;
-    font-family: "JetBrains Mono",monospace;
     justify-content: center;
     line-height: 1;
     list-style: none;
@@ -67,3 +72,72 @@ body {
     background-color: #800000;
 }
 
+
+h1 {
+    font-size: 48px !important;
+}
+
+
+.page-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.title-container {
+    align-self: center;
+    margin-top: 40px;
+    margin-bottom: 40px;
+}
+
+.main-container {
+    display: flex;
+    flex-direction: row;
+    align-self: center;
+    width: 100%;
+    margin-top: 20px;
+}
+
+.form-container, .info-container {
+    display: flex;
+    flex-direction: column;
+    background-color: #4b3832;
+    border: #3c2f2f;
+    border-style: ridge;
+    border-radius: 10px;
+    padding: 30px;
+    width: 500px;
+    margin-bottom: 40px;
+}
+
+.info-container {
+    align-items: center;
+}
+
+.form-part-container, .info-button-container {
+    display: flex;
+}
+
+.form-part-container label,
+.form-part-container input,
+.form-part-container select{
+    width: 100%;
+    margin-bottom: 30px;
+}
+
+.label-wrapper, .helper-container {
+    flex: 1;
+}
+
+.input-wrapper {
+    flex: 3;
+}
+
+input, select, option {
+    color: #3c2f2f !important;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.info-button-container {
+    margin-top: 10px;
+}

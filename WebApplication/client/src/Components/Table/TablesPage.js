@@ -74,7 +74,7 @@ const TablesPage = () => {
   };
 
   return (
-    <div className="tables-page-container">
+    <div className="page-container">
       {/* <h1>Tables Page</h1> */}
       <Link to="/tables/add" className="button-add">Add Table</Link>
 
@@ -89,12 +89,7 @@ const TablesPage = () => {
             <div className="table-actions">
               <Link to={`/tables/edit/${table.tableID}`} className="button-edit">Edit</Link>
               <Link to={`/tables/info/${table.tableID}`} className="button-info">Info</Link>
-              <button
-                className="button-delete"
-                onClick={() => deleteTable(table.tableID)}
-              >
-                Delete
-              </button>
+              <button className="button-delete" onClick={() => deleteTable(table.tableID)}>Delete</button>
             </div>
           </div>
         ))}

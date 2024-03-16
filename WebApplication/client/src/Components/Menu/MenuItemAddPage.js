@@ -67,54 +67,94 @@ const MenuItemAddPage = () => {
   };
 
   return (
-    <div>
-      <h1>Add Item Page</h1>
-      <form onSubmit={handleSubmit}>
-        <label>
-          Name:
-          <input
-            type="text"
-            name="name"
-            value={menuItem.name}
-            onChange={handleChange}
-            required
-          />
-        </label>
-        <br />
-        <label>
-          Price:
-          <input
-            type="number"
-            name="price"
-            value={menuItem.price}
-            onChange={handleChange}
-            min={0}
-            required
-          />
-        </label>
-        <br />
-        <label>
-          Category:
-          <select name="category" value={menuItem.category} onChange={handleChange} required>
-            <option value="">Select a category</option>
-            {categories.map((category) => (
-              <option value={category}>{category}</option>
-            ))}
-          </select>
-        </label>
-        <br />
-        <label>
-          Has allergens:
-          <input
-            type="checkbox"
-            name="hasAllergens"
-            checked={!!menuItem.hasAllergens}
-            onChange={handleChange}
-          />
-        </label>
-        <br />
-        <button type="submit">Add menu item</button>
-      </form>
+    <div className="page-container">
+
+      <div className="title-container">
+        <h1>Add Item Page</h1>
+      </div>
+
+      <div class="main-container">
+        <div className="helper-container"></div>
+
+          <div className="form-container">
+            <form onSubmit={handleSubmit}>
+
+              <div className="form-part-container">
+                <div className="label-wrapper">
+                  <label>Name:</label>
+                </div>
+
+                <div className="input-wrapper">
+                  <input
+                      className="number-input"
+                      type="text"
+                      name="name"
+                      value={menuItem.name}
+                      onChange={handleChange}
+                      required
+                    />
+                </div>
+              </div>
+
+              <div className="form-part-container">
+                <div className="label-wrapper">
+                    <label>Price:</label>
+                </div>
+
+                <div className="input-wrapper">
+                  <input
+                    type="number"
+                    name="price"
+                    value={menuItem.price}
+                    onChange={handleChange}
+                    min={0}
+                    required
+                  />
+                </div>
+              </div>
+
+              <div className="form-part-container">
+                <div className="label-wrapper">
+                  <label>Category:</label>
+                </div>
+
+                <div className="input-wrapper">
+                <select name="category" value={menuItem.category} onChange={handleChange} required>
+                  <option value="">Select a category</option>
+                  {categories.map((category) => (
+                    <option value={category}>{category}</option>
+                  ))}
+                </select>
+                </div>
+              </div>
+
+              <div className="form-part-container">
+                <div className="label-wrapper">
+                    <label>Has allergens:</label>
+                </div>
+
+                <div className="input-wrapper">
+                  <input
+                    type="checkbox"
+                    name="hasAllergens"
+                    checked={!!menuItem.hasAllergens}
+                    onChange={handleChange}
+                  />
+                </div>
+              </div>
+              
+              <div className="form-part-container">
+                <div className="helper-container"></div>
+                <button className="button-add" type="submit">Add Menu Item</button>
+                <div className="helper-container"></div>
+              </div>
+
+            </form>
+          </div>
+
+        <div className="helper-container"></div>
+      </div>
+
     </div>
   );
 };

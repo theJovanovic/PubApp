@@ -9,6 +9,7 @@ const mockGuests = [
     money: 100,
     hasAllergies: false,
     hasDiscount: true,
+    tableNumber: 3,
     tableID: 3,
     orders: [
       {
@@ -175,23 +176,23 @@ const GuestInfoPage = () => {
 
         <div className="info-container">
           <div className="info-name-container">
-            <h2>Name: {guest.number}</h2>
+            <h4>Name: {guest.name}</h4>
           </div>
 
           <div className="info-allergies-container">
-            <h2>Allergies: {guest.allergies}</h2>
+            <h4>Allergies: {guest.hasAllergies ? 'Yes' : 'No'}</h4>
           </div>
 
           <div className="info-discount-container">
-            <h2>Discount: {guest.discount}</h2>
+            <h4>Discount: {guest.hasDiscount ? 'Yes' : 'No'}</h4>
           </div>
 
           <div className="info-money-container">
-            <h2>Money: {guest.money}</h2>
+            <h4>Money: {guest.money} rsd</h4>
           </div>
 
           <div className="info-tableNum-container">
-            <h2>Table number: <Link to={`/tables/info/${guest.tableID}`}>{guest.tableNumber}</Link></h2>
+            <h4>Table number: <Link to={`/tables/info/${guest.tableID}`}>{guest.tableNumber}</Link></h4>
           </div>
 
           <div className="info-button-container">

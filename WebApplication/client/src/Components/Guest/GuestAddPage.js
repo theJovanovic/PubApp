@@ -68,64 +68,109 @@ const GuestAddPage = () => {
   };
 
   return (
-    <div>
-      <h1>Add Guest Page</h1>
-      <form onSubmit={handleSubmit}>
-        <label>
-          Name:
-          <input
-            type="text"
-            name="name"
-            value={guest.name}
-            onChange={handleChange}
-            required
-          />
-        </label>
-        <br />
-        <label>
-          Money:
-          <input
-            type="number"
-            name="money"
-            value={guest.money}
-            onChange={handleChange}
-            min={0}
-            required
-          />
-        </label>
-        <br />
-        <label>
-          Has allergies:
-          <input
-            type="checkbox"
-            name="hasAllergies"
-            checked={!!guest.hasAllergies}
-            onChange={handleChange}
-          />
-        </label>
-        <br />
-        <label>
-          Has discount:
-          <input
-            type="checkbox"
-            name="hasDiscount"
-            checked={!!guest.hasDiscount}
-            onChange={handleChange}
-          />
-        </label>
-        <br />
-        <label>
-          Select table:
-          <select name="tableNumber" value={guest.tableNumber} onChange={handleChange} required>
-            <option value="">Select table</option>
-            {tables.map((table) => (
-              <option value={table.number}>Table {table.number}</option>
-            ))}
-          </select>
-        </label>
-        <br />
-        <button type="submit">Add Guest</button>
-      </form>
+    <div className="page-container">
+
+      <div className="title-container">
+        <h1>Add Guest Page</h1>
+      </div>
+
+      <div class="main-container">
+        <div className="helper-container"></div>
+
+          <div className="form-container">
+            <form onSubmit={handleSubmit}>
+
+              <div className="form-part-container">
+                <div className="label-wrapper">
+                  <label>Name:</label>
+                </div>
+
+                <div className="input-wrapper">
+                  <input
+                      className="number-input"
+                      type="text"
+                      name="name"
+                      value={guest.name}
+                      onChange={handleChange}
+                      required
+                    />
+                </div>
+              </div>
+
+              <div className="form-part-container">
+                <div className="label-wrapper">
+                    <label>Money:</label>
+                </div>
+
+                <div className="input-wrapper">
+                  <input
+                    type="number"
+                    name="money"
+                    value={guest.money}
+                    onChange={handleChange}
+                    min={0}
+                    required
+                  />
+                </div>
+              </div>
+
+              <div className="form-part-container">
+                <div className="label-wrapper">
+                    <label>Has allergies:</label>
+                </div>
+
+                <div className="input-wrapper">
+                  <input
+                    type="checkbox"
+                    name="hasAllergies"
+                    checked={!!guest.hasAllergies}
+                    onChange={handleChange}
+                  />
+                </div>
+              </div>
+
+              <div className="form-part-container">
+                <div className="label-wrapper">
+                    <label>Has discount:</label>
+                </div>
+
+                <div className="input-wrapper">
+                  <input
+                    type="checkbox"
+                    name="hasDiscount"
+                    checked={!!guest.hasDiscount}
+                    onChange={handleChange}
+                  />
+                </div>
+              </div>
+
+              <div className="form-part-container">
+                <div className="label-wrapper">
+                  <label>Select table:</label>
+                </div>
+
+                <div className="input-wrapper">
+                  <select name="tableNumber" value={guest.tableNumber} onChange={handleChange} required>
+                  <option value="">Select table</option>
+                  {tables.map((table) => (
+                  <option value={table.number}>Table {table.number}</option>
+                  ))}
+                  </select>
+                </div>
+              </div>
+              
+              <div className="form-part-container">
+                <div className="helper-container"></div>
+                <button className="button-add" type="submit">Add Guest</button>
+                <div className="helper-container"></div>
+              </div>
+
+            </form>
+          </div>
+
+        <div className="helper-container"></div>
+      </div>
+
     </div>
   );
 };

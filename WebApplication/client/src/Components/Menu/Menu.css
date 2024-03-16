@@ -1,10 +1,10 @@
-.guest-add-container {
+.menu-add-container {
     align-self: center;
-    margin-top: 20px;
-    margin-bottom: 40px;
+    margin-top: 0px;
+    margin-bottom: 10px;
 }
 
-.guests-container {
+.menu-container {
     display: flex;
     flex-wrap: wrap;
     gap: 20px;
@@ -12,28 +12,35 @@
     padding: 20px;
 }
 
-.guest-container {
+.item-container {
     display: flex;
     flex-direction: column;
     align-items: center;
     /* margin: 10px; */
     background-color: #4b3832;
+    width: 400px;
     border: #3c2f2f;
     border-style: ridge;
     border-radius: 10px;
     padding: 20px;
 }
 
-/* .guest-icon-container {
+.item-icon-container {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
 
-} */
-
-.guest-info-container {
+.item-info-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     margin-top: 20px;
+    margin-bottom: 20px;
     font-size: 16px;
     font-weight: bold;
 }
 
-/* .guest-actions-container {
+/* .item-actions-container {
 
 } */
+

@@ -1,0 +1,8 @@
+/* .form-part-container-orderDis {
+    margin-bottom: 500px;
+} */
+
+.order-discount-container {
+    display: flex;
+    align-self: center;
+}

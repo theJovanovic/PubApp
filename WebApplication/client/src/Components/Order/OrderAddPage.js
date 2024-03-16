@@ -2,11 +2,63 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import alertError from '../../alertError';
 
+const mockItems = [
+  {
+    menuItemID: 1,
+    name: "Pasta",
+    price: 300,
+    category: "Main",
+    hasAllergens: false
+  },
+  {
+    menuItemID: 2,
+    name: "Fish and Chips",
+    price: 280,
+    category: "Side",
+    hasAllergens: true
+  },
+  {
+    menuItemID: 3,
+    name: "Salad",
+    price: 250,
+    category: "Main",
+    hasAllergens: false
+  },
+  {
+    menuItemID: 4,
+    name: "Pizza",
+    price: 350,
+    category: "Main",
+    hasAllergens: true
+  },
+  {
+    menuItemID: 5,
+    name: "Burger",
+    price: 400,
+    category: "Main",
+    hasAllergens: true
+  },
+  {
+    menuItemID: 6,
+    name: "Chicken Wings",
+    price: 320,
+    category: "Side",
+    hasAllergens: false
+  }
+]
+
 const OrderAddPage = () => {
   const navigate = useNavigate();
   const { id } = useParams();
-  const [guest, setGuest] = useState({});
-  const [menuItems, setMenuItems] = useState([]);
+  const [guest, setGuest] = useState({
+    guestid: 4,
+      name: "Luka Modric",
+      money: 150,
+      hasAllergies: true,
+      hasDiscount: true,
+      tableNumber: 3
+  });
+  const [menuItems, setMenuItems] = useState(mockItems);
   const [order, setOrder] = useState({
     guestID: '',
     menuItemID: '',
@@ -105,44 +157,82 @@ const OrderAddPage = () => {
   };
 
   return (
-    <div>
-      <h1>Add Order Page</h1>
-      <h3>Available: {guest.money}din
-      {guest.hasDiscount && " (15% discount applied)"}
-      </h3>
-      <form onSubmit={handleSubmit}>
-        <label>
-          Select dish:
-          <select name="menuItemID" value={order.menuItemID} onChange={handleChange} required>
-            <option value="">Select a item</option>
-            {menuItems.map((item) => (
-              <option value={item.menuItemID}>{item.name} ({item.category}) - {item.price}din</option>
-            ))}
-          </select>
-        </label>
-        {hasAllergens && (
-          <>
-          <br />
-          <label>
-            *Has allergens
-          </label>
-          </>
-        )}
-        <br />
-        <label>
-          Quantity:
-          <input
-            type="number"
-            name="quantity"
-            value={order.quantity}
-            onChange={handleChange}
-            min={1}
-            required
-          />
-        </label>
-        <br />
-        <button type="submit">Add Order</button>
-      </form>
+    <div className="page-container">
+
+      <div className="title-container">
+        <h1>Add Order Page</h1>
+      </div>
+
+      {/* WHY THIS NOT WORKING?!?! WHY MAN? */}
+      <div className="order-discount-container">
+        <h3>Available: {guest.money}din
+          {guest.hasDiscount && " (15% discount applied)"}
+        </h3>
+      </div>
+
+      <div class="main-container">
+        <div className="helper-container"></div>
+
+          <div className="form-container">
+            <form onSubmit={handleSubmit}>
+
+              {/* <div className="form-part-container-orderDis">
+                <label>Available: {guest.money}din
+                  {guest.hasDiscount && " (15% discount applied)"}
+                </label>
+              </div> */}
+
+              <div className="form-part-container">
+                <div className="label-wrapper">
+                  <label>Select dish:</label>
+                </div>
+
+                <div className="input-wrapper">
+                  <select name="menuItemID" value={order.menuItemID} onChange={handleChange} required>
+                    <option value="">Select a item</option>
+                    {menuItems.map((item) => (
+                      <option value={item.menuItemID}>{item.name} ({item.category}) - {item.price}din</option>
+                    ))}
+                  </select>
+
+                  {hasAllergens && (
+                    <label>
+                      *Has allergens
+                    </label>
+                  )}
+                  
+                </div>
+              </div>
+
+              <div className="form-part-container">
+                <div className="label-wrapper">
+                    <label>Quantity:</label>
+                </div>
+
+                <div className="input-wrapper">
+                  <input
+                    type="number"
+                    name="quantity"
+                    value={order.quantity}
+                    onChange={handleChange}
+                    min={1}
+                    required
+                  />
+                </div>
+              </div>
+              
+              <div className="form-part-container">
+                <div className="helper-container"></div>
+                <button className="button-add" type="submit">Add Order</button>
+                <div className="helper-container"></div>
+              </div>
+
+            </form>
+          </div>
+
+        <div className="helper-container"></div>
+      </div>
+
     </div>
   );
 };
