@@ -152,7 +152,7 @@ public class TableController : ControllerBase
             .FirstOrDefaultAsync();
 
         // check if table exists with the number we want to edit
-        if (tableWithSameNumber != table)
+        if (tableWithSameNumber != null && tableWithSameNumber.TableID != table.TableID)
         {
             return Conflict("Table with the same number already exists");
         }
@@ -170,7 +170,13 @@ public class TableController : ControllerBase
     [HttpDelete("{id}")]
     public async Task<IActionResult> DeleteTable(int id)
     {
+        if (!ModelState.IsValid)
+        {
+            return BadRequest(ModelState);
+        }
+
         var table = await _context.Tables.FindAsync(id);
+
         if (table == null)
         {
             return NotFound("Table with given ID doesn't exist");
