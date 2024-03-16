@@ -20,7 +20,7 @@ const mockTables = [
     tableID: "3",
     number: 3,
     seats: 6,
-    status: "Reserved",
+    status: "Full",
   },
   {
     tableID: "4",

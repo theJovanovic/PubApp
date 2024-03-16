@@ -1,9 +1,59 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import alertError from '../../alertError';
+import './Guest.css';
 
 const GuestsPage = () => {
-  const [guests, setGuests] = useState([])
+  const [guests, setGuests] = useState([
+    {
+      guestid: 1,
+      name: "Stefan Jovanovic",
+      money: 100,
+      hasallergies: false,
+      hasdiscount: false,
+      tableNumber: 3
+    },
+    {
+      guestid: 2,
+      name: "Ena Separovic",
+      money: 80,
+      hasallergies: true,
+      hasdiscount: true,
+      tableNumber: 3
+    },
+    {
+      guestid: 3,
+      name: "Ivan Horvat",
+      money: 120,
+      hasallergies: false,
+      hasdiscount: false,
+      tableNumber: 3
+    },
+    {
+      guestid: 4,
+      name: "Luka Modric",
+      money: 150,
+      hasallergies: true,
+      hasdiscount: true,
+      tableNumber: 3
+    },
+    {
+      guestid: 5,
+      name: "Marija Novak",
+      money: 200,
+      hasallergies: false,
+      hasdiscount: false,
+      tableNumber: 3
+    },
+    {
+      guestid: 6,
+      name: "Ana Kovačić",
+      money: 50,
+      hasallergies: true,
+      hasdiscount: true,
+      tableNumber: 3
+    }
+  ])
 
   useEffect(() => {
     const fetchGuests = async () => {
@@ -46,30 +96,40 @@ const GuestsPage = () => {
   };
 
   return (
-    <div>
-      <h1>Guests Page</h1>
-      <Link to="/guests/add">Add Guest</Link>
-      <ol>
+    <div className="guests-page-container">
+
+      {/* <div className="title-container">
+        <h1>Guests Page</h1>
+      </div> */}
+
+      <div className="guest-add-container">
+        <Link to="/guests/add" className="button-add">Add Guest</Link>
+      </div>
+
+      <div className="guests-container">
         {guests.map((guest) => (
-          <>
-          <li>
-            <h2>Name: {guest.name}</h2>
-            {/* <h3>Allergies: {guest.hasAllergies && "Yes" || "No"}</h3> */}
-            <h3>Table: {guest.tableNumber}</h3>
-            <Link to={`/guests/edit/${guest.guestID}`}>Edit</Link>
-            <Link to={`/guests/info/${guest.guestID}`}>Info</Link>
-            <a
-              style={{ color: 'blue', textDecoration: 'underline', cursor: 'pointer' }}
-              onClick={() => {deleteGuest(guest.guestID)}}
-            >
-            Delete
-            </a>
-            <Link to={`/order/add/${guest.guestID}`}>Make order</Link>
-          </li>
-          <br />
-          </>
+          <div className="guest-container">
+            {/* Img ne radi, ne znam sta da radim ko ga ... */}
+            <div className="guest-icon-container">
+              <img src="guesticon.png" alt="Guest Icon" />
+            </div>
+
+            <div className="guest-info-container">
+              <p>Name: {guest.name}</p>
+              {/* <p>Allergies: {guest.hasAllergies && "Yes" || "No"}</p> */}
+              <p>Table: {guest.tableNumber}</p>
+            </div>
+
+            <div className="guest-actions-container">
+              <Link to={`/guests/edit/${guest.guestID}`} className="button-edit">Edit</Link>
+              <Link to={`/guests/info/${guest.guestID}`} className="button-info">Info</Link>
+              <a className="button-delete" onClick={() => {deleteGuest(guest.guestID)}}>Delete</a>
+              <Link to={`/order/add/${guest.guestID}`} className="button-add">Make order</Link>
+            </div>
+          </div>
         ))}
-      </ol>
+      </div>
+
     </div>
   );
 };

@@ -6,6 +6,10 @@
       "AbsoluteMoniker": "D:0:0:{C50EA1CC-7032-4CC9-BF85-2A24776A569E}|..\\Server.Tests\\Server.Tests.csproj|d:\\elfak\\vii semestar\\testiranje i kvalitet softvera\\pubapp\\webapplication\\server.tests\\tabletests.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
+      "AbsoluteMoniker": "D:0:0:{1FCE9A12-4147-4AC2-BA32-8AFA3759D74B}|Server.csproj|d:\\elfak\\vii semestar\\testiranje i kvalitet softvera\\pubapp\\webapplication\\server\\models\\table.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1FCE9A12-4147-4AC2-BA32-8AFA3759D74B}|Server.csproj|solutionrelative:models\\table.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{1FCE9A12-4147-4AC2-BA32-8AFA3759D74B}|Server.csproj|d:\\elfak\\vii semestar\\testiranje i kvalitet softvera\\pubapp\\webapplication\\server\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
       "RelativeMoniker": "D:0:0:{1FCE9A12-4147-4AC2-BA32-8AFA3759D74B}|Server.csproj|solutionrelative:appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
     },
@@ -25,11 +29,24 @@
       "DocumentGroups": [
         {
           "DockedWidth": 179,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 2,
           "Children": [
             {
               "$type": "Document",
               "DocumentIndex": 1,
+              "Title": "Table.cs",
+              "DocumentMoniker": "D:\\Elfak\\VII semestar\\Testiranje i kvalitet softvera\\PubApp\\WebApplication\\Server\\Models\\Table.cs",
+              "RelativeDocumentMoniker": "Models\\Table.cs",
+              "ToolTip": "D:\\Elfak\\VII semestar\\Testiranje i kvalitet softvera\\PubApp\\WebApplication\\Server\\Models\\Table.cs",
+              "RelativeToolTip": "Models\\Table.cs",
+              "ViewState": "AQIAAA8AAAAAAAAAAAAYwAoAAAAJAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-03-15T13:20:27.039Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
               "Title": "appsettings.json",
               "DocumentMoniker": "D:\\Elfak\\VII semestar\\Testiranje i kvalitet softvera\\PubApp\\WebApplication\\Server\\appsettings.json",
               "RelativeDocumentMoniker": "appsettings.json",
@@ -37,8 +54,7 @@
               "RelativeToolTip": "appsettings.json",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAkAAAAKAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2024-03-15T02:12:04.016Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-03-15T02:12:04.016Z"
             },
             {
               "$type": "Document",
@@ -48,14 +64,14 @@
               "RelativeDocumentMoniker": "..\\Server.Tests\\TableTests.cs",
               "ToolTip": "D:\\Elfak\\VII semestar\\Testiranje i kvalitet softvera\\PubApp\\WebApplication\\Server.Tests\\TableTests.cs",
               "RelativeToolTip": "..\\Server.Tests\\TableTests.cs",
-              "ViewState": "AQIAABgAAAAAAAAAAAAuwCEAAABLAAAA",
+              "ViewState": "AQIAAEoAAAAAAAAAAAAgwEkAAAAaAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-03-14T23:55:29.931Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 4,
               "Title": "AutoMapperProfile.cs",
               "DocumentMoniker": "D:\\Elfak\\VII semestar\\Testiranje i kvalitet softvera\\PubApp\\WebApplication\\Server\\AutoMapperProfile.cs",
               "RelativeDocumentMoniker": "AutoMapperProfile.cs",
@@ -63,12 +79,11 @@
               "RelativeToolTip": "AutoMapperProfile.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAcAAAAcAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-03-14T19:38:49.943Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-03-14T19:38:49.943Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 3,
               "Title": "TableController.cs",
               "DocumentMoniker": "D:\\Elfak\\VII semestar\\Testiranje i kvalitet softvera\\PubApp\\WebApplication\\Server\\Controllers\\TableController.cs",
               "RelativeDocumentMoniker": "Controllers\\TableController.cs",
@@ -76,8 +91,7 @@
               "RelativeToolTip": "Controllers\\TableController.cs",
               "ViewState": "AQIAACYAAAAAAAAAAAAgwBoAAAAqAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-03-14T19:36:10.578Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-03-14T19:36:10.578Z"
             }
           ]
         }

@@ -18,7 +18,7 @@ namespace Server.Tests
             // Initialize AutoMapper only once for all tests, as it doesn't change per test case.
             var mockMapper = new MapperConfiguration(cfg =>
             {
-                cfg.AddProfile(new AutoMapperProfile()); // Your profile here
+                cfg.AddProfile(new AutoMapperProfile());
             });
             _mapper = mockMapper.CreateMapper();
         }
@@ -65,19 +65,19 @@ namespace Server.Tests
             Assert.That(tables.Count, Is.EqualTo(3), "Expected 3 tables");
         }
 
-        [TearDown]
-        public void TearDown()
-        {
-            // Assuming that the _context is the DbContext for your database and
-            // it is properly instantiated and available here.
+        //[TearDown]
+        //public void TearDown()
+        //{
+        //    // Assuming that the _context is the DbContext for your database and
+        //    // it is properly instantiated and available here.
 
-            // Remove any Tables entities that were added during the test.
-            _context.Tables.RemoveRange(_context.Tables);
-            _context.SaveChanges();
+        //    // Remove any Tables entities that were added during the test.
+        //    _context.Tables.RemoveRange(_context.Tables);
+        //    _context.SaveChanges();
 
-            // Dispose of the context if you are not using dependency injection's built-in disposal.
-            _context.Dispose();
-        }
+        //    // Dispose of the context if you are not using dependency injection's built-in disposal.
+        //    _context.Dispose();
+        //}
 
         private void SeedDatabaseWithTestData()
         {
@@ -87,7 +87,7 @@ namespace Server.Tests
             var testTables = new List<Table>
             {
                 new Table { Number = 1, Seats = 4, Status = "Available" },
-                new Table { Number = 2, Seats = 2, Status = "Occupied" },
+                new Table { Number = 2, Seats = 2, Status = "Available" },
                 new Table { Number = 3, Seats = 6, Status = "Reserved" }
             };
 

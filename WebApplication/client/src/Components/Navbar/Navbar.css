@@ -1,0 +1,11 @@
+a {
+    color: #fff4e6 !important;
+}
+
+.navbar-bg-custom-color {
+    background-color: #4b3832;
+}
+
+.nav-link-custom-color:hover {
+    color: #be9b7b !important;
+}

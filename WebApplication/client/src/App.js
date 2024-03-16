@@ -1,7 +1,7 @@
 import './App.css';
 import React from "react";
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
-import NavigationHeader from './Components/NavigationHeader';
+import NavigationHeader from './Components/Navbar/NavigationHeader';
 import TablesPage from './Components/Table/TablesPage';
 import GuestsPage from './Components/Guest/GuestsPage';
 import TableInfoPage from './Components/Table/TableInfoPage';

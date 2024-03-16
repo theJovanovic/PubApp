@@ -1,0 +1,44 @@
+.guests-page-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.guest-add-container {
+    align-self: center;
+    margin-top: 20px;
+    margin-bottom: 40px;
+}
+
+.guests-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+    padding: 20px;
+}
+
+.guest-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* margin: 10px; */
+    background-color: #4b3832;
+    border: #3c2f2f;
+    border-style: ridge;
+    border-radius: 10px;
+    padding: 20px;
+}
+
+/* .guest-icon-container {
+
+} */
+
+.guest-info-container {
+    margin-top: 20px;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+/* .guest-actions-container {
+
+} */
