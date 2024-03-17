@@ -178,7 +178,7 @@ const GuestEditPage = () => {
               
               <div className="form-part-container">
                 <div className="label-wrapper">
-                  <label>Has allergies:</label>
+                  <label>Has discount:</label>
                 </div>
 
                 <div className="input-wrapper">

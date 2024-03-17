@@ -9,48 +9,48 @@ const GuestsPage = () => {
       guestid: 1,
       name: "Stefan Jovanovic",
       money: 100,
-      hasallergies: false,
-      hasdiscount: false,
+      hasAllergies: false,
+      hasDiscount: false,
       tableNumber: 3
     },
     {
       guestid: 2,
       name: "Ena Separovic",
       money: 80,
-      hasallergies: true,
-      hasdiscount: true,
+      hasAllergies: true,
+      hasDiscount: true,
       tableNumber: 3
     },
     {
       guestid: 3,
       name: "Ivan Horvat",
       money: 120,
-      hasallergies: false,
-      hasdiscount: false,
+      hasAllergies: false,
+      hasDiscount: false,
       tableNumber: 3
     },
     {
       guestid: 4,
       name: "Luka Modric",
       money: 150,
-      hasallergies: true,
-      hasdiscount: true,
+      hasAllergies: true,
+      hasDiscount: true,
       tableNumber: 3
     },
     {
       guestid: 5,
       name: "Marija Novak",
       money: 200,
-      hasallergies: false,
-      hasdiscount: false,
+      hasAllergies: false,
+      hasDiscount: false,
       tableNumber: 3
     },
     {
       guestid: 6,
       name: "Ana Kovačić",
       money: 50,
-      hasallergies: true,
-      hasdiscount: true,
+      hasAllergies: true,
+      hasDiscount: true,
       tableNumber: 3
     }
   ])
@@ -96,7 +96,7 @@ const GuestsPage = () => {
   };
 
   return (
-    <div className="guests-page-container">
+    <div className="page-container">
 
       {/* <div className="title-container">
         <h1>Guests Page</h1>
@@ -115,9 +115,9 @@ const GuestsPage = () => {
             </div>
 
             <div className="guest-info-container">
-              <p>Name: {guest.name}</p>
-              {/* <p>Allergies: {guest.hasAllergies && "Yes" || "No"}</p> */}
-              <p>Table: {guest.tableNumber}</p>
+              <h4>Name: {guest.name}</h4>
+              <h4>Allergies: {guest.hasAllergies && "Yes" || "No"}</h4>
+              <h4>Table: {guest.tableNumber}</h4>
             </div>
 
             <div className="guest-actions-container">
