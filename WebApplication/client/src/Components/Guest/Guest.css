@@ -37,3 +37,32 @@
 /* .guest-actions-container {
 
 } */
+
+.guest-orders-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.guest-orders-title {
+    margin-bottom: 20px;
+    align-self: center;
+}
+
+.guest-orders-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.guest-order-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    margin: 10px;
+    padding: 20px;
+    background-color: #4b3832;
+    border: #3c2f2f;
+    border-style: ridge;
+    border-radius: 10px;
+}

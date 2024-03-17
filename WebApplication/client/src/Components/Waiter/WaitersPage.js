@@ -83,9 +83,8 @@ const WaitersPage = () => {
       <div className="waiters-container">
         {waiters.map((waiter) => (
           <div className="waiter-container">
-            {/* Img ne radi, ne znam sta da radim ko ga ... */}
             <div className="waiter-icon-container">
-              <img src="../Icons/waitericon.png" alt="Waiter Icon" />
+              <img src="waiter.png" alt="Waiter Icon" />
             </div>
 
             <div className="waiter-info-container">
@@ -94,7 +93,7 @@ const WaitersPage = () => {
             </div>
 
             <div className="waiter-actions-container">
-              <Link to={`/waiters/orders/${waiter.waiterID}`} className="button-info">View orders</Link>
+              <Link to={`/waiters/orders/${waiter.waiterID}`} className="button-info">View Orders</Link>
               <a onClick={() => {deleteWaiter(waiter.waiterID)}} className="button-delete">Delete</a>
             </div>
           </div>
