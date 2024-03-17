@@ -19,7 +19,6 @@ public class TableController : ControllerBase
         _mapper = mapper;
     }
 
-    //mislim da je bolje da je api/Tables
     // GET: api/Table
     [HttpGet]
     public async Task<ActionResult> GetTables()

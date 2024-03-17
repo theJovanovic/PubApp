@@ -59,7 +59,7 @@ public class WaiterController : ControllerBase
         //Asserts
         if (waiterDTO.Name.Length > 50)
         {
-            return BadRequest("Name can't have more than 50 character");
+            return BadRequest("Name can't have more than 50 characters");
         }
         if (waiterDTO.Tips != 0)
         {
@@ -87,7 +87,7 @@ public class WaiterController : ControllerBase
         //Asserts
         if (waiterDTO.Name.Length > 50)
         {
-            return BadRequest("Name can't have more than 50 character");
+            return BadRequest("Name can't have more than 50 characters");
         }
 
         if (id != waiterDTO.WaiterID)
@@ -114,7 +114,13 @@ public class WaiterController : ControllerBase
     [HttpDelete("{id}")]
     public async Task<IActionResult> DeleteWaiter(int id)
     {
+        if (!ModelState.IsValid)
+        {
+            return BadRequest(ModelState);
+        }
+
         var waiter = await _context.Waiters.FindAsync(id);
+
         if (waiter == null)
         {
             return NotFound("Waiter with given ID doesn't exist");

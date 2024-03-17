@@ -84,7 +84,7 @@ public class GuestController_GetGuest_Tests
         var okResult = result as OkObjectResult;
         Assert.That(okResult.Value, Is.InstanceOf<GuestDTO>());
         var guestDTO = okResult.Value as GuestDTO;
-        Assert.That(guestDTO, Has.Property("GuestID").EqualTo(existingGuestId));
+        Assert.That(guestDTO, Has.Property("Name").EqualTo(existingGuestName));
         Assert.That(guestDTO, Has.Property("Money").EqualTo(existingGuestMoney));
     }
 
