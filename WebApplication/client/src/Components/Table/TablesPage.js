@@ -75,7 +75,6 @@ const TablesPage = () => {
 
   return (
     <div className="page-container">
-      {/* <h1>Tables Page</h1> */}
       <Link to="/tables/add" className="button-add">Add Table</Link>
 
       <div className="tables-container">

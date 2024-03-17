@@ -164,7 +164,7 @@ const MenuItemEditPage = () => {
 
               <div className="form-part-container">
                 <div className="helper-container"></div>
-                <button className="button-edit" type="submit">Edit Guest</button>
+                <button className="button-edit" type="submit">Edit Item</button>
                 <div className="helper-container"></div>
               </div>
 

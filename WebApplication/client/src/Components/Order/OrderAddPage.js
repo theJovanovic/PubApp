@@ -163,8 +163,7 @@ const OrderAddPage = () => {
         <h1>Add Order Page</h1>
       </div>
 
-      {/* WHY THIS NOT WORKING?!?! WHY MAN? */}
-      <div className="order-discount-container">
+      <div className="order-title-container">
         <h3>Available: {guest.money}din
           {guest.hasDiscount && " (15% discount applied)"}
         </h3>
@@ -175,12 +174,6 @@ const OrderAddPage = () => {
 
           <div className="form-container">
             <form onSubmit={handleSubmit}>
-
-              {/* <div className="form-part-container-orderDis">
-                <label>Available: {guest.money}din
-                  {guest.hasDiscount && " (15% discount applied)"}
-                </label>
-              </div> */}
 
               <div className="form-part-container">
                 <div className="label-wrapper">

@@ -42,15 +42,22 @@
 
 .tableguests-title {
     align-self: center;
-    margin-bottom: 10px; 
+    margin-bottom: 20px; 
 }
 
 .tableguests-list {
     display: flex;
     flex-direction: row;
     justify-content: space-around;
+    flex-wrap: wrap;
 }
 
 .tableguest-container {
     margin: 10px;
+    padding: 20px;
+    background-color: #4b3832;
+    border: #3c2f2f;
+    border-style: ridge;
+    border-radius: 10px;
 }
+

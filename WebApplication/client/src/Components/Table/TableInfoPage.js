@@ -26,7 +26,7 @@ const TableInfoPage = () => {
         hasAllergies: true,
         hasDiscount: false,
         tableID: 3
-      }
+      },
     ]
   });
 
@@ -114,12 +114,7 @@ const TableInfoPage = () => {
         <div className="tableguests-list">
             {table.guests?.map((guest, index) => (
                 <div className="tableguest-container">
-                  <div className="tableicon-container">
-                    <img src="" alt="Guest Icon" /> 
-                  </div>
-                  <div className="tablelink-container">
-                    <Link to={`/guests/info/${guest.guestID}`}>{index+1}. {guest.name}</Link>
-                  </div>
+                  <Link to={`/guests/info/${guest.guestID}`}>{index+1}. {guest.name}</Link>
                 </div>
             ))}
         </div>

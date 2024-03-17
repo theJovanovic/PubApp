@@ -100,7 +100,7 @@ const MenuPage = () => {
         </div>
 
         <div className="menu-add-container">
-          <Link to="/menu/add" className="button-add">Add menu item</Link>
+          <Link to="/menu/add" className="button-add">Add Menu Item</Link>
         </div>
 
         <div className="menu-container">
@@ -108,7 +108,7 @@ const MenuPage = () => {
               <div className="item-container">
 
                 <div className="item-icon-container">
-                  <img src="guesticon.png" alt="Menu Item Icon" />
+                  <img src="menu.png" alt="Menu Item Icon" />
                 </div>
 
                 <div className="item-info-container">

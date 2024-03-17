@@ -16,6 +16,8 @@ const mockGuests = [
         orderid: 1,
         ordertime: '2024-03-16T12:00:00Z',
         status: 'Pending',
+        name: "Pasta",
+        price: 300,
         quantity: 2,
         guestid: 1,
         menuitemid: 101,
@@ -24,7 +26,9 @@ const mockGuests = [
       {
         orderid: 2,
         ordertime: '2024-03-16T12:15:00Z',
-        status: 'Served',
+        status: 'Preparing',
+        name: "Fish and Chips",
+        price: 280,
         quantity: 1,
         guestid: 2,
         menuitemid: 102,
@@ -34,6 +38,8 @@ const mockGuests = [
         orderid: 3,
         ordertime: '2024-03-16T12:30:00Z',
         status: 'Completed',
+        name: "Salad",
+        price: 250,
         quantity: 3,
         guestid: 3,
         menuitemid: 103,
@@ -43,6 +49,8 @@ const mockGuests = [
         orderid: 4,
         ordertime: '2024-03-16T12:45:00Z',
         status: 'Cancelled',
+        name: "Pizza",
+        price: 350,
         quantity: 1,
         guestid: 4,
         menuitemid: 104,
@@ -52,6 +60,8 @@ const mockGuests = [
         orderid: 5,
         ordertime: '2024-03-16T13:00:00Z',
         status: 'Pending',
+        name: "Burger",
+        price: 400,
         quantity: 4,
         guestid: 5,
         menuitemid: 105,
@@ -60,12 +70,14 @@ const mockGuests = [
       {
         orderid: 6,
         ordertime: '2024-03-16T13:15:00Z',
-        status: 'Served',
+        status: 'Delivered',
+        name: "Chicken Wings",
+        price: 320,
         quantity: 2,
         guestid: 6,
         menuitemid: 106,
         waiterid: 206
-      }
+      },
     ]
   },
 ]
@@ -212,28 +224,26 @@ const GuestInfoPage = () => {
         <div className="guest-orders-title">
           <h1>Orders:</h1>
         </div>
-        {/* NIJE GOTOVO DOVRSITI LEPO */}
+
         <div className="guest-orders-list">
           {guest.orders?.map((order) => (
             <div className="guest-order-container">
 
               <div className="guest-orderName-container">
-                <h3>{order.name} {order.quantity > 1 && `x${order.quantity}`}</h3>
+                <h4>{order.name} {order.quantity > 1 && `x${order.quantity}`}</h4>
               </div>
               <div className="guest-orderPrice-container">
-                <h3>{order.price * order.quantity}</h3>
+                <h4>Price: {order.price * order.quantity} din</h4>
               </div>
               <div className="guest-orderStatus-container">
-                <h3>{order.status}</h3>
+                <h4>{order.status}</h4>
               </div>
               
               {order.status === "Delivered" && (
                 <>
-                <label>
-                  Tip (optional):
+                  <h4>Tip (optional):</h4>
                   <input type="number" name="tip" value={tip} onChange={handleChange} min={0} required />
-                </label>
-                <a onClick={() => {payOrder(order.orderID)}} className="button-edit">Pay</a>
+                  <a onClick={() => {payOrder(order.orderID)}} className="button-info">Pay</a>
                 </>
               ) || (
                 <a onClick={() => {cancelOrder(order.orderID)}} className="button-delete">Cancel</a>

@@ -109,9 +109,8 @@ const GuestsPage = () => {
       <div className="guests-container">
         {guests.map((guest) => (
           <div className="guest-container">
-            {/* Img ne radi, ne znam sta da radim ko ga ... */}
             <div className="guest-icon-container">
-              <img src="guesticon.png" alt="Guest Icon" />
+              <img src="user.png" alt="Guest Icon" />
             </div>
 
             <div className="guest-info-container">
