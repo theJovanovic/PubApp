@@ -37,7 +37,9 @@ public class TableController_GetTableInfo_Tests
 
         // Seed the database
         _context.Tables.Add(new Table { TableID = 1, Number = 101, Seats = 4, Status = "Available" });
+        _context.SaveChanges();
         _context.Tables.Add(new Table { TableID = 2, Number = 102, Seats = 6, Status = "Occupied" });
+        _context.SaveChanges();
         _context.Tables.Add(new Table { TableID = 3, Number = 103, Seats = 6, Status = "Full" });
         _context.SaveChanges();
 
