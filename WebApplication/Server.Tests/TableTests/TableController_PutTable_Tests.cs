@@ -88,10 +88,10 @@ public class TableController_PutTable_Tests
     [Test]
     public async Task PutTable_WithNonExistingTable_ReturnsNotFound()
     {
-        var nonexistingId = 0;
-        var tableDTO = new TableDTO { TableID = nonexistingId, Number = 5, Seats = 4, Status = "Available" };
+        var nonExistingId = 0;
+        var tableDTO = new TableDTO { TableID = nonExistingId, Number = 5, Seats = 4, Status = "Available" };
 
-        var result = await _controller.PutTable(nonexistingId, tableDTO);
+        var result = await _controller.PutTable(nonExistingId, tableDTO);
 
         Assert.That(result, Is.InstanceOf<NotFoundObjectResult>());
         var notFoundResult = result as NotFoundObjectResult;

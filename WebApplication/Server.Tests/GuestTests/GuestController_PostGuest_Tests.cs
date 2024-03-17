@@ -157,6 +157,41 @@ public class GuestController_PostGuest_Tests
         Assert.That(conflictResult, Has.Property("Value").EqualTo("Table is already full"));
     }
 
+    [Test]
+    public async Task PostGuest_ToOccupiedTable_UpdatesTableStatusToFull()
+    {
+        // Arrange
+        var tableNumber = 2;
+        var guestDTO = new GuestDTO { Name = "Guest", TableNumber = tableNumber };
+
+        // Act
+        var result = await _controller.PostGuest(guestDTO);
+
+        // Assert
+        Assert.That(result, Is.InstanceOf<CreatedAtActionResult>());
+
+        var table = _context.Tables.FirstOrDefault(t => t.Number == tableNumber);
+
+        Assert.That(table, Has.Property("Status").EqualTo("Full"));
+    }
+
+    [Test]
+    public async Task PostGuest_ToAvailableTable_UpdatesTableStatusToOccupied()
+    {
+        // Arrange
+        var tableNumber = 2;
+        var guestDTO = new GuestDTO { Name = "Guest", TableNumber = tableNumber };
+
+        // Act
+        var result = await _controller.PostGuest(guestDTO);
+
+        // Assert
+        Assert.That(result, Is.InstanceOf<CreatedAtActionResult>());
+
+        var table = _context.Tables.FirstOrDefault(t => t.Number == tableNumber);
+        Assert.That(table, Has.Property("Status").EqualTo("Full"));
+    }
+
     [TearDown]
     public void TearDown()
     {

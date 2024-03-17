@@ -65,7 +65,7 @@ public class TableController_GetTables_Tests
     }
 
     [Test]
-    public async Task GetTables_ReturnsNumberProperties()
+    public async Task GetTables_ReturnsNumberProperties([Values(0, 1, 2)] int index)
     {
         // Act
         var result = await _controller.GetTables();
@@ -80,14 +80,15 @@ public class TableController_GetTables_Tests
         Assert.That(tables, Is.Not.Null);
         Assert.That(tables, Has.Count.EqualTo(3));
 
-        Assert.That(tables[0], Has.Property("Number").EqualTo(101));
-        Assert.That(tables[1], Has.Property("Number").EqualTo(102));
-        Assert.That(tables[2], Has.Property("Number").EqualTo(103));
+        Assert.That(tables[index], Has.Property("Number").EqualTo(100 + index + 1));
     }
 
     [Test]
-    public async Task GetTables_ReturnsSeatsProperties()
+    public async Task GetTables_ReturnsSeatsProperties([Values(0, 1, 2)] int index)
     {
+        // Arrange
+        var expectedResults = new List<int> { 4, 6 , 6 };
+
         // Act
         var result = await _controller.GetTables();
 
@@ -101,14 +102,15 @@ public class TableController_GetTables_Tests
         Assert.That(tables, Is.Not.Null);
         Assert.That(tables, Has.Count.EqualTo(3));
 
-        Assert.That(tables[0], Has.Property("Seats").EqualTo(4));
-        Assert.That(tables[1], Has.Property("Seats").EqualTo(6));
-        Assert.That(tables[2], Has.Property("Seats").EqualTo(6));
+        Assert.That(tables[index], Has.Property("Seats").EqualTo(expectedResults[index]));
     }
 
     [Test]
-    public async Task GetTables_ReturnsStatusProperties()
+    public async Task GetTables_ReturnsStatusProperties([Values(0, 1, 2)] int index)
     {
+        // Arrange
+        var expectedResults = new List<string> { "Available", "Occupied", "Full" };
+
         // Act
         var result = await _controller.GetTables();
 
@@ -122,9 +124,7 @@ public class TableController_GetTables_Tests
         Assert.That(tables, Is.Not.Null);
         Assert.That(tables, Has.Count.EqualTo(3));
 
-        Assert.That(tables[0], Has.Property("Status").EqualTo("Available"));
-        Assert.That(tables[1], Has.Property("Status").EqualTo("Occupied"));
-        Assert.That(tables[2], Has.Property("Status").EqualTo("Full"));
+        Assert.That(tables[index], Has.Property("Status").EqualTo(expectedResults[index]));
     }
 
     [Test]

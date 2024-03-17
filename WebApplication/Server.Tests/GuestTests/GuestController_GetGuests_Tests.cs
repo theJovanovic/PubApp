@@ -5,6 +5,7 @@ using Models;
 using Server;
 using Microsoft.EntityFrameworkCore.Storage;
 using Microsoft.EntityFrameworkCore.Diagnostics;
+using Newtonsoft.Json.Linq;
 
 namespace GuestTests;
 
@@ -56,7 +57,7 @@ public class GuestController_GetGuests_Tests
         {
             GuestID = 2,
             HasAllergies = true,
-            HasDiscount = false,
+            HasDiscount = true,
             Money = 2200,
             Name = "Guest 2",
             TableID = 2
@@ -80,57 +81,59 @@ public class GuestController_GetGuests_Tests
     }
 
     [Test]
-    public async Task GetGuests_FirstGuest_HasCorrectID()
+    public async Task GetGuests_FirstGuest_HasCorrectID([Values(0, 1)] int index)
     {
         var result = await _controller.GetGuests();
         var okResult = result as OkObjectResult;
         var guestsList = okResult.Value as List<GuestDTO>;
-        Assert.That(guestsList[0], Has.Property("GuestID").EqualTo(1));
+        Assert.That(guestsList[index], Has.Property("GuestID").EqualTo(index + 1));
     }
 
     [Test]
-    public async Task GetGuests_FirstGuest_HasCorrectName()
+    public async Task GetGuests_FirstGuest_HasCorrectName([Values(0, 1)] int index)
     {
         var result = await _controller.GetGuests();
         var okResult = result as OkObjectResult;
         var guestsList = okResult.Value as List<GuestDTO>;
-        Assert.That(guestsList[0], Has.Property("Name").EqualTo("Guest 1"));
+        Assert.That(guestsList[index], Has.Property("Name").EqualTo($"Guest {index+1}"));
     }
 
     [Test]
-    public async Task GetGuests_FirstGuest_HasCorrectMoney()
+    public async Task GetGuests_FirstGuest_HasCorrectMoney([Values(0, 1)] int index)
     {
         var result = await _controller.GetGuests();
         var okResult = result as OkObjectResult;
         var guestsList = okResult.Value as List<GuestDTO>;
-        Assert.That(guestsList[0], Has.Property("Money").EqualTo(1200));
+        Assert.That(guestsList[index], Has.Property("Money").EqualTo(200 + (index+1)*1000));
     }
 
     [Test]
-    public async Task GetGuests_FirstGuest_HasAllergiesCorrectlySet()
+    public async Task GetGuests_FirstGuest_HasAllergiesCorrectlySet([Values(0, 1)] int index)
     {
+        var expectedResults = new List<bool> { false, true };
         var result = await _controller.GetGuests();
         var okResult = result as OkObjectResult;
         var guestsList = okResult.Value as List<GuestDTO>;
-        Assert.That(guestsList[0], Has.Property("HasAllergies").EqualTo(false));
+        Assert.That(guestsList[index], Has.Property("HasAllergies").EqualTo(expectedResults[index]));
     }
 
     [Test]
-    public async Task GetGuests_FirstGuest_HasDiscountCorrectlySet()
+    public async Task GetGuests_FirstGuest_HasDiscountCorrectlySet([Values(0, 1)] int index)
     {
+        var expectedResults = new List<bool> { false, true };
         var result = await _controller.GetGuests();
         var okResult = result as OkObjectResult;
         var guestsList = okResult.Value as List<GuestDTO>;
-        Assert.That(guestsList[0], Has.Property("HasDiscount").EqualTo(false));
+        Assert.That(guestsList[index], Has.Property("HasDiscount").EqualTo(expectedResults[index]));
     }
 
     [Test]
-    public async Task GetGuests_FirstGuest_HasCorrectTableNumber()
+    public async Task GetGuests_FirstGuest_HasCorrectTableNumber([Values(0, 1)] int index)
     {
         var result = await _controller.GetGuests();
         var okResult = result as OkObjectResult;
         var guestsList = okResult.Value as List<GuestDTO>;
-        Assert.That(guestsList[0], Has.Property("TableNumber").EqualTo(1));
+        Assert.That(guestsList[index], Has.Property("TableNumber").EqualTo(index+1));
     }
 
 

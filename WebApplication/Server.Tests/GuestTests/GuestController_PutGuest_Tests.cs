@@ -141,6 +141,63 @@ public class GuestController_PutGuest_Tests
     }
 
     [Test]
+    public async Task PutGuest_FromFullTable_UpdatesTableStatusToAvailable()
+    {
+        var oldTableNumber = 1;
+        var guestDTO = new GuestDTO { GuestID = 1, Name = "John Doe", Money = 100, TableNumber = 2 };
+
+        var result = await _controller.PutGuest(1, guestDTO);
+
+        Assert.That(result, Is.InstanceOf<NoContentResult>());
+
+        var oldTable = _context.Tables.FirstOrDefault(t => t.Number == oldTableNumber);
+        Assert.That(oldTable, Has.Property("Status").EqualTo("Available"));
+    }
+
+    [Test]
+    public async Task PutGuest_ToOccupiedTable_UpdatesTableStatusToFull()
+    {
+        var newTableNumber = 2;
+        var guestDTO = new GuestDTO { GuestID = 1, Name = "John Doe", Money = 100, TableNumber = newTableNumber };
+
+        var result = await _controller.PutGuest(1, guestDTO);
+
+        Assert.That(result, Is.InstanceOf<NoContentResult>());
+
+        var newTable = _context.Tables.FirstOrDefault(t => t.Number == newTableNumber);
+        Assert.That(newTable, Has.Property("Status").EqualTo("Full"));
+    }
+
+    [Test]
+    public async Task PutGuest_ToAvailableTable_UpdatesTableStatusToOccupied()
+    {
+        var newTableNumber = 3;
+        var guestDTO = new GuestDTO { GuestID = 1, Name = "John Doe", Money = 100, TableNumber = newTableNumber };
+
+        var result = await _controller.PutGuest(1, guestDTO);
+
+        Assert.That(result, Is.InstanceOf<NoContentResult>());
+
+        var newTable = _context.Tables.FirstOrDefault(t => t.Number == newTableNumber);
+        Assert.That(newTable, Has.Property("Status").EqualTo("Occupied"));
+    }
+
+    [Test]
+    public async Task PutGuest_FromOccupiedTable_UpdatesTableStatusToAvailable()
+    {
+        var newTableNumber = 3;
+        var oldTableNumber = 2;
+        var guestDTO = new GuestDTO { GuestID = 2, Name = "John Doe", Money = 100, TableNumber = newTableNumber };
+
+        var result = await _controller.PutGuest(2, guestDTO);
+
+        Assert.That(result, Is.InstanceOf<NoContentResult>());
+
+        var newTable = _context.Tables.FirstOrDefault(t => t.Number == oldTableNumber);
+        Assert.That(newTable, Has.Property("Status").EqualTo("Available"));
+    }
+
+    [Test]
     public async Task PutGuest_ToFullTable_ReturnsBadRequest()
     {
         var guestDTO = new GuestDTO { GuestID = 2, Name = "John Doe", Money = 100, TableNumber = 1 };

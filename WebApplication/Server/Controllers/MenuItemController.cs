@@ -132,7 +132,7 @@ public class MenuItemController : ControllerBase
 
     // PUT: api/MenuItem/5
     [HttpPut("{id}")]
-    public async Task<IActionResult> PutTable(int id, MenuItemDTO menuItemDTO)
+    public async Task<IActionResult> PutMenuItem(int id, MenuItemDTO menuItemDTO)
     {
         // Asserts
         if (menuItemDTO.Name.Length > 80)
