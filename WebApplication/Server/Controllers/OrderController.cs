@@ -37,8 +37,8 @@ public class OrderController : ControllerBase
     {
         var random = new Random();
         var ordersToUpdate = _context.Orders
-            .Where(o => o.Status != "Completed")
             .Where(o => o.Status != "Delivered")
+            .Where(o => o.Status != "Completed")
             .ToList();
 
         foreach (var order in ordersToUpdate)
@@ -54,15 +54,7 @@ public class OrderController : ControllerBase
 
         var orders = await _context.Orders
             .Where(o => o.Status != "Delivered")
-            //.Select(o => new
-            //{
-            //    OrderID = o.OrderID,
-            //    Name = o.MenuItem.Name,
-            //    OrderTime = o.OrderTime,
-            //    Status = o.Status,
-            //    Quantity = o.Quantity,
-            //    TableNumber = o.Guest.Table.TableID
-            //})
+            .Where(o => o.Status != "Completed")
             .Select(o => _mapper.Map<OrderOverviewDTO>(o))
             .ToListAsync();
 
@@ -201,8 +193,15 @@ public class OrderController : ControllerBase
 
         int discountedPrice = guest.HasDiscount ? (int)(menuItem.Price * 0.85) : menuItem.Price; // 15% discount
         int totalOrderCost = discountedPrice * order.Quantity + tip;
+
+        // check if guest has enough money to pay the order
+        if (guest.Money < totalOrderCost)
+        {
+            return BadRequest("Guest doesn't have enough money to pay the order");
+        }
+
         guest.Money -= totalOrderCost;
-        
+
         // add tip to waiter
         var waiter = await _context.Waiters.FindAsync(order.WaiterID);
         if (waiter == null)

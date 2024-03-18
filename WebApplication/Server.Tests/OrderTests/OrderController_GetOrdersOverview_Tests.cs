@@ -118,26 +118,7 @@ namespace OrderTests
         }
 
         [Test]
-        public async Task GetOrdersOverview_ReturnsCorrectNumberOfNonDeliveredOrders()
-        {
-            //Arrange
-            var expectedNumberOfOrders = 6;
-
-            //Act
-            var result = await _controller.GetOrdersOverview();
-
-            //Assert
-            var okResult = result as OkObjectResult;
-            Assert.That(okResult, Is.Not.Null);
-
-            var orders = okResult.Value as List<OrderOverviewDTO>;
-            Assert.That(orders, Is.Not.Null);
-
-            Assert.That(orders, Has.Count.EqualTo(expectedNumberOfOrders));
-        }
-
-        [Test]
-        public async Task GetOrdersOverview_ReturnsCorrectId([Values(0, 1, 2, 3)] int index)
+        public async Task GetOrdersOverview_ReturnsOnlyPendingOrPreparingOrders()
         {
             //Act
             var result = await _controller.GetOrdersOverview();
@@ -145,20 +126,21 @@ namespace OrderTests
             //Assert
             Assert.That(result, Is.InstanceOf<OkObjectResult>());
             var okResult = result as OkObjectResult;
-
-            Assert.That(okResult, Is.Not.Null);
-            var orders = okResult.Value as List<dynamic>;
+            var orders = okResult.Value as List<OrderOverviewDTO>;
 
             Assert.That(orders, Is.Not.Null);
 
-            Assert.That(orders[index], Has.Property("OrderID").EqualTo(index + 1));
+            foreach (var order in orders)
+            {
+                Assert.That(order, Has.Property("Status").AnyOf("Pending", "Preparing"));
+            }
         }
 
         [Test]
         public async Task GetOrdersOverview_ReturnsEmptyList()
         {
             // Arrange
-            _context.MenuItems.RemoveRange(_context.MenuItems);
+            _context.Orders.RemoveRange(_context.Orders);
             await _context.SaveChangesAsync();
 
             // Act
@@ -167,9 +149,10 @@ namespace OrderTests
             // Assert
             Assert.That(result, Is.InstanceOf<OkObjectResult>());
             var okResult = result as OkObjectResult;
-
             Assert.That(okResult, Is.Not.Null);
-            Assert.That(okResult.Value, Is.Not.Null);
+
+            var orders = okResult.Value as List<OrderOverviewDTO>;
+            Assert.That(orders, Is.Not.Null);
 
             Assert.That(okResult.Value, Is.Empty);
         }
