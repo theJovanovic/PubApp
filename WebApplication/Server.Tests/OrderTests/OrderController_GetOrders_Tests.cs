@@ -35,80 +35,10 @@ namespace OrderTests
             _controller = new OrderController(_context, _mapper);
 
             // Seed the database
-            //Waiters
-            _context.Waiters.Add(new Waiter { WaiterID = 1, Name = "Waiter 1", Tips = 100 });
-            _context.SaveChanges();
-            _context.Waiters.Add(new Waiter { WaiterID = 2, Name = "Waiter 2", Tips = 200 });
-            _context.SaveChanges();
-
-            ////MenuItems
-            //_context.MenuItems.Add(new MenuItem
-            //{
-            //    MenuItemID = 1,
-            //    Name = "Item 1",
-            //    Category = "Category 1",
-            //    HasAllergens = false,
-            //    Price = 100
-            //});
-            //_context.SaveChanges();
-            //_context.MenuItems.Add(new MenuItem
-            //{
-            //    MenuItemID = 2,
-            //    Name = "Item 2",
-            //    Category = "Category 2",
-            //    HasAllergens = true,
-            //    Price = 200
-            //});
-            //_context.SaveChanges();
-            //_context.MenuItems.Add(new MenuItem
-            //{
-            //    MenuItemID = 3,
-            //    Name = "Item 3",
-            //    Category = "Category 3",
-            //    HasAllergens = true,
-            //    Price = 300
-            //});
-            //_context.SaveChanges();
-            //_context.MenuItems.Add(new MenuItem
-            //{
-            //    MenuItemID = 4,
-            //    Name = "Item 4",
-            //    Category = "Category 4",
-            //    HasAllergens = true,
-            //    Price = 400
-            //});
-            //_context.SaveChanges();
-
-            ////Tables
-            //_context.Tables.Add(new Table { TableID = 1, Number = 100, Seats = 2, Status = "Full" });
-            //_context.SaveChanges();
-
-            ////Guests
-            //_context.Guests.Add(new Guest
-            //{
-            //    GuestID = 1,
-            //    HasAllergies = false,
-            //    HasDiscount = true,
-            //    Money = 4200,
-            //    Name = "Guest 1",
-            //    TableID = 1
-            //});
-            //_context.SaveChanges();
-            //_context.Guests.Add(new Guest
-            //{
-            //    GuestID = 2,
-            //    HasAllergies = true,
-            //    HasDiscount = false,
-            //    Money = 5200,
-            //    Name = "Guest 2",
-            //    TableID = 1
-            //});
-
-            //Orders
             _context.Orders.Add(new Order
             {
                 OrderID = 1,
-                OrderTime = DateTime.Now,
+                OrderTime = new DateTime(2024, 3, 18, 12, 29, 23),
                 Status = "Pending",
                 Quantity = 2,
                 GuestID = 1,
@@ -152,6 +82,135 @@ namespace OrderTests
 
             // Setup the transaction just in case
             _transaction = _context.Database.BeginTransaction();
+        }
+
+        [Test]
+        public async Task GetOrders_ReturnsCorrectNumberOfOrders()
+        {
+            //Arrange
+            var expectedNumberOfOrders = 4;
+
+            //Act
+            var result = await _controller.GetOrders();
+
+            //Assert
+            Assert.That(result, Is.InstanceOf<OkObjectResult>());
+            var okResult = result as OkObjectResult;
+
+            Assert.That(okResult, Is.Not.Null);
+            var orders = okResult.Value as List<OrderDTO>;
+
+            Assert.That(orders, Has.Count.EqualTo(expectedNumberOfOrders));
+        }
+
+        [Test]
+        public async Task GetOrders_ReturnsCorrectId([Values(0, 1, 2, 3)] int index)
+        {
+            //Act
+            var result = await _controller.GetOrders();
+
+            //Assert
+            Assert.That(result, Is.InstanceOf<OkObjectResult>());
+            var okResult = result as OkObjectResult;
+
+            Assert.That(okResult, Is.Not.Null);
+            var orders = okResult.Value as List<OrderDTO>;
+
+            Assert.That(orders, Is.Not.Null);
+
+            Assert.That(orders[index], Has.Property("OrderID").EqualTo(index + 1));
+        }
+
+        [Test]
+        public async Task GetOrders_ReturnsCorrectTime([Values(0, 1, 2, 3)] int index)
+        {
+            //Arrange
+            var expectedOrderDates = new List<DateTime>
+            {
+                new DateTime(2024, 3, 18, 12, 29, 23),
+                new DateTime(2024, 3, 18, 12, 30, 00),
+                new DateTime(2024, 3, 18, 12, 31, 00),
+                new DateTime(2024, 3, 18, 12, 35, 00)
+            };
+
+            //Act
+            var result = await _controller.GetOrders();
+            
+            //Assert
+            Assert.That(result, Is.InstanceOf<OkObjectResult>());
+            var okResult = result as OkObjectResult;
+
+            Assert.That(okResult, Is.Not.Null);
+            var orders = okResult.Value as List<OrderDTO>;
+
+            Assert.That(orders, Is.Not.Null);
+
+            Assert.That(orders[index], Has.Property("OrderTime").EqualTo(expectedOrderDates[index]));
+        }
+
+        [Test]
+        public async Task GetOrders_ReturnsCorrectStatus([Values(0, 1, 2, 3)] int index)
+        {
+            //Arrange
+            var expectedStatuses = new List<String>
+            {
+                "Pending",
+                "Preparing",
+                "Completed",
+                "Delivered"
+            };
+
+            //Act
+            var result = await _controller.GetOrders();
+
+            //Assert
+            Assert.That(result, Is.InstanceOf<OkObjectResult>());
+            var okResult = result as OkObjectResult;
+
+            Assert.That(okResult, Is.Not.Null);
+            var orders = okResult.Value as List<OrderDTO>;
+
+            Assert.That(orders, Is.Not.Null);
+
+            Assert.That(orders[index], Has.Property("Status").EqualTo(expectedStatuses[index]));
+        }
+
+        [Test, Sequential]
+        public async Task GetOrders_ReturnsCorrectGuestId([Values(0, 1, 2, 3)] int index, [Values(1, 1, 2, 2)] int gId)
+        {
+            //Act
+            var result = await _controller.GetOrders();
+
+            //Assert
+            Assert.That(result, Is.InstanceOf<OkObjectResult>());
+            var okResult = result as OkObjectResult;
+
+            Assert.That(okResult, Is.Not.Null);
+            var orders = okResult.Value as List<OrderDTO>;
+
+            Assert.That(orders, Is.Not.Null);
+
+            Assert.That(orders[index], Has.Property("GuestID").EqualTo(gId));
+        }
+
+        [Test]
+        public async Task GetOrders_ReturnsEmptyList()
+        {
+            // Arrange
+            _context.Orders.RemoveRange(_context.Orders);
+            await _context.SaveChangesAsync();
+
+            // Act
+            var result = await _controller.GetOrders();
+
+            // Assert
+            Assert.That(result, Is.InstanceOf<OkObjectResult>());
+            var okResult = result as OkObjectResult;
+
+            Assert.That(okResult, Is.Not.Null);
+            var orders = okResult.Value as List<OrderDTO>;
+
+            Assert.That(orders, Is.Empty);
         }
 
         [TearDown]

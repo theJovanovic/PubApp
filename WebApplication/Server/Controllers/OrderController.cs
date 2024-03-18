@@ -54,15 +54,16 @@ public class OrderController : ControllerBase
 
         var orders = await _context.Orders
             .Where(o => o.Status != "Delivered")
-            .Select(o => new
-            {
-                OrderID = o.OrderID,
-                Name = o.MenuItem.Name,
-                OrderTime = o.OrderTime,
-                Status = o.Status,
-                Quantity = o.Quantity,
-                TableNumber = o.Guest.Table.TableID
-            })
+            //.Select(o => new
+            //{
+            //    OrderID = o.OrderID,
+            //    Name = o.MenuItem.Name,
+            //    OrderTime = o.OrderTime,
+            //    Status = o.Status,
+            //    Quantity = o.Quantity,
+            //    TableNumber = o.Guest.Table.TableID
+            //})
+            .Select(o => _mapper.Map<OrderOverviewDTO>(o))
             .ToListAsync();
 
         return Ok(orders);
@@ -110,7 +111,9 @@ public class OrderController : ControllerBase
         await _context.Orders.AddAsync(order);
         await _context.SaveChangesAsync();
 
-        return NoContent();
+        var result = _mapper.Map<OrderDTO>(order);
+
+        return CreatedAtAction(nameof(GetOrder), new { id = result.OrderID }, result);
     }
 
     // PUT: api/Order/5/Waiter/1

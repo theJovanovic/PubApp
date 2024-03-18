@@ -138,7 +138,7 @@
   },
   {
     "ContainingType": "Server.Controllers.MenuItemController",
-    "Method": "PutTable",
+    "Method": "PutMenuItem",
     "RelativePath": "api/MenuItem/{id}",
     "HttpMethod": "PUT",
     "IsController": true,

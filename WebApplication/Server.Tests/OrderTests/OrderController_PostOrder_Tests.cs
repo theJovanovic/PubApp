@@ -34,124 +34,50 @@ namespace OrderTests
 
             _controller = new OrderController(_context, _mapper);
 
-            // Seed the database
-            //Waiters
-            _context.Waiters.Add(new Waiter { WaiterID = 1, Name = "Waiter 1", Tips = 100 });
-            _context.SaveChanges();
-            _context.Waiters.Add(new Waiter { WaiterID = 2, Name = "Waiter 2", Tips = 200 });
-            _context.SaveChanges();
-
-            ////MenuItems
-            //_context.MenuItems.Add(new MenuItem
-            //{
-            //    MenuItemID = 1,
-            //    Name = "Item 1",
-            //    Category = "Category 1",
-            //    HasAllergens = false,
-            //    Price = 100
-            //});
-            //_context.SaveChanges();
-            //_context.MenuItems.Add(new MenuItem
-            //{
-            //    MenuItemID = 2,
-            //    Name = "Item 2",
-            //    Category = "Category 2",
-            //    HasAllergens = true,
-            //    Price = 200
-            //});
-            //_context.SaveChanges();
-            //_context.MenuItems.Add(new MenuItem
-            //{
-            //    MenuItemID = 3,
-            //    Name = "Item 3",
-            //    Category = "Category 3",
-            //    HasAllergens = true,
-            //    Price = 300
-            //});
-            //_context.SaveChanges();
-            //_context.MenuItems.Add(new MenuItem
-            //{
-            //    MenuItemID = 4,
-            //    Name = "Item 4",
-            //    Category = "Category 4",
-            //    HasAllergens = true,
-            //    Price = 400
-            //});
-            //_context.SaveChanges();
-
-            ////Tables
-            //_context.Tables.Add(new Table { TableID = 1, Number = 100, Seats = 2, Status = "Full" });
-            //_context.SaveChanges();
-
-            ////Guests
-            //_context.Guests.Add(new Guest
-            //{
-            //    GuestID = 1,
-            //    HasAllergies = false,
-            //    HasDiscount = true,
-            //    Money = 4200,
-            //    Name = "Guest 1",
-            //    TableID = 1
-            //});
-            //_context.SaveChanges();
-            //_context.Guests.Add(new Guest
-            //{
-            //    GuestID = 2,
-            //    HasAllergies = true,
-            //    HasDiscount = false,
-            //    Money = 5200,
-            //    Name = "Guest 2",
-            //    TableID = 1
-            //});
-
-            //Orders
-            _context.Orders.Add(new Order
-            {
-                OrderID = 1,
-                OrderTime = DateTime.Now,
-                Status = "Pending",
-                Quantity = 2,
-                GuestID = 1,
-                MenuItemID = 1,
-                WaiterID = 1
-            });
-            _context.SaveChanges();
-            _context.Orders.Add(new Order
-            {
-                OrderID = 2,
-                OrderTime = new DateTime(2024, 3, 18, 12, 30, 00),
-                Status = "Preparing",
-                Quantity = 3,
-                GuestID = 1,
-                MenuItemID = 2,
-                WaiterID = 1
-            });
-            _context.SaveChanges();
-            _context.Orders.Add(new Order
-            {
-                OrderID = 3,
-                OrderTime = new DateTime(2024, 3, 18, 12, 31, 00),
-                Status = "Completed",
-                Quantity = 1,
-                GuestID = 2,
-                MenuItemID = 3,
-                WaiterID = 2
-            });
-            _context.SaveChanges();
-            _context.Orders.Add(new Order
-            {
-                OrderID = 4,
-                OrderTime = new DateTime(2024, 3, 18, 12, 35, 00),
-                Status = "Delivered",
-                Quantity = 10,
-                GuestID = 2,
-                MenuItemID = 4,
-                WaiterID = 2
-            });
-            _context.SaveChanges();
-
             // Setup the transaction just in case
             _transaction = _context.Database.BeginTransaction();
+        }
+
+        [Test]
+        public async Task PostOrder_WithValidData_ReturnsCreatedAtAction()
+        {
+            // Arrange
+            var newOrder = new OrderCreateDTO { GuestID = 1, Quantity = 5, MenuItemID = 2 };
+
+            // Act
+            var result = await _controller.PostOrder(newOrder);
+
+            // Assert
+            Assert.That(result, Is.InstanceOf<CreatedAtActionResult>());
+        }
+
+        [Test]
+        public async Task PostOrder_WithNegativeQuantity_ReturnsBadRequest()
+        {
+            // Arrange
+            var newOrder = new OrderCreateDTO { GuestID = 1, Quantity = -1, MenuItemID = 2 };
+
+            // Act
+            var result = await _controller.PostOrder(newOrder);
+
+            // Assert
+            Assert.That(result, Is.InstanceOf<BadRequestObjectResult>());
+            var badRequestResult = result as BadRequestObjectResult;
+            Assert.That(badRequestResult, Has.Property("Value").EqualTo("Quantity must be a positive value"));
+        }
+
+        [Test]
+        public async Task PostOrder_WithInvalidModelState_ReturnsBadRequest()
+        {
+            //Arrange
+            _controller.ModelState.AddModelError("Erorr", "Some error 😭");
+            var newOrder = new OrderCreateDTO();
+
+            //Act
+            var result = await _controller.PostOrder(newOrder);
+
+            //Assert
+            Assert.That(result, Is.InstanceOf<BadRequestObjectResult>());
         }
 
         [TearDown]

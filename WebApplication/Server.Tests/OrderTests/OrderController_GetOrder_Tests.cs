@@ -35,76 +35,6 @@ namespace OrderTests
             _controller = new OrderController(_context, _mapper);
 
             // Seed the database
-            //Waiters
-            _context.Waiters.Add(new Waiter { WaiterID = 1, Name = "Waiter 1", Tips = 100 });
-            _context.SaveChanges();
-            _context.Waiters.Add(new Waiter { WaiterID = 2, Name = "Waiter 2", Tips = 200 });
-            _context.SaveChanges();
-
-            ////MenuItems
-            //_context.MenuItems.Add(new MenuItem
-            //{
-            //    MenuItemID = 1,
-            //    Name = "Item 1",
-            //    Category = "Category 1",
-            //    HasAllergens = false,
-            //    Price = 100
-            //});
-            //_context.SaveChanges();
-            //_context.MenuItems.Add(new MenuItem
-            //{
-            //    MenuItemID = 2,
-            //    Name = "Item 2",
-            //    Category = "Category 2",
-            //    HasAllergens = true,
-            //    Price = 200
-            //});
-            //_context.SaveChanges();
-            //_context.MenuItems.Add(new MenuItem
-            //{
-            //    MenuItemID = 3,
-            //    Name = "Item 3",
-            //    Category = "Category 3",
-            //    HasAllergens = true,
-            //    Price = 300
-            //});
-            //_context.SaveChanges();
-            //_context.MenuItems.Add(new MenuItem
-            //{
-            //    MenuItemID = 4,
-            //    Name = "Item 4",
-            //    Category = "Category 4",
-            //    HasAllergens = true,
-            //    Price = 400
-            //});
-            //_context.SaveChanges();
-
-            ////Tables
-            //_context.Tables.Add(new Table { TableID = 1, Number = 100, Seats = 2, Status = "Full" });
-            //_context.SaveChanges();
-
-            ////Guests
-            //_context.Guests.Add(new Guest
-            //{
-            //    GuestID = 1,
-            //    HasAllergies = false,
-            //    HasDiscount = true,
-            //    Money = 4200,
-            //    Name = "Guest 1",
-            //    TableID = 1
-            //});
-            //_context.SaveChanges();
-            //_context.Guests.Add(new Guest
-            //{
-            //    GuestID = 2,
-            //    HasAllergies = true,
-            //    HasDiscount = false,
-            //    Money = 5200,
-            //    Name = "Guest 2",
-            //    TableID = 1
-            //});
-
-            //Orders
             _context.Orders.Add(new Order
             {
                 OrderID = 1,
@@ -152,6 +82,99 @@ namespace OrderTests
 
             // Setup the transaction just in case
             _transaction = _context.Database.BeginTransaction();
+        }
+
+        [Test]
+        public async Task GetOrder_ReturnsCorrectOrderID()
+        {
+            //Arrange
+            var existingOrderId = 1;
+
+            //Act
+            var result = await _controller.GetOrder(existingOrderId);
+
+            //Assert
+            Assert.That(result, Is.InstanceOf<OkObjectResult>());
+            var okResult = result as OkObjectResult;
+
+            Assert.That(okResult, Is.Not.Null);
+            var orderDTO = okResult.Value as OrderDTO;
+
+            Assert.That(orderDTO, Has.Property("OrderID").EqualTo(existingOrderId));
+        }
+
+        [Test]
+        public async Task GetOrder_ReturnsCorrectOrderTime()
+        {
+            //Arrange
+            var existingOrderId = 2;
+            var expectedDateTime = new DateTime(2024, 3, 18, 12, 30, 00);
+
+            //Act
+            var result = await _controller.GetOrder(existingOrderId);
+
+            //Assert
+            Assert.That(result, Is.InstanceOf<OkObjectResult>());
+            var okResult = result as OkObjectResult;
+
+            Assert.That(okResult, Is.Not.Null);
+            var orderDTO = okResult.Value as OrderDTO;
+
+            Assert.That(orderDTO, Has.Property("OrderTime").EqualTo(expectedDateTime));
+        }
+
+        [Test]
+        public async Task GetOrder_ReturnsCorrectStatus()
+        {
+            //Arrange
+            var existingOrderId = 3;
+
+            //Act
+            var result = await _controller.GetOrder(existingOrderId);
+
+            //Assert
+            Assert.That(result, Is.InstanceOf<OkObjectResult>());
+            var okResult = result as OkObjectResult;
+
+            Assert.That(okResult, Is.Not.Null);
+            var orderDTO = okResult.Value as OrderDTO;
+
+            Assert.That(orderDTO, Has.Property("Status").EqualTo("Completed"));
+        }
+
+        [Test]
+        public async Task GetOrder_ReturnsCorrectGuestID()
+        {
+            //Arrange
+            var existingOrderId = 4;
+            var exptectedGuestId = 2;
+
+            //Act
+            var result = await _controller.GetOrder(existingOrderId);
+
+            //Assert
+            Assert.That(result, Is.InstanceOf<OkObjectResult>());
+            var okResult = result as OkObjectResult;
+
+            Assert.That(okResult, Is.Not.Null);
+            var orderDTO = okResult.Value as OrderDTO;
+
+            Assert.That(orderDTO, Has.Property("GuestID").EqualTo(exptectedGuestId));
+        }
+
+        [Test]
+        public async Task GetOrder_WithNonExistingId_ReturnsNotFound()
+        {
+            // Arrange
+            int nonExistingOrderId = 999;
+
+            // Act
+            var result = await _controller.GetOrder(nonExistingOrderId);
+
+            // Assert
+            Assert.That(result, Is.InstanceOf<NotFoundObjectResult>());
+            var notFoundResult = result as NotFoundObjectResult;
+            Assert.That(notFoundResult, Has.Property("Value").EqualTo("Order with given ID doesn't exist"));
         }
 
         [TearDown]

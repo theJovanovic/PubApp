@@ -99,26 +99,6 @@ const WaiterOrderPage = () => {
     }
   }
 
-  // return (
-  //   <div>
-  //     <h1>Orders Overview</h1>
-  //     <ol>
-  //       {orders.map((order) => (
-  //         <li>
-  //           <h2>Name: {order.name}</h2>
-  //           <h2>Order time: {formatDate(order.orderTime)}</h2>
-  //           <h2>Status: {order.status}</h2>
-  //           <h2>Quantity: {order.quantity}</h2>
-  //           <h2>Table: {order.tableNumber}</h2>
-  //           {order.status === "Completed" && 
-  //             <a onClick={() => {deliverOrder(order.orderID)}}>Deliver</a>
-  //           }
-  //         </li>
-  //       ))}
-  //     </ol>
-  //   </div>
-  // );
-
   return (
     <div className="page-container">
 

@@ -41,69 +41,6 @@ namespace OrderTests
             _context.Waiters.Add(new Waiter { WaiterID = 2, Name = "Waiter 2", Tips = 200 });
             _context.SaveChanges();
 
-            ////MenuItems
-            //_context.MenuItems.Add(new MenuItem
-            //{
-            //    MenuItemID = 1,
-            //    Name = "Item 1",
-            //    Category = "Category 1",
-            //    HasAllergens = false,
-            //    Price = 100
-            //});
-            //_context.SaveChanges();
-            //_context.MenuItems.Add(new MenuItem
-            //{
-            //    MenuItemID = 2,
-            //    Name = "Item 2",
-            //    Category = "Category 2",
-            //    HasAllergens = true,
-            //    Price = 200
-            //});
-            //_context.SaveChanges();
-            //_context.MenuItems.Add(new MenuItem
-            //{
-            //    MenuItemID = 3,
-            //    Name = "Item 3",
-            //    Category = "Category 3",
-            //    HasAllergens = true,
-            //    Price = 300
-            //});
-            //_context.SaveChanges();
-            //_context.MenuItems.Add(new MenuItem
-            //{
-            //    MenuItemID = 4,
-            //    Name = "Item 4",
-            //    Category = "Category 4",
-            //    HasAllergens = true,
-            //    Price = 400
-            //});
-            //_context.SaveChanges();
-
-            ////Tables
-            //_context.Tables.Add(new Table { TableID = 1, Number = 100, Seats = 2, Status = "Full" });
-            //_context.SaveChanges();
-
-            ////Guests
-            //_context.Guests.Add(new Guest
-            //{
-            //    GuestID = 1,
-            //    HasAllergies = false,
-            //    HasDiscount = true,
-            //    Money = 4200,
-            //    Name = "Guest 1",
-            //    TableID = 1
-            //});
-            //_context.SaveChanges();
-            //_context.Guests.Add(new Guest
-            //{
-            //    GuestID = 2,
-            //    HasAllergies = true,
-            //    HasDiscount = false,
-            //    Money = 5200,
-            //    Name = "Guest 2",
-            //    TableID = 1
-            //});
-
             //Orders
             _context.Orders.Add(new Order
             {
