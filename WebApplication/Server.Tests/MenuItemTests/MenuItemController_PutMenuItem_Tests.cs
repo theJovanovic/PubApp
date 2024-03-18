@@ -75,7 +75,7 @@ public class MenuItemController_PutMenuItem_Tests
         var existingMenuItemId = 1; // Ensure this matches a seeded MenuItem
         var updateDTO = new MenuItemDTO { MenuItemID = existingMenuItemId, Name = "Updated Name", Price = 1200, Category = Category.Chinese.ToString(), HasAllergens = true };
 
-        var result = await _controller.PutTable(existingMenuItemId, updateDTO);
+        var result = await _controller.PutMenuItem(existingMenuItemId, updateDTO);
 
         Assert.That(result, Is.InstanceOf<NoContentResult>());
     }
@@ -86,7 +86,7 @@ public class MenuItemController_PutMenuItem_Tests
         var existingMenuItemId = 1;
         var updateDTO = new MenuItemDTO { MenuItemID = existingMenuItemId, Name = "Updated Name", Price = 1200, Category = Category.Chinese.ToString(), HasAllergens = true };
 
-        await _controller.PutTable(existingMenuItemId, updateDTO);
+        await _controller.PutMenuItem(existingMenuItemId, updateDTO);
 
         var updatedItem = await _context.MenuItems.FindAsync(existingMenuItemId);
         Assert.That(updatedItem.Name, Is.EqualTo(updateDTO.Name));
@@ -98,7 +98,7 @@ public class MenuItemController_PutMenuItem_Tests
         var existingMenuItemId = 1;
         var updateDTO = new MenuItemDTO { MenuItemID = existingMenuItemId, Name = "Updated Item", Price = 1200, Category = Category.Chinese.ToString(), HasAllergens = true };
 
-        await _controller.PutTable(existingMenuItemId, updateDTO);
+        await _controller.PutMenuItem(existingMenuItemId, updateDTO);
 
         var updatedItem = await _context.MenuItems.FindAsync(existingMenuItemId);
         Assert.That(updatedItem.Price, Is.EqualTo(updateDTO.Price));
@@ -110,7 +110,7 @@ public class MenuItemController_PutMenuItem_Tests
         var existingMenuItemId = 1;
         var updateDTO = new MenuItemDTO { MenuItemID = existingMenuItemId, Name = "Updated Item", Price = 1200, Category = Category.Chinese.ToString(), HasAllergens = true };
 
-        await _controller.PutTable(existingMenuItemId, updateDTO);
+        await _controller.PutMenuItem(existingMenuItemId, updateDTO);
 
         var updatedItem = await _context.MenuItems.FindAsync(existingMenuItemId);
         Assert.That(updatedItem.Category, Is.EqualTo(updateDTO.Category));
@@ -122,7 +122,7 @@ public class MenuItemController_PutMenuItem_Tests
         var existingMenuItemId = 1;
         var updateDTO = new MenuItemDTO { MenuItemID = existingMenuItemId, Name = "Updated Item", Price = 1200, Category = Category.Chinese.ToString(), HasAllergens = true };
 
-        await _controller.PutTable(existingMenuItemId, updateDTO);
+        await _controller.PutMenuItem(existingMenuItemId, updateDTO);
 
         var updatedItem = await _context.MenuItems.FindAsync(existingMenuItemId);
         Assert.That(updatedItem.HasAllergens, Is.EqualTo(updateDTO.HasAllergens));
@@ -132,7 +132,7 @@ public class MenuItemController_PutMenuItem_Tests
     public async Task PutMenuItem_WithNameTooLong_ReturnsBadRequest()
     {
         var menuItemDTO = new MenuItemDTO { MenuItemID = 1, Name = new string('a', 81), Price = 100 };
-        var result = await _controller.PutTable(1, menuItemDTO);
+        var result = await _controller.PutMenuItem(1, menuItemDTO);
         Assert.That(result, Is.InstanceOf<BadRequestObjectResult>());
         var badRequestResult = result as BadRequestObjectResult;
         Assert.That(badRequestResult, Has.Property("Value").EqualTo("Name can't have more than 80 character"));
@@ -142,7 +142,7 @@ public class MenuItemController_PutMenuItem_Tests
     public async Task PutMenuItem_WithNegativePrice_ReturnsBadRequest()
     {
         var menuItemDTO = new MenuItemDTO { MenuItemID = 1, Name = "Test Item", Price = -1 };
-        var result = await _controller.PutTable(1, menuItemDTO);
+        var result = await _controller.PutMenuItem(1, menuItemDTO);
         Assert.That(result, Is.InstanceOf<BadRequestObjectResult>());
         var badRequestResult = result as BadRequestObjectResult;
         Assert.That(badRequestResult, Has.Property("Value").EqualTo("Price can't be negative"));
@@ -152,7 +152,7 @@ public class MenuItemController_PutMenuItem_Tests
     public async Task PutMenuItem_WithMismatchedIds_ReturnsBadRequest()
     {
         var menuItemDTO = new MenuItemDTO { MenuItemID = 2, Name = "Test Item", Price = 100 };
-        var result = await _controller.PutTable(1, menuItemDTO);
+        var result = await _controller.PutMenuItem(1, menuItemDTO);
         Assert.That(result, Is.InstanceOf<BadRequestObjectResult>());
         var badRequestResult = result as BadRequestObjectResult;
         Assert.That(badRequestResult, Has.Property("Value").EqualTo("Item IDs don't match"));
@@ -162,7 +162,7 @@ public class MenuItemController_PutMenuItem_Tests
     public async Task PutMenuItem_WithInvalidCategory_ReturnsBadRequest()
     {
         var menuItemDTO = new MenuItemDTO { MenuItemID = 1, Name = "Test Item", Price = 100, Category = "InvalidCategory" };
-        var result = await _controller.PutTable(1, menuItemDTO);
+        var result = await _controller.PutMenuItem(1, menuItemDTO);
         Assert.That(result, Is.InstanceOf<BadRequestObjectResult>());
         var badRequestResult = result as BadRequestObjectResult;
         Assert.That(badRequestResult, Has.Property("Value").EqualTo("The given category doesn't exist"));

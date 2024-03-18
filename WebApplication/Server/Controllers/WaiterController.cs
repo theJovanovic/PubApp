@@ -89,6 +89,10 @@ public class WaiterController : ControllerBase
         {
             return BadRequest("Name can't have more than 50 characters");
         }
+        if (waiterDTO.Tips < 0)
+        {
+            return BadRequest("Tips can't be negative");
+        }
 
         if (id != waiterDTO.WaiterID)
         {
@@ -104,6 +108,7 @@ public class WaiterController : ControllerBase
 
         //change other properties
         waiter.Name = waiterDTO.Name;
+        waiter.Tips = waiterDTO.Tips;
 
         await _context.SaveChangesAsync();
 

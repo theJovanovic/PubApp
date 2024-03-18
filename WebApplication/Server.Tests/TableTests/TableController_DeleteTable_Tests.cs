@@ -48,7 +48,7 @@ public class TableController_DeleteTable_Tests
     }
 
     [Test]
-    public async Task DeleteTable_WithExistingTable_ReturnsNoContent()
+    public async Task DeleteTable_WithExistingId_ReturnsNoContent()
     {
         // Arrange
         int existingTableId = 1;
@@ -61,7 +61,7 @@ public class TableController_DeleteTable_Tests
     }
 
     [Test]
-    public async Task DeleteTable_WithNonExistingTable_ReturnsNotFound()
+    public async Task DeleteTable_WithNonExistingId_ReturnsNotFound()
     {
         // Arrange
         int nonExistingTableId = 999;

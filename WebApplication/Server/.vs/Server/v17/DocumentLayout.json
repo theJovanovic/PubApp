@@ -1,14 +1,27 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Users\\LENOVO\\Desktop\\PubApp\\WebApplication\\Server\\",
+  "WorkspaceRootPath": "D:\\Elfak\\VII semestar\\Testiranje i kvalitet softvera\\PubApp\\WebApplication\\Server\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{1FCE9A12-4147-4AC2-BA32-8AFA3759D74B}|Server.csproj|c:\\users\\lenovo\\desktop\\pubapp\\webapplication\\server\\controllers\\menuitemcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{1FCE9A12-4147-4AC2-BA32-8AFA3759D74B}|Server.csproj|solutionrelative:controllers\\menuitemcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{C50EA1CC-7032-4CC9-BF85-2A24776A569E}|..\\Server.Tests\\Server.Tests.csproj|d:\\elfak\\vii semestar\\testiranje i kvalitet softvera\\pubapp\\webapplication\\server.tests\\ordertests\\ordercontroller_postorder_tests.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{1FCE9A12-4147-4AC2-BA32-8AFA3759D74B}|Server.csproj|c:\\users\\lenovo\\desktop\\pubapp\\webapplication\\server\\models\\order.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{1FCE9A12-4147-4AC2-BA32-8AFA3759D74B}|Server.csproj|solutionrelative:models\\order.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{C50EA1CC-7032-4CC9-BF85-2A24776A569E}|..\\Server.Tests\\Server.Tests.csproj|d:\\elfak\\vii semestar\\testiranje i kvalitet softvera\\pubapp\\webapplication\\server.tests\\ordertests\\ordercontroller_payorder_tests.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C50EA1CC-7032-4CC9-BF85-2A24776A569E}|..\\Server.Tests\\Server.Tests.csproj|d:\\elfak\\vii semestar\\testiranje i kvalitet softvera\\pubapp\\webapplication\\server.tests\\ordertests\\ordercontroller_getordersoverview_tests.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C50EA1CC-7032-4CC9-BF85-2A24776A569E}|..\\Server.Tests\\Server.Tests.csproj|d:\\elfak\\vii semestar\\testiranje i kvalitet softvera\\pubapp\\webapplication\\server.tests\\ordertests\\ordercontroller_getorders_tests.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C50EA1CC-7032-4CC9-BF85-2A24776A569E}|..\\Server.Tests\\Server.Tests.csproj|d:\\elfak\\vii semestar\\testiranje i kvalitet softvera\\pubapp\\webapplication\\server.tests\\ordertests\\ordercontroller_getorder_tests.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C50EA1CC-7032-4CC9-BF85-2A24776A569E}|..\\Server.Tests\\Server.Tests.csproj|d:\\elfak\\vii semestar\\testiranje i kvalitet softvera\\pubapp\\webapplication\\server.tests\\ordertests\\ordercontroller_deliverorder_tests.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C50EA1CC-7032-4CC9-BF85-2A24776A569E}|..\\Server.Tests\\Server.Tests.csproj|d:\\elfak\\vii semestar\\testiranje i kvalitet softvera\\pubapp\\webapplication\\server.tests\\ordertests\\ordercontroller_deleteorder_tests.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -18,36 +31,97 @@
       "DocumentGroups": [
         {
           "DockedWidth": 179,
-          "SelectedChildIndex": 2,
+          "SelectedChildIndex": 4,
           "Children": [
             {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "OrderController_GetOrder_Tests.cs",
+              "DocumentMoniker": "D:\\Elfak\\VII semestar\\Testiranje i kvalitet softvera\\PubApp\\WebApplication\\Server.Tests\\OrderTests\\OrderController_GetOrder_Tests.cs",
+              "RelativeDocumentMoniker": "..\\Server.Tests\\OrderTests\\OrderController_GetOrder_Tests.cs",
+              "ToolTip": "D:\\Elfak\\VII semestar\\Testiranje i kvalitet softvera\\PubApp\\WebApplication\\Server.Tests\\OrderTests\\OrderController_GetOrder_Tests.cs",
+              "RelativeToolTip": "..\\Server.Tests\\OrderTests\\OrderController_GetOrder_Tests.cs",
+              "ViewState": "AQIAAJUAAAAAAAAAAAAiwKMAAAAJAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-03-18T00:06:06.113Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "OrderController_GetOrders_Tests.cs",
+              "DocumentMoniker": "D:\\Elfak\\VII semestar\\Testiranje i kvalitet softvera\\PubApp\\WebApplication\\Server.Tests\\OrderTests\\OrderController_GetOrders_Tests.cs",
+              "RelativeDocumentMoniker": "..\\Server.Tests\\OrderTests\\OrderController_GetOrders_Tests.cs",
+              "ToolTip": "D:\\Elfak\\VII semestar\\Testiranje i kvalitet softvera\\PubApp\\WebApplication\\Server.Tests\\OrderTests\\OrderController_GetOrders_Tests.cs",
+              "RelativeToolTip": "..\\Server.Tests\\OrderTests\\OrderController_GetOrders_Tests.cs",
+              "ViewState": "AQIAAJUAAAAAAAAAAAAiwKMAAAAJAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-03-18T00:05:48.822Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "OrderController_GetOrdersOverview_Tests.cs",
+              "DocumentMoniker": "D:\\Elfak\\VII semestar\\Testiranje i kvalitet softvera\\PubApp\\WebApplication\\Server.Tests\\OrderTests\\OrderController_GetOrdersOverview_Tests.cs",
+              "RelativeDocumentMoniker": "..\\Server.Tests\\OrderTests\\OrderController_GetOrdersOverview_Tests.cs",
+              "ToolTip": "D:\\Elfak\\VII semestar\\Testiranje i kvalitet softvera\\PubApp\\WebApplication\\Server.Tests\\OrderTests\\OrderController_GetOrdersOverview_Tests.cs",
+              "RelativeToolTip": "..\\Server.Tests\\OrderTests\\OrderController_GetOrdersOverview_Tests.cs",
+              "ViewState": "AQIAAI8AAAAAAAAAAAAiwKMAAAAJAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-03-18T00:05:34.964Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "Order.cs",
-              "DocumentMoniker": "C:\\Users\\LENOVO\\Desktop\\PubApp\\WebApplication\\Server\\Models\\Order.cs",
-              "RelativeDocumentMoniker": "Models\\Order.cs",
-              "ToolTip": "C:\\Users\\LENOVO\\Desktop\\PubApp\\WebApplication\\Server\\Models\\Order.cs",
-              "RelativeToolTip": "Models\\Order.cs",
-              "ViewState": "AQIAAAYAAAAAAAAAAAAAAAwAAAA7AAAA",
+              "Title": "OrderController_PayOrder_Tests.cs",
+              "DocumentMoniker": "D:\\Elfak\\VII semestar\\Testiranje i kvalitet softvera\\PubApp\\WebApplication\\Server.Tests\\OrderTests\\OrderController_PayOrder_Tests.cs",
+              "RelativeDocumentMoniker": "..\\Server.Tests\\OrderTests\\OrderController_PayOrder_Tests.cs",
+              "ToolTip": "D:\\Elfak\\VII semestar\\Testiranje i kvalitet softvera\\PubApp\\WebApplication\\Server.Tests\\OrderTests\\OrderController_PayOrder_Tests.cs",
+              "RelativeToolTip": "..\\Server.Tests\\OrderTests\\OrderController_PayOrder_Tests.cs",
+              "ViewState": "AQIAAI8AAAAAAAAAAAAiwKMAAAAJAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-03-17T19:19:55.948Z",
+              "WhenOpened": "2024-03-18T00:07:30.431Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "MenuItemController.cs",
-              "DocumentMoniker": "C:\\Users\\LENOVO\\Desktop\\PubApp\\WebApplication\\Server\\Controllers\\MenuItemController.cs",
-              "RelativeDocumentMoniker": "Controllers\\MenuItemController.cs",
-              "ToolTip": "C:\\Users\\LENOVO\\Desktop\\PubApp\\WebApplication\\Server\\Controllers\\MenuItemController.cs",
-              "RelativeToolTip": "Controllers\\MenuItemController.cs",
-              "ViewState": "AQIAAKYAAAAAAAAAAAAwwKwAAAAAAAAA",
+              "Title": "OrderController_PostOrder_Tests.cs",
+              "DocumentMoniker": "D:\\Elfak\\VII semestar\\Testiranje i kvalitet softvera\\PubApp\\WebApplication\\Server.Tests\\OrderTests\\OrderController_PostOrder_Tests.cs",
+              "RelativeDocumentMoniker": "..\\Server.Tests\\OrderTests\\OrderController_PostOrder_Tests.cs",
+              "ToolTip": "D:\\Elfak\\VII semestar\\Testiranje i kvalitet softvera\\PubApp\\WebApplication\\Server.Tests\\OrderTests\\OrderController_PostOrder_Tests.cs",
+              "RelativeToolTip": "..\\Server.Tests\\OrderTests\\OrderController_PostOrder_Tests.cs",
+              "ViewState": "AQIAAJIAAAAAAAAAAAAiwKMAAAAJAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-03-17T16:02:05.702Z",
+              "WhenOpened": "2024-03-18T00:06:41.862Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "OrderController_DeliverOrder_Tests.cs",
+              "DocumentMoniker": "D:\\Elfak\\VII semestar\\Testiranje i kvalitet softvera\\PubApp\\WebApplication\\Server.Tests\\OrderTests\\OrderController_DeliverOrder_Tests.cs",
+              "RelativeDocumentMoniker": "..\\Server.Tests\\OrderTests\\OrderController_DeliverOrder_Tests.cs",
+              "ToolTip": "D:\\Elfak\\VII semestar\\Testiranje i kvalitet softvera\\PubApp\\WebApplication\\Server.Tests\\OrderTests\\OrderController_DeliverOrder_Tests.cs",
+              "RelativeToolTip": "..\\Server.Tests\\OrderTests\\OrderController_DeliverOrder_Tests.cs",
+              "ViewState": "AQIAAPoAAAAAAAAAAAAwwAUBAAAIAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-03-18T01:38:41.927Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "OrderController_DeleteOrder_Tests.cs",
+              "DocumentMoniker": "D:\\Elfak\\VII semestar\\Testiranje i kvalitet softvera\\PubApp\\WebApplication\\Server.Tests\\OrderTests\\OrderController_DeleteOrder_Tests.cs",
+              "RelativeDocumentMoniker": "..\\Server.Tests\\OrderTests\\OrderController_DeleteOrder_Tests.cs",
+              "ToolTip": "D:\\Elfak\\VII semestar\\Testiranje i kvalitet softvera\\PubApp\\WebApplication\\Server.Tests\\OrderTests\\OrderController_DeleteOrder_Tests.cs",
+              "RelativeToolTip": "..\\Server.Tests\\OrderTests\\OrderController_DeleteOrder_Tests.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAACQAAAAgAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-03-18T00:46:26.087Z",
               "EditorCaption": ""
             }
           ]

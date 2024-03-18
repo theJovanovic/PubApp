@@ -148,6 +148,11 @@ public class OrderController : ControllerBase
     [HttpDelete("{id}")]
     public async Task<IActionResult> DeleteOrder(int id)
     {
+        if (!ModelState.IsValid)
+        {
+            return BadRequest(ModelState);
+        }
+
         var order = await _context.Orders.FindAsync(id);
 
         if (order == null)
