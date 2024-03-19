@@ -165,7 +165,7 @@ const payOrder = async (orderID, tip) => {
                   <a onClick={() => {payOrder(order.orderID, tip)}} className="button-info">Pay</a>
                 </>
               ) || (
-                <a onClick={() => {cancelOrder(order.orderID)}} className="button-delete">Cancel</a>
+                <a id={`cancel_${order.orderID}`} onClick={() => {cancelOrder(order.orderID)}} className="button-delete">Cancel</a>
               )}
             </div>
           ))}

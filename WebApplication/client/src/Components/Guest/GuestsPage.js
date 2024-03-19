@@ -71,10 +71,10 @@ const GuestsPage = () => {
             </div>
 
             <div className="guest-actions-container">
-              <Link to={`/guests/edit/${guest.guestID}`} className="button-edit">Edit</Link>
-              <Link to={`/guests/info/${guest.guestID}`} className="button-info">Info</Link>
-              <a className="button-delete" onClick={() => {deleteGuest(guest.guestID)}}>Delete</a>
-              <Link to={`/order/add/${guest.guestID}`} className="button-add">Make order</Link>
+              <Link id={`edit_${guest.guestID}`} to={`/guests/edit/${guest.guestID}`} className="button-edit">Edit</Link>
+              <Link id={`info_${guest.guestID}`} to={`/guests/info/${guest.guestID}`} className="button-info">Info</Link>
+              <a id={`delete_${guest.guestID}`} className="button-delete" onClick={() => {deleteGuest(guest.guestID)}}>Delete</a>
+              <Link id={`make_order_${guest.guestID}`} to={`/order/add/${guest.guestID}`} className="button-add">Make order</Link>
             </div>
           </div>
         ))}

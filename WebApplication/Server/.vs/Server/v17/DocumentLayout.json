@@ -1,13 +1,34 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "D:\\Elfak\\VII semestar\\Testiranje i kvalitet softvera\\PubApp\\WebApplication\\Server\\",
+  "WorkspaceRootPath": "C:\\Users\\LENOVO\\Desktop\\PubApp\\WebApplication\\Server\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{F8734AB1-0447-4CB8-AA2D-31F4C387C2AD}|..\\PlaywrightTests\\PlaywrightTests.csproj|d:\\elfak\\vii semestar\\testiranje i kvalitet softvera\\pubapp\\webapplication\\playwrighttests\\apitests\\guestcontrollertests.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\LENOVO\\AppData\\Local\\Temp\\ivuruamz..sql||{CC5D8DF0-88F4-4BB2-9DBB-B48CEE65C30A}|"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{1FCE9A12-4147-4AC2-BA32-8AFA3759D74B}|Server.csproj|d:\\elfak\\vii semestar\\testiranje i kvalitet softvera\\pubapp\\webapplication\\server\\controllers\\guestcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{1FCE9A12-4147-4AC2-BA32-8AFA3759D74B}|Server.csproj|solutionrelative:controllers\\guestcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{1FCE9A12-4147-4AC2-BA32-8AFA3759D74B}|Server.csproj|c:\\users\\lenovo\\desktop\\pubapp\\webapplication\\server\\controllers\\waitercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1FCE9A12-4147-4AC2-BA32-8AFA3759D74B}|Server.csproj|solutionrelative:controllers\\waitercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F8734AB1-0447-4CB8-AA2D-31F4C387C2AD}|..\\PlaywrightTests\\PlaywrightTests.csproj|c:\\users\\lenovo\\desktop\\pubapp\\webapplication\\playwrighttests\\tests\\tabletests.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F8734AB1-0447-4CB8-AA2D-31F4C387C2AD}|..\\PlaywrightTests\\PlaywrightTests.csproj|c:\\users\\lenovo\\desktop\\pubapp\\webapplication\\playwrighttests\\databaserefresher.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\LENOVO\\AppData\\Local\\Temp\\rgau40zz..sql||{CC5D8DF0-88F4-4BB2-9DBB-B48CEE65C30A}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\LENOVO\\AppData\\Local\\Temp\\ivuruamz..sql||{CC5D8DF0-88F4-4BB2-9DBB-B48CEE65C30A}|CodeFrame"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\LENOVO\\AppData\\Local\\Temp\\ivuruamz..sql||{CC5D8DF0-88F4-4BB2-9DBB-B48CEE65C30A}|ResultFrame"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\LENOVO\\AppData\\Local\\Temp\\rgau40zz..sql||{CC5D8DF0-88F4-4BB2-9DBB-B48CEE65C30A}|CodeFrame"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\LENOVO\\AppData\\Local\\Temp\\rgau40zz..sql||{CC5D8DF0-88F4-4BB2-9DBB-B48CEE65C30A}|ResultFrame"
     }
   ],
   "DocumentGroupContainers": [
@@ -17,34 +38,72 @@
       "DocumentGroups": [
         {
           "DockedWidth": 179,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 4,
           "Children": [
             {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "GuestControllerTests.cs",
-              "DocumentMoniker": "D:\\Elfak\\VII semestar\\Testiranje i kvalitet softvera\\PubApp\\WebApplication\\PlaywrightTests\\APITests\\GuestControllerTests.cs",
-              "RelativeDocumentMoniker": "..\\PlaywrightTests\\APITests\\GuestControllerTests.cs",
-              "ToolTip": "D:\\Elfak\\VII semestar\\Testiranje i kvalitet softvera\\PubApp\\WebApplication\\PlaywrightTests\\APITests\\GuestControllerTests.cs",
-              "RelativeToolTip": "..\\PlaywrightTests\\APITests\\GuestControllerTests.cs",
-              "ViewState": "AQIAABUAAAAAAAAAAAAAACEAAAAhAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-03-19T14:00:23.957Z",
-              "IsPinned": true,
-              "EditorCaption": ""
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "GuestController.cs",
-              "DocumentMoniker": "D:\\Elfak\\VII semestar\\Testiranje i kvalitet softvera\\PubApp\\WebApplication\\Server\\Controllers\\GuestController.cs",
-              "RelativeDocumentMoniker": "Controllers\\GuestController.cs",
-              "ToolTip": "D:\\Elfak\\VII semestar\\Testiranje i kvalitet softvera\\PubApp\\WebApplication\\Server\\Controllers\\GuestController.cs",
-              "RelativeToolTip": "Controllers\\GuestController.cs",
-              "ViewState": "AQIAAB4BAAAAAAAAAAAswDcBAAAAAAAA",
+              "Title": "WaiterController.cs",
+              "DocumentMoniker": "C:\\Users\\LENOVO\\Desktop\\PubApp\\WebApplication\\Server\\Controllers\\WaiterController.cs",
+              "RelativeDocumentMoniker": "Controllers\\WaiterController.cs",
+              "ToolTip": "C:\\Users\\LENOVO\\Desktop\\PubApp\\WebApplication\\Server\\Controllers\\WaiterController.cs",
+              "RelativeToolTip": "Controllers\\WaiterController.cs",
+              "ViewState": "AQIAAHUAAAAAAAAAAAAowIYAAABVAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-03-19T14:21:54.462Z",
-              "IsPinned": true
+              "WhenOpened": "2024-03-19T22:58:06.321Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "DatabaseRefresher.cs",
+              "DocumentMoniker": "C:\\Users\\LENOVO\\Desktop\\PubApp\\WebApplication\\PlaywrightTests\\DatabaseRefresher.cs",
+              "RelativeDocumentMoniker": "..\\PlaywrightTests\\DatabaseRefresher.cs",
+              "ToolTip": "C:\\Users\\LENOVO\\Desktop\\PubApp\\WebApplication\\PlaywrightTests\\DatabaseRefresher.cs",
+              "RelativeToolTip": "..\\PlaywrightTests\\DatabaseRefresher.cs",
+              "ViewState": "AQIAAJMAAAAAAAAAAAAwwLQAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-03-19T21:14:43.458Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "TableTests.cs",
+              "DocumentMoniker": "C:\\Users\\LENOVO\\Desktop\\PubApp\\WebApplication\\PlaywrightTests\\tests\\TableTests.cs",
+              "RelativeDocumentMoniker": "..\\PlaywrightTests\\tests\\TableTests.cs",
+              "ToolTip": "C:\\Users\\LENOVO\\Desktop\\PubApp\\WebApplication\\PlaywrightTests\\tests\\TableTests.cs",
+              "RelativeToolTip": "..\\PlaywrightTests\\tests\\TableTests.cs",
+              "ViewState": "AQIAANAAAAAAAAAAAAAwwNkAAAA+AAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-03-19T20:52:03.212Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "SQLQuery1.sql ",
+              "DocumentMoniker": "C:\\Users\\LENOVO\\AppData\\Local\\Temp\\ivuruamz..sql",
+              "RelativeDocumentMoniker": "..\\..\\..\\..\\AppData\\Local\\Temp\\ivuruamz..sql",
+              "ToolTip": "SQLQuery1.sql *",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000826|",
+              "WhenOpened": "2024-03-19T22:02:03.983Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "SQLQuery2.sql ",
+              "DocumentMoniker": "C:\\Users\\LENOVO\\AppData\\Local\\Temp\\rgau40zz..sql",
+              "RelativeDocumentMoniker": "..\\..\\..\\..\\AppData\\Local\\Temp\\rgau40zz..sql",
+              "ToolTip": "SQLQuery2.sql *",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000826|",
+              "WhenOpened": "2024-03-19T22:07:11.222Z",
+              "EditorCaption": ""
             }
           ]
         }

@@ -70,8 +70,8 @@ const WaitersPage = () => {
             </div>
 
             <div className="waiter-actions-container">
-              <Link to={`/waiters/orders/${waiter.waiterID}`} className="button-info">View Orders</Link>
-              <a onClick={() => {deleteWaiter(waiter.waiterID)}} className="button-delete">Delete</a>
+              <Link id={`view_orders_${waiter.waiterID}`} to={`/waiters/orders/${waiter.waiterID}`} className="button-info">View Orders</Link>
+              <a id={`delete_${waiter.waiterID}`} onClick={() => {deleteWaiter(waiter.waiterID)}} className="button-delete">Delete</a>
             </div>
           </div>
         ))}

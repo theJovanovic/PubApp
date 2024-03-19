@@ -59,9 +59,9 @@ const TablesPage = () => {
               <p>Status: {table.status}</p>
             </div>
             <div className="table-actions">
-              <Link to={`/tables/edit/${table.tableID}`} className="button-edit">Edit</Link>
-              <Link to={`/tables/info/${table.tableID}`} className="button-info">Info</Link>
-              <button className="button-delete" onClick={() => deleteTable(table.tableID)}>Delete</button>
+              <Link id={`edit_${table.tableID}`} to={`/tables/edit/${table.tableID}`} className="button-edit">Edit</Link>
+              <Link id={`info_${table.tableID}`} to={`/tables/info/${table.tableID}`} className="button-info">Info</Link>
+              <button id={`delete_${table.tableID}`} className="button-delete" onClick={() => deleteTable(table.tableID)}>Delete</button>
             </div>
           </div>
         ))}

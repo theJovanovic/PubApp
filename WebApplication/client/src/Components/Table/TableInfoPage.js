@@ -90,7 +90,7 @@ const TableInfoPage = () => {
         <div className="tableguests-list">
             {table.guests?.map((guest, index) => (
                 <div className="tableguest-container">
-                  <Link to={`/guests/info/${guest.guestID}`}>{index+1}. {guest.name}</Link>
+                  <Link id={`guest_${guest.guestID}`} to={`/guests/info/${guest.guestID}`}>{index+1}. {guest.name}</Link>
                 </div>
             ))}
         </div>

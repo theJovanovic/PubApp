@@ -73,8 +73,8 @@ const MenuPage = () => {
                 </div>
 
                 <div className="item-actions-container">
-                  <Link to={`/menu/edit/${item.menuItemID}`} className="button-edit">Edit</Link>
-                  <a onClick={() => {deleteMenuItem(item.menuItemID)}} className="button-delete">Delete</a>
+                  <Link id={`edit_${item.menuItemID}`} to={`/menu/edit/${item.menuItemID}`} className="button-edit">Edit</Link>
+                  <a id={`delete_${item.menuItemID}`} onClick={() => {deleteMenuItem(item.menuItemID)}} className="button-delete">Delete</a>
                 </div>
               </div>
             ))}

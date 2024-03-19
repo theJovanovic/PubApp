@@ -131,6 +131,11 @@ public class WaiterController : ControllerBase
             return NotFound("Waiter with given ID doesn't exist");
         }
 
+        // Delete all associated orders
+        var ordersToDelete = _context.Orders.Where(o => o.WaiterID == waiter.WaiterID);
+        _context.Orders.RemoveRange(ordersToDelete);
+        await _context.SaveChangesAsync();
+
         _context.Waiters.Remove(waiter);
         await _context.SaveChangesAsync();
 
