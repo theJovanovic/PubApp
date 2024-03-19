@@ -1,10 +1,13 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Users\\LENOVO\\Desktop\\PubApp\\WebApplication\\Server\\",
+  "WorkspaceRootPath": "D:\\Elfak\\VII semestar\\Testiranje i kvalitet softvera\\PubApp\\WebApplication\\Server\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{1FCE9A12-4147-4AC2-BA32-8AFA3759D74B}|Server.csproj|c:\\users\\lenovo\\desktop\\pubapp\\webapplication\\server\\controllers\\tablecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{1FCE9A12-4147-4AC2-BA32-8AFA3759D74B}|Server.csproj|solutionrelative:controllers\\tablecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{F8734AB1-0447-4CB8-AA2D-31F4C387C2AD}|..\\PlaywrightTests\\PlaywrightTests.csproj|d:\\elfak\\vii semestar\\testiranje i kvalitet softvera\\pubapp\\webapplication\\playwrighttests\\apitests\\guestcontrollertests.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1FCE9A12-4147-4AC2-BA32-8AFA3759D74B}|Server.csproj|d:\\elfak\\vii semestar\\testiranje i kvalitet softvera\\pubapp\\webapplication\\server\\controllers\\guestcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1FCE9A12-4147-4AC2-BA32-8AFA3759D74B}|Server.csproj|solutionrelative:controllers\\guestcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -14,24 +17,34 @@
       "DocumentGroups": [
         {
           "DockedWidth": 179,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 0,
           "Children": [
-            {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
-            },
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "TableController.cs",
-              "DocumentMoniker": "C:\\Users\\LENOVO\\Desktop\\PubApp\\WebApplication\\Server\\Controllers\\TableController.cs",
-              "RelativeDocumentMoniker": "Controllers\\TableController.cs",
-              "ToolTip": "C:\\Users\\LENOVO\\Desktop\\PubApp\\WebApplication\\Server\\Controllers\\TableController.cs",
-              "RelativeToolTip": "Controllers\\TableController.cs",
-              "ViewState": "AQIAABAAAAAAAAAAAAAQwBUAAAAVAAAA",
+              "Title": "GuestControllerTests.cs",
+              "DocumentMoniker": "D:\\Elfak\\VII semestar\\Testiranje i kvalitet softvera\\PubApp\\WebApplication\\PlaywrightTests\\APITests\\GuestControllerTests.cs",
+              "RelativeDocumentMoniker": "..\\PlaywrightTests\\APITests\\GuestControllerTests.cs",
+              "ToolTip": "D:\\Elfak\\VII semestar\\Testiranje i kvalitet softvera\\PubApp\\WebApplication\\PlaywrightTests\\APITests\\GuestControllerTests.cs",
+              "RelativeToolTip": "..\\PlaywrightTests\\APITests\\GuestControllerTests.cs",
+              "ViewState": "AQIAABUAAAAAAAAAAAAAACEAAAAhAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-03-19T00:23:48.036Z",
+              "WhenOpened": "2024-03-19T14:00:23.957Z",
+              "IsPinned": true,
               "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "GuestController.cs",
+              "DocumentMoniker": "D:\\Elfak\\VII semestar\\Testiranje i kvalitet softvera\\PubApp\\WebApplication\\Server\\Controllers\\GuestController.cs",
+              "RelativeDocumentMoniker": "Controllers\\GuestController.cs",
+              "ToolTip": "D:\\Elfak\\VII semestar\\Testiranje i kvalitet softvera\\PubApp\\WebApplication\\Server\\Controllers\\GuestController.cs",
+              "RelativeToolTip": "Controllers\\GuestController.cs",
+              "ViewState": "AQIAAB4BAAAAAAAAAAAswDcBAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-03-19T14:21:54.462Z",
+              "IsPinned": true
             }
           ]
         }

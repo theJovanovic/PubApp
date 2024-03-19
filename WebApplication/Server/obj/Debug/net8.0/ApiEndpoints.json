@@ -405,6 +405,16 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "Server.Controllers.TableController",
+    "Method": "GetTablesNotFull",
+    "RelativePath": "api/Table/not_full",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "Server.Controllers.WaiterController",
     "Method": "GetWaiters",
     "RelativePath": "api/Waiter",
