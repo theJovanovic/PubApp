@@ -1,22 +1,10 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "D:\\Elfak\\VII semestar\\Testiranje i kvalitet softvera\\PubApp\\WebApplication\\Server\\",
+  "WorkspaceRootPath": "C:\\Users\\LENOVO\\Desktop\\PubApp\\WebApplication\\Server\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{1FCE9A12-4147-4AC2-BA32-8AFA3759D74B}|Server.csproj|d:\\elfak\\vii semestar\\testiranje i kvalitet softvera\\pubapp\\webapplication\\server\\controllers\\ordercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{1FCE9A12-4147-4AC2-BA32-8AFA3759D74B}|Server.csproj|solutionrelative:controllers\\ordercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{1FCE9A12-4147-4AC2-BA32-8AFA3759D74B}|Server.csproj|d:\\elfak\\vii semestar\\testiranje i kvalitet softvera\\pubapp\\webapplication\\server\\models\\table.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{1FCE9A12-4147-4AC2-BA32-8AFA3759D74B}|Server.csproj|solutionrelative:models\\table.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{1FCE9A12-4147-4AC2-BA32-8AFA3759D74B}|Server.csproj|d:\\elfak\\vii semestar\\testiranje i kvalitet softvera\\pubapp\\webapplication\\server\\models\\guest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{1FCE9A12-4147-4AC2-BA32-8AFA3759D74B}|Server.csproj|solutionrelative:models\\guest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{1FCE9A12-4147-4AC2-BA32-8AFA3759D74B}|Server.csproj|d:\\elfak\\vii semestar\\testiranje i kvalitet softvera\\pubapp\\webapplication\\server\\models\\order.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{1FCE9A12-4147-4AC2-BA32-8AFA3759D74B}|Server.csproj|solutionrelative:models\\order.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{1FCE9A12-4147-4AC2-BA32-8AFA3759D74B}|Server.csproj|c:\\users\\lenovo\\desktop\\pubapp\\webapplication\\server\\controllers\\tablecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1FCE9A12-4147-4AC2-BA32-8AFA3759D74B}|Server.csproj|solutionrelative:controllers\\tablecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -26,58 +14,23 @@
       "DocumentGroups": [
         {
           "DockedWidth": 179,
-          "SelectedChildIndex": 2,
+          "SelectedChildIndex": 1,
           "Children": [
             {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "Table.cs",
-              "DocumentMoniker": "D:\\Elfak\\VII semestar\\Testiranje i kvalitet softvera\\PubApp\\WebApplication\\Server\\Models\\Table.cs",
-              "RelativeDocumentMoniker": "Models\\Table.cs",
-              "ToolTip": "D:\\Elfak\\VII semestar\\Testiranje i kvalitet softvera\\PubApp\\WebApplication\\Server\\Models\\Table.cs",
-              "RelativeToolTip": "Models\\Table.cs",
-              "ViewState": "AQIAAAYAAAAAAAAAAAAAAAAAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-03-18T22:23:50.953Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "Guest.cs",
-              "DocumentMoniker": "D:\\Elfak\\VII semestar\\Testiranje i kvalitet softvera\\PubApp\\WebApplication\\Server\\Models\\Guest.cs",
-              "RelativeDocumentMoniker": "Models\\Guest.cs",
-              "ToolTip": "D:\\Elfak\\VII semestar\\Testiranje i kvalitet softvera\\PubApp\\WebApplication\\Server\\Models\\Guest.cs",
-              "RelativeToolTip": "Models\\Guest.cs",
-              "ViewState": "AQIAAA0AAAAAAAAAAAAQwAAAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-03-18T22:23:42.218Z",
-              "EditorCaption": ""
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
             },
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "OrderController.cs",
-              "DocumentMoniker": "D:\\Elfak\\VII semestar\\Testiranje i kvalitet softvera\\PubApp\\WebApplication\\Server\\Controllers\\OrderController.cs",
-              "RelativeDocumentMoniker": "Controllers\\OrderController.cs",
-              "ToolTip": "D:\\Elfak\\VII semestar\\Testiranje i kvalitet softvera\\PubApp\\WebApplication\\Server\\Controllers\\OrderController.cs",
-              "RelativeToolTip": "Controllers\\OrderController.cs",
-              "ViewState": "AQIAALwAAAAAAAAAAAApwM4AAAAAAAAA",
+              "Title": "TableController.cs",
+              "DocumentMoniker": "C:\\Users\\LENOVO\\Desktop\\PubApp\\WebApplication\\Server\\Controllers\\TableController.cs",
+              "RelativeDocumentMoniker": "Controllers\\TableController.cs",
+              "ToolTip": "C:\\Users\\LENOVO\\Desktop\\PubApp\\WebApplication\\Server\\Controllers\\TableController.cs",
+              "RelativeToolTip": "Controllers\\TableController.cs",
+              "ViewState": "AQIAABAAAAAAAAAAAAAQwBUAAAAVAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-03-18T22:09:52.123Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "Order.cs",
-              "DocumentMoniker": "D:\\Elfak\\VII semestar\\Testiranje i kvalitet softvera\\PubApp\\WebApplication\\Server\\Models\\Order.cs",
-              "RelativeDocumentMoniker": "Models\\Order.cs",
-              "ToolTip": "D:\\Elfak\\VII semestar\\Testiranje i kvalitet softvera\\PubApp\\WebApplication\\Server\\Models\\Order.cs",
-              "RelativeToolTip": "Models\\Order.cs",
-              "ViewState": "AQIAADQAAAAAAAAAAAAzwEAAAAABAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-03-18T22:18:33.075Z",
+              "WhenOpened": "2024-03-19T00:23:48.036Z",
               "EditorCaption": ""
             }
           ]

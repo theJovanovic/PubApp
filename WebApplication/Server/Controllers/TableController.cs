@@ -30,6 +30,18 @@ public class TableController : ControllerBase
         return Ok(tables);
     }
 
+    // GET: api/Table/not_full
+    [HttpGet("not_full")]
+    public async Task<ActionResult> GetTablesNotFull()
+    {
+        var tablesNotFull = await _context.Tables
+            .Where(t => t.Status != "Full")
+            .Select(t => _mapper.Map<TableDTO>(t))
+            .ToListAsync();
+
+        return Ok(tablesNotFull);
+    }
+
     // GET: api/Table/5
     [HttpGet("{id}")]
     public async Task<ActionResult> GetTable(int id)
@@ -156,9 +168,18 @@ public class TableController : ControllerBase
             return Conflict("Table with the same number already exists");
         }
 
+        //checking seats
+        var sittingGuestCount = _context.Guests
+            .Where(g => g.TableID == table.TableID)
+            .Count();
+        if (tableDTO.Seats < sittingGuestCount)
+        {
+            return BadRequest("There can't be less seats than the number of guests at the moment by the table");
+        }
+
         table.Number = tableDTO.Number;
-        table.Seats = tableDTO.Seats;
         table.Status = tableDTO.Status;
+        table.Seats = tableDTO.Seats;
 
         await _context.SaveChangesAsync();
 

@@ -121,6 +121,33 @@ public class TableController_PutTable_Tests
         Assert.That(result, Is.InstanceOf<NoContentResult>());
     }
 
+    [Test]
+    public async Task PutTable_WithLessSeatsThanTheNumberOfCurrentGuests_ReturnsBadRequst()
+    {
+
+        //Arrange
+        _context.Tables.RemoveRange(_context.Tables);
+        await _context.SaveChangesAsync();
+
+        await _context.Tables.AddAsync(new Table { TableID = 1, Number = 1, Seats = 3, Status = "Available"});
+        await _context.SaveChangesAsync();
+
+        await _context.Guests.AddAsync(new Guest { GuestID = 1, Name = "Guest 1", HasAllergies = false, HasDiscount = false, Money = 1000, TableID = 1 });
+        await _context.SaveChangesAsync();
+        await _context.Guests.AddAsync(new Guest { GuestID = 2, Name = "Guest 2", HasAllergies = false, HasDiscount = false, Money = 2000, TableID = 1 });
+        await _context.SaveChangesAsync();
+
+        var tableDTO = new TableDTO { TableID = 1, Number = 1, Seats = 1, Status = "Occupied" };
+
+        //Act
+        var result = await _controller.PutTable(1, tableDTO);
+
+        //Assert
+        Assert.That(result, Is.InstanceOf<BadRequestObjectResult>());
+        var badRequestResult = result as BadRequestObjectResult;
+        Assert.That(badRequestResult, Has.Property("Value").EqualTo("There can't be less seats than the number of guests at the moment by the table"));
+    }
+
     [TearDown]
     public void TearDown()
     {

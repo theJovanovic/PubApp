@@ -15,7 +15,7 @@ const GuestAddPage = () => {
 
   useEffect(() => {
     const fetchTables = async () => {
-      const endpoint = 'https://localhost:7146/api/Table';
+      const endpoint = 'https://localhost:7146/api/Table/not_full';
       try {
         const response = await fetch(endpoint, {
           method: "GET",
