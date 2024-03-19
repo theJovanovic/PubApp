@@ -291,7 +291,7 @@
   {
     "ContainingType": "Server.Controllers.OrderController",
     "Method": "PayOrder",
-    "RelativePath": "api/Order/pay/{id}",
+    "RelativePath": "api/Order/pay/{id}/{tip}",
     "HttpMethod": "DELETE",
     "IsController": true,
     "Order": 0,
@@ -304,7 +304,7 @@
       {
         "Name": "tip",
         "Type": "System.Int32",
-        "IsRequired": false
+        "IsRequired": true
       }
     ],
     "ReturnTypes": []

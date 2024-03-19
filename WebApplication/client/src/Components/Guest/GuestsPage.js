@@ -4,56 +4,7 @@ import alertError from '../../alertError';
 import './Guest.css';
 
 const GuestsPage = () => {
-  const [guests, setGuests] = useState([
-    {
-      guestid: 1,
-      name: "Stefan Jovanovic",
-      money: 100,
-      hasAllergies: false,
-      hasDiscount: false,
-      tableNumber: 3
-    },
-    {
-      guestid: 2,
-      name: "Ena Separovic",
-      money: 80,
-      hasAllergies: true,
-      hasDiscount: true,
-      tableNumber: 3
-    },
-    {
-      guestid: 3,
-      name: "Ivan Horvat",
-      money: 120,
-      hasAllergies: false,
-      hasDiscount: false,
-      tableNumber: 3
-    },
-    {
-      guestid: 4,
-      name: "Luka Modric",
-      money: 150,
-      hasAllergies: true,
-      hasDiscount: true,
-      tableNumber: 3
-    },
-    {
-      guestid: 5,
-      name: "Marija Novak",
-      money: 200,
-      hasAllergies: false,
-      hasDiscount: false,
-      tableNumber: 3
-    },
-    {
-      guestid: 6,
-      name: "Ana Kovačić",
-      money: 50,
-      hasAllergies: true,
-      hasDiscount: true,
-      tableNumber: 3
-    }
-  ])
+  const [guests, setGuests] = useState([])
 
   useEffect(() => {
     const fetchGuests = async () => {

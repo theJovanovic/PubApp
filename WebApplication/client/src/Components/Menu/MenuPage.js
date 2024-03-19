@@ -3,54 +3,9 @@ import { Link, useParams } from 'react-router-dom';
 import alertError from '../../alertError';
 import "./Menu.css";
 
-const mockItems = [
-  {
-    menuItemID: 1,
-    name: "Pasta",
-    price: 300,
-    category: "Main",
-    hasAllergens: false
-  },
-  {
-    menuItemID: 2,
-    name: "Fish and Chips",
-    price: 280,
-    category: "Side",
-    hasAllergens: true
-  },
-  {
-    menuItemID: 3,
-    name: "Salad",
-    price: 250,
-    category: "Main",
-    hasAllergens: false
-  },
-  {
-    menuItemID: 4,
-    name: "Pizza",
-    price: 350,
-    category: "Main",
-    hasAllergens: true
-  },
-  {
-    menuItemID: 5,
-    name: "Burger",
-    price: 400,
-    category: "Main",
-    hasAllergens: true
-  },
-  {
-    menuItemID: 6,
-    name: "Chicken Wings",
-    price: 320,
-    category: "Side",
-    hasAllergens: false
-  }
-]
-
 const MenuPage = () => {
     const { id } = useParams();
-    const [menuItems, setMenuItems] = useState(mockItems);
+    const [menuItems, setMenuItems] = useState([]);
 
     useEffect(() => {
         const fetchMenuItems = async () => {
@@ -113,7 +68,7 @@ const MenuPage = () => {
 
                 <div className="item-info-container">
                   <h2>{item.name} {item.hasAllergens && "(A)"}</h2>
-                  <h3>{item.price} din</h3>
+                  <h3>{item.price} rsd</h3>
                   <h3>Category: {item.category}</h3>
                 </div>
 

@@ -5,30 +5,7 @@ import alertError from '../../alertError';
 const TableInfoPage = () => {
   const navigate = useNavigate();
   const { id } = useParams();
-  const [table, setTable] = useState({
-    tableID: "3",
-    number: 3,
-    seats: 6,
-    status: "Full",
-    guests: [
-      {
-        guestID: 2121,
-        name: "Stefan Jovanovic",
-        money: 100,
-        hasAllergies: false,
-        hasDiscount: true,
-        tableID: 3
-      },
-      {
-        guestID: 3132,
-        name: "Ena Separovic",
-        money: 150,
-        hasAllergies: true,
-        hasDiscount: false,
-        tableID: 3
-      },
-    ]
-  });
+  const [table, setTable] = useState({});
 
   useEffect(() => {
     const fetchTable = async () => {
@@ -110,7 +87,6 @@ const TableInfoPage = () => {
           <h1>Guests:</h1>
         </div>
 
-        {/* Namestiti da radi slika i stilizovati sve lepo  */}
         <div className="tableguests-list">
             {table.guests?.map((guest, index) => (
                 <div className="tableguest-container">

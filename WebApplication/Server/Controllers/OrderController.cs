@@ -54,8 +54,15 @@ public class OrderController : ControllerBase
 
         var orders = await _context.Orders
             .Where(o => o.Status != "Delivered")
-            .Where(o => o.Status != "Completed")
-            .Select(o => _mapper.Map<OrderOverviewDTO>(o))
+            .Select(o => new OrderOverviewDTO
+            {
+                OrderID = o.OrderID,
+                Name = o.MenuItem.Name,
+                OrderTime = o.OrderTime,
+                Status = o.Status,
+                Quantity = o.Quantity,
+                TableNumber = o.Guest.Table.Number
+            })
             .ToListAsync();
 
         return Ok(orders);
@@ -161,8 +168,8 @@ public class OrderController : ControllerBase
         return NoContent();
     }
 
-    // DELETE: api/Order/pay/5
-    [HttpDelete("pay/{id}")]
+    // DELETE: api/Order/pay/5/100
+    [HttpDelete("pay/{id}/{tip}")]
     public async Task<IActionResult> PayOrder(int id, int tip)
     {
         //Asserts
@@ -191,7 +198,13 @@ public class OrderController : ControllerBase
             return NotFound("Item with given ID doesn't exist");
         }
 
-        int discountedPrice = guest.HasDiscount ? (int)(menuItem.Price * 0.85) : menuItem.Price; // 15% discount
+        int discountedPrice = menuItem.Price;
+
+        if(guest.HasDiscount)
+        {
+            discountedPrice = (int)(menuItem.Price * 0.85); // 15% discount
+        }
+
         int totalOrderCost = discountedPrice * order.Quantity + tip;
 
         // check if guest has enough money to pay the order
@@ -209,6 +222,7 @@ public class OrderController : ControllerBase
             return NotFound("Waiter with given ID doesn't exist");
         }
         waiter.Tips += tip;
+        await _context.SaveChangesAsync();
 
         // delete order
         _context.Orders.Remove(order);

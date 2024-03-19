@@ -19,7 +19,7 @@ public class Table
     [Range(1, int.MaxValue, ErrorMessage = "Table seats most be a positive value")]
     public int Seats { get; set; }
 
-    public string Status { get; set; } // = "Available"; // "Available", "Occupied", "Full
+    public string Status { get; set; } // = "Available"; // "Available", "Occupied", "Full"
 
     public List<Guest> Guests { get; set; } = new List<Guest>();
 }

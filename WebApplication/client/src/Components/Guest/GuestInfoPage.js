@@ -2,90 +2,10 @@ import React, { useEffect, useState } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import alertError from '../../alertError';
 
-const mockGuests = [
-  {
-    guestID: 2121,
-    name: "Stefan Jovanovic",
-    money: 100,
-    hasAllergies: false,
-    hasDiscount: true,
-    tableNumber: 3,
-    tableID: 3,
-    orders: [
-      {
-        orderid: 1,
-        ordertime: '2024-03-16T12:00:00Z',
-        status: 'Pending',
-        name: "Pasta",
-        price: 300,
-        quantity: 2,
-        guestid: 1,
-        menuitemid: 101,
-        waiterid: 201
-      },
-      {
-        orderid: 2,
-        ordertime: '2024-03-16T12:15:00Z',
-        status: 'Preparing',
-        name: "Fish and Chips",
-        price: 280,
-        quantity: 1,
-        guestid: 2,
-        menuitemid: 102,
-        waiterid: 202
-      },
-      {
-        orderid: 3,
-        ordertime: '2024-03-16T12:30:00Z',
-        status: 'Completed',
-        name: "Salad",
-        price: 250,
-        quantity: 3,
-        guestid: 3,
-        menuitemid: 103,
-        waiterid: 203
-      },
-      {
-        orderid: 4,
-        ordertime: '2024-03-16T12:45:00Z',
-        status: 'Cancelled',
-        name: "Pizza",
-        price: 350,
-        quantity: 1,
-        guestid: 4,
-        menuitemid: 104,
-        waiterid: 204
-      },
-      {
-        orderid: 5,
-        ordertime: '2024-03-16T13:00:00Z',
-        status: 'Pending',
-        name: "Burger",
-        price: 400,
-        quantity: 4,
-        guestid: 5,
-        menuitemid: 105,
-        waiterid: 205
-      },
-      {
-        orderid: 6,
-        ordertime: '2024-03-16T13:15:00Z',
-        status: 'Delivered',
-        name: "Chicken Wings",
-        price: 320,
-        quantity: 2,
-        guestid: 6,
-        menuitemid: 106,
-        waiterid: 206
-      },
-    ]
-  },
-]
-
 const GuestInfoPage = () => {
   const navigate = useNavigate();
   const { id } = useParams();
-  const [guest, setGuest] = useState(mockGuests[0]);
+  const [guest, setGuest] = useState({});
   const [tip, setTip] = useState(0)
 
   // Fetch guest
@@ -132,19 +52,18 @@ const GuestInfoPage = () => {
     }
   };
 
-  const payOrder = async (orderID) => {
+const payOrder = async (orderID, tip) => {
     try {
-      const endpoint = `https://localhost:7146/api/Order/pay/${orderID}`;
+      const endpoint = `https://localhost:7146/api/Order/pay/${orderID}/${tip}`;
       const response = await fetch(endpoint, {
         method: 'DELETE',
-        body: JSON.stringify(tip),
       });
       if (!response.ok) {
         const message = await alertError(response);
         throw new Error(message);
       }
       const order = guest.orders.find(order => order.orderID === orderID)
-      const totalPrice = order.price * order.quantity
+      const totalPrice = order.price + tip
       setGuest(prevGuest => ({
         ...prevGuest,
         money: prevGuest.money - totalPrice,
@@ -243,7 +162,7 @@ const GuestInfoPage = () => {
                 <>
                   <h4>Tip (optional):</h4>
                   <input type="number" name="tip" value={tip} onChange={handleChange} min={0} required />
-                  <a onClick={() => {payOrder(order.orderID)}} className="button-info">Pay</a>
+                  <a onClick={() => {payOrder(order.orderID, tip)}} className="button-info">Pay</a>
                 </>
               ) || (
                 <a onClick={() => {cancelOrder(order.orderID)}} className="button-delete">Cancel</a>

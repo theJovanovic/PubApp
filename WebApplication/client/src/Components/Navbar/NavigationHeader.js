@@ -8,7 +8,7 @@ import './Navbar.css';
 const NavigationHeader = () => {
   return (
   <Navbar expand="md" className="sticky-top navbar-bg-custom-color" > 
-        <Navbar.Brand href="/tables" className="navbar-brand-custom-color">Stefan's PUB</Navbar.Brand>
+        <Navbar.Brand href="/tables" className="navbar-brand-custom-color">The Best PUB</Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav" className=".navbar-collapse-centered">
           <Nav className="nav-centered">

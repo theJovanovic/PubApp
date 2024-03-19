@@ -3,31 +3,8 @@ import { Link } from 'react-router-dom';
 import alertError from '../../alertError';
 import "./Waiter.css";
 
-const mockWaiters = [
-  {
-    waiterID: 1,
-    name: "Petar Peric",
-    tips: 100,
-  },
-  {
-    waiterID: 2,
-    name: "Marko Markovic",
-    tips: 80,
-  },
-  {
-    waiterID: 3,
-    name: "Ivan Ivanovic",
-    tips: 120,
-  },
-  {
-    waiterID: 4,
-    name: "Luka Lukic",
-    tips: 150,
-  }
-]
-
 const WaitersPage = () => {
-  const [waiters, setWaiters] = useState(mockWaiters)
+  const [waiters, setWaiters] = useState([])
 
   useEffect(() => {
     const fetchWaiters = async () => {

@@ -126,13 +126,41 @@ namespace OrderTests
             //Assert
             Assert.That(result, Is.InstanceOf<OkObjectResult>());
             var okResult = result as OkObjectResult;
+
+            Assert.That(okResult, Is.Not.Null);
             var orders = okResult.Value as List<OrderOverviewDTO>;
 
             Assert.That(orders, Is.Not.Null);
 
             foreach (var order in orders)
             {
-                Assert.That(order, Has.Property("Status").AnyOf("Pending", "Preparing"));
+                Assert.That(order, Has.Property("Status").AnyOf("Pending", "Preparing", "Completed"));
+            }
+        }
+
+        [Test]
+        public async Task GetOrdersOverview_CorrectlyMapsToDTO()
+        {
+            // Act
+            var result = await _controller.GetOrdersOverview();
+
+            //Assert
+            Assert.That(result, Is.InstanceOf<OkObjectResult>());
+            var okResult = result as OkObjectResult;
+
+            Assert.That(okResult, Is.Not.Null);
+            var orders = okResult.Value as List<OrderOverviewDTO>;
+
+            Assert.That(orders, Is.Not.Null);
+
+            foreach (var order in orders)
+            {
+                Assert.That(order, Has.Property("OrderID"));
+                Assert.That(order, Has.Property("Name"));
+                Assert.That(order, Has.Property("OrderTime"));
+                Assert.That(order, Has.Property("Status"));
+                Assert.That(order, Has.Property("Quantity"));
+                Assert.That(order, Has.Property("TableNumber"));
             }
         }
 

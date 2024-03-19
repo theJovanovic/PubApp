@@ -2,37 +2,10 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import alertError from '../../alertError';
 
-const mockTables = [
-  {
-    tableID: "1",
-    number: 1,
-    seats: 4,
-    status: "Available",
-  },
-  {
-    tableID: "2",
-    number: 2,
-    seats: 2,
-    status: "Occupied",
-  },
-  {
-    tableID: "3",
-    number: 3,
-    seats: 6,
-    status: "Full",
-  },
-  {
-    tableID: "4",
-    number: 4,
-    seats: 4,
-    status: "Available",
-  }
-];
-
 const GuestEditPage = () => {
   const navigate = useNavigate();
   const { id } = useParams();
-  const [tables, setTables] = useState(mockTables)
+  const [tables, setTables] = useState([])
   const [guest, setGuest] = useState({});
   const [guestCurrentTableNumber, setGuestCurrentTableNumber] = useState();
 

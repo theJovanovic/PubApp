@@ -5,12 +5,7 @@ import alertError from '../../alertError';
 const TableEditPage = () => {
   const navigate = useNavigate();
   const { id } = useParams();
-  const [table, setTable] = useState({
-    tableID: "3",
-    number: 3,
-    seats: 6,
-    status: "Full",
-  });
+  const [table, setTable] = useState({});
 
   useEffect(() => {
     const fetchTable = async () => {

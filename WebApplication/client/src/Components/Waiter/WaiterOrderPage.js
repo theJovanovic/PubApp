@@ -2,52 +2,9 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import alertError from '../../alertError';
 
-const mockOrders = [
-  {
-    orderID: 1,
-    name: 'Pasta',
-    orderTime: '2021-05-01T12:07:00',
-    status: 'Delivered',
-    quantity: 3,
-    tableNumber: 1
-  },
-  {
-    orderID: 2,
-    name: 'Pizza',
-    orderTime: '2021-05-01T12:02:00',
-    status: 'Completed',
-    quantity: 1,
-    tableNumber: 2
-  },
-  {
-    orderID: 3,
-    name: 'Fish and Chips',
-    orderTime: '2021-05-01T12:12:00',
-    status: 'Delivered',
-    quantity: 4,
-    tableNumber: 3
-  },
-  {
-    orderID: 4,
-    name: 'Burger',
-    orderTime: '2021-05-01T12:05:00',
-    status: 'Pending',
-    quantity: 2,
-    tableNumber: 4
-  },
-  {
-    orderID: 5,
-    name: 'Chicken Wings',
-    orderTime: '2021-05-01T12:10:00',
-    status: 'Completed',
-    quantity: 3,
-    tableNumber: 5
-  }
-]
-
 const WaiterOrderPage = () => {
   const { id } = useParams();
-  const [orders, setOrders] = useState(mockOrders);
+  const [orders, setOrders] = useState([]);
 
   useEffect(() => {
     const fetchOrders = async () => {

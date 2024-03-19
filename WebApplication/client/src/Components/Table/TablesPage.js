@@ -3,35 +3,8 @@ import { Link } from 'react-router-dom';
 import alertError from '../../alertError';
 import './Table.css';
 
-const mockTables = [
-  {
-    tableID: "1",
-    number: 1,
-    seats: 4,
-    status: "Available",
-  },
-  {
-    tableID: "2",
-    number: 2,
-    seats: 2,
-    status: "Occupied",
-  },
-  {
-    tableID: "3",
-    number: 3,
-    seats: 6,
-    status: "Full",
-  },
-  {
-    tableID: "4",
-    number: 4,
-    seats: 4,
-    status: "Available",
-  }
-];
-
 const TablesPage = () => {
-  const [tables, setTables] = useState(mockTables)
+  const [tables, setTables] = useState([])
 
   useEffect(() => {
     const fetchTables = async () => {
