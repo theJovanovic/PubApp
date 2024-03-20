@@ -1,5 +1,6 @@
 # PubApp
 An application for TIKS project.
+Made by: Stefan Jovanović 18199 and Dušan Petrović 18329
 
 Run server:
 - dotnet run
