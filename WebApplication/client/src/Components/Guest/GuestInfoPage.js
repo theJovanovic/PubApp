@@ -63,7 +63,7 @@ const payOrder = async (orderID, tip) => {
         throw new Error(message);
       }
       const order = guest.orders.find(order => order.orderID === orderID)
-      const totalPrice = order.price + tip
+      const totalPrice = order.price + parseInt(tip, 10)
       setGuest(prevGuest => ({
         ...prevGuest,
         money: prevGuest.money - totalPrice,

@@ -78,6 +78,9 @@ public class PubTests : PageTest
     {
         await Page.GotoAsync("http://localhost:3000/tables");
         await Page.Locator("#delete_1").ClickAsync();
+        await Page.Locator("#delete_3").ClickAsync();
+        await Page.Locator("#delete_5").ClickAsync();
+        await Page.Locator("#delete_7").ClickAsync();
     }
 
     [Test]
@@ -128,9 +131,18 @@ public class PubTests : PageTest
     {
         await Page.GotoAsync("http://localhost:3000/guests");
         await Page.Locator("#delete_1").ClickAsync();
-        await Page.Locator("#delete_2").ClickAsync();
-        await Page.Locator("#delete_3").ClickAsync();
         await Page.Locator("#delete_4").ClickAsync();
+        await Page.Locator("#delete_7").ClickAsync();
+        await Page.Locator("#delete_10").ClickAsync();
+    }
+
+    [Test]
+    public async Task PayOrder()
+    {
+        await Page.GotoAsync("http://localhost:3000/guests");
+        await Page.Locator("#info_5").ClickAsync();
+        await Page.GetByRole(AriaRole.Spinbutton).FillAsync("300");
+        await Page.GetByText("Pay").ClickAsync();
     }
 
     [Test]
@@ -188,10 +200,10 @@ public class PubTests : PageTest
     public async Task DeleteMenuOrder()
     {
         await Page.GotoAsync("http://localhost:3000/menu");
-        await Page.Locator("#delete_4").ClickAsync();
-        await Page.Locator("#delete_9").ClickAsync();
-        await Page.Locator("#delete_11").ClickAsync();
-        await Page.Locator("#delete_12").ClickAsync();
+        await Page.Locator("#delete_1").ClickAsync();
+        await Page.Locator("#delete_3").ClickAsync();
+        await Page.Locator("#delete_6").ClickAsync();
+        await Page.Locator("#delete_8").ClickAsync();
     }
 
     [Test]
@@ -226,11 +238,27 @@ public class PubTests : PageTest
     [Test]
     public async Task DeleteWaiter()
     {
+        await Page.GotoAsync("http://localhost:3000/waiters");
+        await Page.Locator("#delete_1").ClickAsync();
+        await Page.Locator("#delete_3").ClickAsync();
+        await Page.Locator("#delete_6").ClickAsync();
     }
 
     [Test]
     public async Task DeliverOrderWaiter()
     {
+        await Page.GotoAsync("http://localhost:3000/waiters");
+        await Page.Locator("#view_orders_2").ClickAsync();
+
+        // simulate page refreshing to make sure there are completed orders
+        for (int i = 0; i < 20; i++)
+        {
+            await Page.GotoAsync("http://localhost:3000/waiters/orders/2");
+        }
+
+        await Page.Locator("#deliver_1").ClickAsync();
+        await Page.Locator("#deliver_4").ClickAsync();
+        await Page.Locator("#deliver_7").ClickAsync();
     }
 
     [TearDown]

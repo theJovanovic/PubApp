@@ -77,7 +77,7 @@ const WaiterOrderPage = () => {
 
             <div className="waiter-actions-container">
               {order.status === "Completed" && 
-                <a onClick={() => {deliverOrder(order.orderID)}} className="button-info">Deliver</a>
+                <a id={`deliver_${order.orderID}`} onClick={() => {deliverOrder(order.orderID)}} className="button-info">Deliver</a>
               }
             </div>
           </div>
