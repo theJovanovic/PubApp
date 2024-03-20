@@ -453,7 +453,7 @@ namespace PlaywrightTests.APITests
         }
 
         [Test]
-        public async Task GetGuests_ReturnsOk_AndNonEmptyGuests()
+        public async Task GetGuests_NonEmptyGuests_ReturnsOk()
         {
             await using var response = await Request.GetAsync("/api/Guest");
 

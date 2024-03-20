@@ -4,6 +4,7 @@ using Models;
 
 namespace PlaywrightTests.APITests
 {
+    [TestFixture]
     public class TableControllerTests : PlaywrightTest
     {
         private IAPIRequestContext Request;
