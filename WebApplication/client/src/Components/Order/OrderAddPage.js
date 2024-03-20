@@ -105,44 +105,75 @@ const OrderAddPage = () => {
   };
 
   return (
-    <div>
-      <h1>Add Order Page</h1>
-      <h3>Available: {guest.money}din
-      {guest.hasDiscount && " (15% discount applied)"}
-      </h3>
-      <form onSubmit={handleSubmit}>
-        <label>
-          Select dish:
-          <select name="menuItemID" value={order.menuItemID} onChange={handleChange} required>
-            <option value="">Select a item</option>
-            {menuItems.map((item) => (
-              <option value={item.menuItemID}>{item.name} ({item.category}) - {item.price}din</option>
-            ))}
-          </select>
-        </label>
-        {hasAllergens && (
-          <>
-          <br />
-          <label>
-            *Has allergens
-          </label>
-          </>
-        )}
-        <br />
-        <label>
-          Quantity:
-          <input
-            type="number"
-            name="quantity"
-            value={order.quantity}
-            onChange={handleChange}
-            min={1}
-            required
-          />
-        </label>
-        <br />
-        <button type="submit">Add Order</button>
-      </form>
+    <div className="page-container">
+
+      <div className="title-container">
+        <h1>Add Order Page</h1>
+      </div>
+
+      <div className="order-title-container">
+        <h3>Available: {guest.money} rsd
+          {guest.hasDiscount && " (15% discount applied)"}
+        </h3>
+      </div>
+
+      <div class="main-container">
+        <div className="helper-container"></div>
+
+          <div className="form-container">
+            <form onSubmit={handleSubmit}>
+
+              <div className="form-part-container">
+                <div className="label-wrapper">
+                  <label>Select dish:</label>
+                </div>
+
+                <div className="input-wrapper">
+                  <select name="menuItemID" value={order.menuItemID} onChange={handleChange} required>
+                    <option value="">Select a item</option>
+                    {menuItems.map((item) => (
+                      <option value={item.menuItemID}>{item.name} ({item.category}) - {item.price} rsd</option>
+                    ))}
+                  </select>
+
+                  {hasAllergens && (
+                    <label>
+                      *Has allergens
+                    </label>
+                  )}
+                  
+                </div>
+              </div>
+
+              <div className="form-part-container">
+                <div className="label-wrapper">
+                    <label>Quantity:</label>
+                </div>
+
+                <div className="input-wrapper">
+                  <input
+                    type="number"
+                    name="quantity"
+                    value={order.quantity}
+                    onChange={handleChange}
+                    min={1}
+                    required
+                  />
+                </div>
+              </div>
+              
+              <div className="form-part-container">
+                <div className="helper-container"></div>
+                <button className="button-add" type="submit">Add Order</button>
+                <div className="helper-container"></div>
+              </div>
+
+            </form>
+          </div>
+
+        <div className="helper-container"></div>
+      </div>
+
     </div>
   );
 };

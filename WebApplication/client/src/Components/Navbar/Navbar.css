@@ -1,0 +1,30 @@
+a {
+    color: #fff4e6 !important;
+}
+
+.navbar-bg-custom-color {
+    background-color: #4b3832;
+}
+
+.nav-link-custom-color {
+    font-size: 20px;
+    margin-left: 30px;
+    margin-right: 30px;
+}
+
+.navbar-brand-custom-color {
+    margin-left: 40px;
+}
+
+.nav-link-custom-color:hover {
+    color: #be9b7b !important;
+}
+
+.navbar-brand-custom-color {
+    font-size: 26px;
+}
+
+/* .navbar-collapse-centered {
+    display: flex;
+    justify-content: center;
+} */

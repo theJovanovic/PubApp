@@ -37,8 +37,8 @@ public class OrderController : ControllerBase
     {
         var random = new Random();
         var ordersToUpdate = _context.Orders
-            .Where(o => o.Status != "Completed")
             .Where(o => o.Status != "Delivered")
+            .Where(o => o.Status != "Completed")
             .ToList();
 
         foreach (var order in ordersToUpdate)
@@ -54,14 +54,14 @@ public class OrderController : ControllerBase
 
         var orders = await _context.Orders
             .Where(o => o.Status != "Delivered")
-            .Select(o => new
+            .Select(o => new OrderOverviewDTO
             {
                 OrderID = o.OrderID,
                 Name = o.MenuItem.Name,
                 OrderTime = o.OrderTime,
                 Status = o.Status,
                 Quantity = o.Quantity,
-                TableNumber = o.Guest.Table.TableID
+                TableNumber = o.Guest.Table.Number
             })
             .ToListAsync();
 
@@ -110,7 +110,9 @@ public class OrderController : ControllerBase
         await _context.Orders.AddAsync(order);
         await _context.SaveChangesAsync();
 
-        return NoContent();
+        var result = _mapper.Map<OrderDTO>(order);
+
+        return CreatedAtAction(nameof(GetOrder), new { id = result.OrderID }, result);
     }
 
     // PUT: api/Order/5/Waiter/1
@@ -148,6 +150,11 @@ public class OrderController : ControllerBase
     [HttpDelete("{id}")]
     public async Task<IActionResult> DeleteOrder(int id)
     {
+        if (!ModelState.IsValid)
+        {
+            return BadRequest(ModelState);
+        }
+
         var order = await _context.Orders.FindAsync(id);
 
         if (order == null)
@@ -161,8 +168,8 @@ public class OrderController : ControllerBase
         return NoContent();
     }
 
-    // DELETE: api/Order/pay/5
-    [HttpDelete("pay/{id}")]
+    // DELETE: api/Order/pay/5/100
+    [HttpDelete("pay/{id}/{tip}")]
     public async Task<IActionResult> PayOrder(int id, int tip)
     {
         //Asserts
@@ -191,10 +198,23 @@ public class OrderController : ControllerBase
             return NotFound("Item with given ID doesn't exist");
         }
 
-        int discountedPrice = guest.HasDiscount ? (int)(menuItem.Price * 0.85) : menuItem.Price; // 15% discount
+        int discountedPrice = menuItem.Price;
+
+        if(guest.HasDiscount)
+        {
+            discountedPrice = (int)(menuItem.Price * 0.85); // 15% discount
+        }
+
         int totalOrderCost = discountedPrice * order.Quantity + tip;
+
+        // check if guest has enough money to pay the order
+        if (guest.Money < totalOrderCost)
+        {
+            return BadRequest("Guest doesn't have enough money to pay the order");
+        }
+
         guest.Money -= totalOrderCost;
-        
+
         // add tip to waiter
         var waiter = await _context.Waiters.FindAsync(order.WaiterID);
         if (waiter == null)
@@ -202,6 +222,7 @@ public class OrderController : ControllerBase
             return NotFound("Waiter with given ID doesn't exist");
         }
         waiter.Tips += tip;
+        await _context.SaveChangesAsync();
 
         // delete order
         _context.Orders.Remove(order);

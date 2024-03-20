@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import alertError from '../../alertError';
+import './Table.css';
 
 const TableAddPage = () => {
   const navigate = useNavigate();
@@ -41,45 +42,81 @@ const TableAddPage = () => {
   };
 
   return (
-    <div>
-      <h1>Add Table Page</h1>
-      <form onSubmit={handleSubmit}>
-        <label>
-          Number:
-          <input
-            type="number"
-            name="number"
-            value={table.number}
-            onChange={handleChange}
-            min={1}
-            required
-          />
-        </label>
-        <br />
-        <label>
-          Seats:
-          <input
-            type="number"
-            name="seats"
-            value={table.seats}
-            onChange={handleChange}
-            min={1}
-            required
-          />
-        </label>
-        <br />
-        <label>
-          Status:
-          <select name="status" value={table.status} onChange={handleChange} required>
-            <option value="">Select status</option>
-            <option value="Available">Available</option>
-            <option value="Occupied">Occupied</option>
-            <option value="Full">Full</option>
-          </select>
-        </label>
-        <br />
-        <button type="submit">Add Table</button>
-      </form>
+    <div className="page-container">
+
+      <div className="title-container">
+        <h1>Add Table Page</h1>
+      </div>
+
+      <div class="main-container">
+        <div className="helper-container"></div>
+
+          <div className="form-container">
+            <form onSubmit={handleSubmit}>
+
+              <div className="form-part-container">
+                <div className="label-wrapper">
+                  <label>Number:</label>
+                </div>
+
+                <div className="input-wrapper">
+                  <input
+                      className="number-input"
+                      type="number"
+                      name="number"
+                      value={table.number}
+                      onChange={handleChange}
+                      min={1}
+                      required
+                    />
+                </div>
+              </div>
+
+              <div className="form-part-container">
+                <div className="label-wrapper">
+                    <label>Seats:</label>
+                </div>
+
+                <div className="input-wrapper">
+                  <input
+                    className='seats-input'
+                    type="number"
+                    name="seats"
+                    value={table.seats}
+                    onChange={handleChange}
+                    min={1}
+                    required
+                  />
+                </div>
+              </div>
+
+              <div className="form-part-container">
+                <div className="label-wrapper">
+                  <label>Status:</label>
+                </div>
+
+                <div className="input-wrapper">
+                  <select name="status" value={table.status} onChange={handleChange} required>
+                    <option value="">Select status</option>
+                    <option value="Available">Available</option>
+                    <option value="Occupied">Occupied</option>
+                    <option value="Full">Full</option>
+                  </select>
+                </div>
+              </div>
+              
+              <div className="form-part-container">
+                <div className="helper-container"></div>
+                <button className="button-add" type="submit">Add Table</button>
+                <div className="helper-container"></div>
+              </div>
+
+            </form>
+          </div>
+
+        <div className="helper-container"></div>
+      </div>
+
     </div>
   );
 };

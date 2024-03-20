@@ -1,0 +1,45 @@
+.waiter-add-container {
+    align-self: center;
+    margin-top: 20px;
+    margin-bottom: 40px;
+}
+
+.waiters-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+    padding: 20px;
+}
+
+.waiter-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 10px;
+    padding: 20px;
+    background-color: #4b3832;
+    border: #3c2f2f;
+    border-style: ridge;
+    border-radius: 10px;
+}
+
+
+/* .waiter-icon-container {
+
+} */
+
+.waiter-info-container {
+    display: flex;
+    flex-direction: column;
+    /* align-items: center; */
+    justify-content: space-between;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+/* .waiter-actions-container {
+
+} */

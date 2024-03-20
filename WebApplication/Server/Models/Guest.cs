@@ -10,8 +10,11 @@ public class Guest
     [Key]
     public int GuestID { get; set; }
 
+    [Required]
+    [MaxLength(50, ErrorMessage = "Name can't have more than 50 characters")]
     public string Name { get; set; }
 
+    [Range(0, int.MaxValue, ErrorMessage = "Money can't be negative")]
     public int Money { get; set; }
 
     public bool HasAllergies { get; set; }

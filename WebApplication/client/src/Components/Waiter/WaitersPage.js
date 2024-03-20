@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import alertError from '../../alertError';
+import "./Waiter.css";
 
 const WaitersPage = () => {
   const [waiters, setWaiters] = useState([])
@@ -46,29 +47,39 @@ const WaitersPage = () => {
   };
 
   return (
-    <div>
-      <h1>Waiters Page</h1>
-      <Link to="/waiters/add">Add Waiter</Link>
-      <ol>
+    <div className="page-container">
+
+      {/* <div className="title-container">
+        <h1>Waiters Page</h1>
+      </div> */}
+
+      <div className="waiter-add-container">
+        <Link to="/waiters/add" className="button-add">Add Waiter</Link>
+      </div>
+
+      <div className="waiters-container">
         {waiters.map((waiter) => (
-          <>
-          <li>
-            <h2>{waiter.name}</h2>
-            <h3>Tips: {waiter.tips}din</h3>
-            <Link to={`/waiters/orders/${waiter.waiterID}`}>View orders</Link>
-            <a
-              style={{ color: 'blue', textDecoration: 'underline', cursor: 'pointer' }}
-              onClick={() => {deleteWaiter(waiter.waiterID)}}
-            >
-            Delete
-            </a>
-          </li>
-          <br />
-          </>
+          <div className="waiter-container">
+            <div className="waiter-icon-container">
+              <img src="waiter.png" alt="Waiter Icon" />
+            </div>
+
+            <div className="waiter-info-container">
+              <h4>Name: {waiter.name}</h4>
+              <h4>Tips: {waiter.tips} rsd</h4>
+            </div>
+
+            <div className="waiter-actions-container">
+              <Link id={`view_orders_${waiter.waiterID}`} to={`/waiters/orders/${waiter.waiterID}`} className="button-info">View Orders</Link>
+              <a id={`delete_${waiter.waiterID}`} onClick={() => {deleteWaiter(waiter.waiterID)}} className="button-delete">Delete</a>
+            </div>
+          </div>
         ))}
-      </ol>
+      </div>
+
     </div>
   );
+
 };
 
 export default WaitersPage;

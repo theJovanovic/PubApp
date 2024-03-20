@@ -138,7 +138,7 @@
   },
   {
     "ContainingType": "Server.Controllers.MenuItemController",
-    "Method": "PutTable",
+    "Method": "PutMenuItem",
     "RelativePath": "api/MenuItem/{id}",
     "HttpMethod": "PUT",
     "IsController": true,
@@ -171,6 +171,16 @@
         "IsRequired": true
       }
     ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Server.Controllers.MenuItemController",
+    "Method": "GetMenuCategories",
+    "RelativePath": "api/MenuItem/categories",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
     "ReturnTypes": []
   },
   {
@@ -281,7 +291,7 @@
   {
     "ContainingType": "Server.Controllers.OrderController",
     "Method": "PayOrder",
-    "RelativePath": "api/Order/pay/{id}",
+    "RelativePath": "api/Order/pay/{id}/{tip}",
     "HttpMethod": "DELETE",
     "IsController": true,
     "Order": 0,
@@ -294,7 +304,7 @@
       {
         "Name": "tip",
         "Type": "System.Int32",
-        "IsRequired": false
+        "IsRequired": true
       }
     ],
     "ReturnTypes": []
@@ -392,6 +402,16 @@
         "IsRequired": true
       }
     ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Server.Controllers.TableController",
+    "Method": "GetTablesNotFull",
+    "RelativePath": "api/Table/not_full",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
     "ReturnTypes": []
   },
   {

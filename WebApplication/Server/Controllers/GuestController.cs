@@ -232,15 +232,15 @@ public class GuestController : ControllerBase
             var newTableGuestCount = _context.Guests
                 .Where(g => g.TableID == newTable.TableID)
                 .Count();
-            if (newTableGuestCount == newTable.Seats)
+            if (newTableGuestCount + 1 > newTable.Seats)
             {
                 return BadRequest("Table is already full");
             }
-            else if (newTableGuestCount == newTable.Seats - 1)
+            else if (newTableGuestCount + 1 == newTable.Seats)
             {
                 newTable.Status = "Full";
             }
-            else if (newTableGuestCount == 0)
+            else if (newTableGuestCount + 1 < newTable.Seats)
             {
                 newTable.Status = "Occupied";
             }
@@ -249,13 +249,17 @@ public class GuestController : ControllerBase
             var oldTableGuestCount = _context.Guests
                     .Where(g => g.TableID == oldTable.TableID)
                     .Count();
-            if (oldTableGuestCount == oldTable.Seats)
+            if (oldTableGuestCount - 1 < 0)
             {
-                oldTable.Status = "Occupied";
+                return BadRequest("The guest is not registed on table");
             }
-            else if (oldTableGuestCount == 1)
+            else if (oldTableGuestCount - 1 == 0)
             {
                 oldTable.Status = "Available";
+            }
+            else
+            {
+                oldTable.Status = "Occupied";
             }
 
             guest.TableID = newTable.TableID;
@@ -286,13 +290,17 @@ public class GuestController : ControllerBase
         var guestsAtTable = _context.Guests
             .Where(g => g.TableID == table.TableID)
             .Count();
-        if (guestsAtTable == table.Seats)
+        if (guestsAtTable - 1 < 0)
         {
-            table.Status = "Occupied";
+            return BadRequest("The guest is not registed on table");
         }
-        else if (guestsAtTable == 1)
+        else if (guestsAtTable - 1 == 0)
         {
             table.Status = "Available";
+        }
+        else
+        {
+            table.Status = "Occupied";
         }
 
         _context.Guests.Remove(guest);

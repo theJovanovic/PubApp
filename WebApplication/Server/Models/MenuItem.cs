@@ -22,10 +22,15 @@ public class MenuItem
     [Key]
     public int MenuItemID { get; set; }
 
+    [Required]
+    [MaxLength(80, ErrorMessage = "Name can't have more than 80 characters")]
     public string Name { get; set; }
 
+    [Range(0, int.MaxValue, ErrorMessage = "Price can't be negative")]
     public int Price { get; set; }
 
+    [Required]
+    [EnumDataType(typeof(Category), ErrorMessage = "Invalid category")]
     public string Category { get; set; }
 
     public bool HasAllergens { get; set; }

@@ -57,32 +57,36 @@ const WaiterOrderPage = () => {
   }
 
   return (
-    <div>
-      <h1>Orders overview</h1>
-      <ol>
+    <div className="page-container">
+
+      <div className="title-container">
+        <h1>Orders Overview</h1>
+      </div>
+
+      <div className="waiters-container">
         {orders.map((order) => (
-          <>
-          <li>
-            <h2>Name: {order.name}</h2>
-            <h2>Order time: {formatDate(order.orderTime)}</h2>
-            <h2>Status: {order.status}</h2>
-            <h2>Quantity: {order.quantity}</h2>
-            <h2>Table: {order.tableNumber}</h2>
-            {order.status === "Completed" && 
-              <a
-                style={{ color: 'blue', textDecoration: 'underline', cursor: 'pointer' }}
-                onClick={() => {deliverOrder(order.orderID)}}
-              >
-              Deliver
-              </a>
-            }
-          </li>
-          <br />
-          </>
+          <div className="waiter-container">
+
+            <div className="waiter-info-container">
+              <h4>Name: {order.name}</h4>
+              <h4>Order time: {formatDate(order.orderTime)}</h4>
+              <h4>Status: {order.status}</h4>
+              <h4>Quantity: {order.quantity}</h4>
+              <h4>Table: {order.tableNumber}</h4>
+            </div>
+
+            <div className="waiter-actions-container">
+              {order.status === "Completed" && 
+                <a id={`deliver_${order.orderID}`} onClick={() => {deliverOrder(order.orderID)}} className="button-info">Deliver</a>
+              }
+            </div>
+          </div>
         ))}
-      </ol>
+      </div>
+
     </div>
   );
+
 };
 
 export default WaiterOrderPage;

@@ -52,19 +52,18 @@ const GuestInfoPage = () => {
     }
   };
 
-  const payOrder = async (orderID) => {
+const payOrder = async (orderID, tip) => {
     try {
-      const endpoint = `https://localhost:7146/api/Order/pay/${orderID}`;
+      const endpoint = `https://localhost:7146/api/Order/pay/${orderID}/${tip}`;
       const response = await fetch(endpoint, {
         method: 'DELETE',
-        body: JSON.stringify(tip),
       });
       if (!response.ok) {
         const message = await alertError(response);
         throw new Error(message);
       }
       const order = guest.orders.find(order => order.orderID === orderID)
-      const totalPrice = order.price * order.quantity
+      const totalPrice = order.price + parseInt(tip, 10)
       setGuest(prevGuest => ({
         ...prevGuest,
         money: prevGuest.money - totalPrice,
@@ -97,64 +96,84 @@ const GuestInfoPage = () => {
   };
 
   return (
-  <div>
-      <h1>Info Guest Page</h1>
-      <h2>Name: {guest.name}</h2>
-      <h2>Allergies: {guest.hasAllergies && "Yes" || "No"}</h2>
-      <h2>Discount: {guest.hasDiscount && "Yes" || "No"}</h2>
-      <h2>Money: {guest.money}</h2>
-      <h2>Table number: <Link to={`/tables/info/${guest.tableID}`}>{guest.tableNumber}</Link></h2>
-      <Link to={`/guests/edit/${guest.guestID}`}>Edit</Link>
-      <a
-        style={{ color: 'blue', textDecoration: 'underline', cursor: 'pointer' }}
-        onClick={() => {deleteGuest(guest.guestID)}}
-      >
-      Delete
-      </a>
-      <Link to={`/order/add/${guest.guestID}`}>Make order</Link>
-      <h2>Orders:</h2>
-      <ol>
-        {guest.orders?.map((order) => (
-          <>
-          <li>
-            <h3>{order.name} {order.quantity > 1 && `x${order.quantity}`}</h3>
-            <h3>{order.price * order.quantity}</h3>
-            <h3>{order.status}</h3>
-            {order.status === "Delivered" && (
-              <>
-              <label>
-                Tip (optional):
-                <input
-                  type="number"
-                  name="tip"
-                  value={tip}
-                  onChange={handleChange}
-                  min={0}
-                  required
-                />
-              </label>
-              <br />
-              <a
-                style={{ color: 'blue', textDecoration: 'underline', cursor: 'pointer' }}
-                onClick={() => {payOrder(order.orderID)}}
-              >
-              Pay
-              </a>
-              </>
-            ) || (
-              <a
-                style={{ color: 'blue', textDecoration: 'underline', cursor: 'pointer' }}
-                onClick={() => {cancelOrder(order.orderID)}}
-              >
-              Cancel
-              </a>
-            )}
-          </li>
-          <br />
-          </>
-        ))}
-      </ol>
-  </div>
+    <div className="page-container">
+
+      <div className="title-container">
+        <h1>Info Guest Page</h1>
+      </div>
+
+      <div class="main-container">
+        <div className="helper-container"></div>
+
+        <div className="info-container">
+          <div className="info-name-container">
+            <h4>Name: {guest.name}</h4>
+          </div>
+
+          <div className="info-allergies-container">
+            <h4>Allergies: {guest.hasAllergies ? 'Yes' : 'No'}</h4>
+          </div>
+
+          <div className="info-discount-container">
+            <h4>Discount: {guest.hasDiscount ? 'Yes' : 'No'}</h4>
+          </div>
+
+          <div className="info-money-container">
+            <h4>Money: {guest.money} rsd</h4>
+          </div>
+
+          <div className="info-tableNum-container">
+            <h4>Table number: <Link to={`/tables/info/${guest.tableID}`}>{guest.tableNumber}</Link></h4>
+          </div>
+
+          <div className="info-button-container">
+            <div className="helper-container"></div>
+            <Link to={`/guests/edit/${guest.guestID}`} className="button-edit">Edit</Link>
+            <a className="button-delete" onClick={() => {deleteGuest(guest.guestID)}}>Delete</a>
+            <Link to={`/order/add/${guest.guestID}`} className="button-add">Make order</Link>
+            <div className="helper-container"></div>
+          </div>
+        </div>
+
+        <div className="helper-container"></div>
+      </div>
+
+      <div className="guest-orders-container">
+
+        <div className="guest-orders-title">
+          <h1>Orders:</h1>
+        </div>
+
+        <div className="guest-orders-list">
+          {guest.orders?.map((order) => (
+            <div className="guest-order-container">
+
+              <div className="guest-orderName-container">
+                <h4>{order.name} {order.quantity > 1 && `x${order.quantity}`}</h4>
+              </div>
+              <div className="guest-orderPrice-container">
+                <h4>Price: {order.price * order.quantity} din</h4>
+              </div>
+              <div className="guest-orderStatus-container">
+                <h4>{order.status}</h4>
+              </div>
+              
+              {order.status === "Delivered" && (
+                <>
+                  <h4>Tip (optional):</h4>
+                  <input type="number" name="tip" value={tip} onChange={handleChange} min={0} required />
+                  <a onClick={() => {payOrder(order.orderID, tip)}} className="button-info">Pay</a>
+                </>
+              ) || (
+                <a id={`cancel_${order.orderID}`} onClick={() => {cancelOrder(order.orderID)}} className="button-delete">Cancel</a>
+              )}
+            </div>
+          ))}
+        </div>
+
+      </div>
+
+    </div>
   );
 };
 
